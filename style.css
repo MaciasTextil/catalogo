@@ -1,0 +1,89 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background: #FAD2F8;
+  background: linear-gradient(321deg,rgba(250, 210, 248, 1) 0%, rgba(212, 196, 245, 1) 50%, rgba(143, 205, 255, 1) 100%);
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.filters > * {
+  flex: 0 1 auto;
+}
+
+.filters .choices {
+  min-width: 200px;
+  max-width: 250px;
+}
+
+.search-container input {
+  padding: 8px 12px;
+  font-size: 14px;
+  min-width: 250px;
+}
+
+#downloadPDF {
+  display: block;
+  margin: 0 auto 30px auto;
+  padding: 10px 20px;
+  background: #0077cc;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.catalog {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.page {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  page-break-after: always;
+}
+
+.fabric {
+  background: #ffffff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.fabric img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.fabric h3 {
+  margin: 0 0 5px;
+}
+
+.fabric p {
+  margin: 4px 0;
+}
+
+.choices__item,
+.choices__item--selectable {
+  white-space: nowrap;
+}
