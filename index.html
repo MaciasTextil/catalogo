@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" /> 
+     <link rel="shortcut icon" type="image/x-icon" href="icon.png">
+  <title>Catálogo de tecidos</title>
+
+  <!-- Choices.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Catálogo de Tecidos</h1>
+
+  <div class="filters">
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Pesquisar tecido ou código..." />
+    </div>
+
+    <select id="compositionFilter">
+      <option value="">Composição</option>
+    </select>
+
+    <select id="gramWeightFilter">
+      <option value="">Gramatura</option>
+    </select>
+
+    <select id="lineFilter">
+      <option value="">Linha</option>
+    </select>
+
+    <select id="ligamentoFilter">
+      <option value="">Estrutura</option>
+    </select>
+
+    <select id="applicationFilter">
+      <option value="">Aplicação</option>
+    </select>
+
+    <select id="colorFilter">
+      <option value="">Cor</option>
+    </select>
+
+    <button onclick="salvarComoPDF()">Salvar como PDF</button>
+
+  </div>
+
+  <div class="catalog" id="catalog"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
