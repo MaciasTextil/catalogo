@@ -658,6 +658,45 @@ const fabrics = [
   application: ["Forros de Jaquetas", "Jaquetas", "Bolsas"],
   colors: ["N/A"],
     image: "#"
+},
+{
+  name: "Mac Piquet",
+  code: "11020",
+  composition: [
+    { material: "Poliamida 6.6", percentage: 100 }
+  ],
+  gramWeight: 105,
+  line: ["Esportivos"],
+  ligamento: "Maquinetado",
+  application: ["Forros de jaquetas", "Jaquetas", "Bolsas", "Shorts", "Entre outros"],
+  colors: ["0001 - Branco","2074 - Azul Liquen","3280 - Cinza Asfalto","4244 - Caqui Escuro","5384 - Vermelho Batom","7131 - Laranja", "9999 - Preto"],
+  image: "#"
+},
+{
+  name: "Aerofit",
+  code: "11049",
+  composition: [
+    { material: "Poliamida 6.6 premium", percentage: 100 }
+  ],
+  gramWeight: 72,
+  line: ["Esportivos"],
+  ligamento: "Rip Stop",
+  application: ["Jaquetas corta vento", "Bolsas", "Entre outros"],
+  colors: ["0001 - Branco","0011 - Amareo Limão Fluor","0372 - Off White","0532 - Amarelo Gema","1019 - Verde Água","1204 - Verde Militar","1764 - Verde Limão","2013 - Azul Piscina Fluor","2073 - Azul Royal Escuro","2261 - Azul Marinho","2715 - Azul Estratosfera","2910 - Azul Royal Claro","3390 - Cinza Chumbo","4676 - Caqui Médio","5025 - Rosa Fluor","5384 - Vermelho Batom","5397 - Coral","5787 - Rosa Clássico","6003 - Rosa Escuro","6419 - Roxo Maravilha","7007 - Laranja Fluor","7131 - Laranja","9999 - Preto"],
+  image: "#"
+},
+{
+  name: "Nylpar Rip Stop",
+  code: "11198",
+  composition: [
+    { material: "Poliamida premium", percentage: 100 }
+  ],
+  gramWeight: 123,
+  line: ["Esportivos"],
+  ligamento: "Rip Stop",
+  application: ["Jaquetas", "Bonés", "Calças", "Pochetes", "Acessórios"],
+  colors: ["9999 - Preto"],
+  image: "#"
 }
 ];
 
@@ -837,4 +876,5 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
 
     html2pdf().set(opt).from(element).save();
   });
+
 });
