@@ -676,7 +676,7 @@ const fabrics = [
   name: "Aerofit",
   code: "11049",
   composition: [
-    { material: "Poliamida 6.6 premium", percentage: 100 }
+    { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 72,
   line: ["Esportivos"],
@@ -689,7 +689,7 @@ const fabrics = [
   name: "Nylpar Rip Stop",
   code: "11198",
   composition: [
-    { material: "Poliamida premium", percentage: 100 }
+    { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 123,
   line: ["Esportivos"],
@@ -878,4 +878,5 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
   });
 
 });
+
 
