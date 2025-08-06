@@ -403,7 +403,7 @@ const fabrics = [
   line: ["Pesados"],
   ligamento: "REPS",
   application: [
-    "Bolsas","Malas","Pochetes","Mochilas","Coletes Balísticos","Jaquetas de Motoqueiro","Botas","Artigos Militares","Ombrelones","Guarda Sol","Artigos de Aventura"
+    "Bolsas","Malas","Pochetes","Mochilas","Coletes Balísticos","Jaquetas de Motoqueiro","Botas","Artigos Militares","Artigos de Aventura"
   ],
   colors: ["0001 - Branco", "9999 - Preto"],
     image: "#"
@@ -878,3 +878,4 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
   });
 
 });
+
