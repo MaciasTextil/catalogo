@@ -19,7 +19,7 @@ const fabrics = [
       { material: "Poliamida 6.6", percentage: 100 }
     ],
     gramWeight: 108,
-    line: ["UV 50+", "BIO-D"],
+    line: ["BIO-D"],
     ligamento: "Tela",
     application: ["Camisas para pesca", "Camisas cargo", "Bonés", "Chapéus", "Jaquetas", "Shorts", "Bermudas"],
     colors: ["0001 - Branco", "0192 - Areia", "1204 - Verde Militar", "2261 - Azul Marinho", "3390 - Cinza Chumbo", "4236 - Cinza Fossil", "5384 - Vermelho Batom", "7131 - Laranja", "9999 - Preto"],
@@ -267,9 +267,9 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 37 }
   ],
   gramWeight: 150,
-  line: ["BIO-D","Esportivos"],
+  line: ["BIO-D","Esportivos","UV 50+","Alfaiataria"],
   ligamento: "Canele",
-  application: ["Agasalhos", "Calças", "Jaquetas"],
+  application: ["Calças cargo", "Camisas cargo", "Jaquetas","Bermudas","Peças de alfaiataria casual"],
   colors: ["0001 - Branco","1204 - Verde Militar","2261 - Azul Marinho","3624 - Cinza Claro","4033 - Areia Silver","4244 - Caqui Escuro", "9999 - Preto"],
     image: "#"
 },
@@ -878,5 +878,6 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
   });
 
 });
+
 
 
