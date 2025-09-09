@@ -86,7 +86,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 94 },
     { material: "Elastano", percentage: 6 }
   ],
-  gramWeight: 94,
+  gramWeight: 98,
   line: ["Esportivos", "Elastizados", "Alfaiataria"],
   ligamento: "Maquinetado",
   application: ["Shorts", "Bermudas", "Calças esportivas", "Jaquetas", "Coletes", "Bonés"],
@@ -128,7 +128,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 90 },
     { material: "Elastano", percentage: 10 }
   ],
-  gramWeight: 115,
+  gramWeight: 125,
   line: ["Esportivos", "Elastizados"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Camisas", "Agasalhos"],
@@ -878,6 +878,7 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
   });
 
 });
+
 
 
 
