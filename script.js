@@ -203,7 +203,7 @@ const fabrics = [
   line: ["Esportivos", "Elastizados"],
   ligamento: "Sarja",
   application: ["Shorts", "Bermudas"],
-  colors: ["0001 - Branco","2694 - Azul Marinho","5010 - Vermelho Cereja", "9999 - Preto"],
+  colors: ["0001 - Branco","2222 - Azul Medieval","5010 - Vermelho Cereja", "9999 - Preto"],
     image: "#"
 },
 {
@@ -878,6 +878,7 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
   });
 
 });
+
 
 
 
