@@ -35,7 +35,7 @@ const fabrics = [
     line: ["UV 50+"],
     ligamento: "Tela",
     application: ["Camisas para pesca", "Camisas cargo", "Bonés", "Chapéus", "Jaquetas", "Shorts", "Bermudas"],
-    colors: ["0001 - Branco", "1399 - Verde Aventura", "2261 - Azul Marinho", "3390 - Cinza Chumbo", "4236 - Caqui Queimado", "4341 - Areia Avermelhada", "4676 - Caqui Medio", "4832 - Marrom Chocolate", "9999 - Preto"],
+    colors: ["0001 - Branco", "1399 - Verde Aventura", "2261 - Azul Marinho", "3390 - Cinza Chumbo", "4236 - Caqui Queimado", "4341 - Areia Avermelhada", "4676 - Caqui Médio", "4832 - Marrom Chocolate", "9999 - Preto"],
     image: "#"
   },
   {
@@ -48,7 +48,7 @@ const fabrics = [
   line: ["UV 50+"],
   ligamento: "Tela",
   application: ["Camisas para pesca", "Camisas cargo", "Bonés", "Chapéus", "Jaquetas", "Shorts", "Bermudas"],
-  colors: ["0001 - Branco","1204 - Verde Militar","1399 - Verde Aventura","2015 - Azul Claro Acinzentado","2261 - Azul Marinho","2715 - Azul Estratosfera","2954 - Azul Jeans","3301 - Cinza Cimento Esverdeado","3390 - Cinza Chumbo","3381 - Prata Esverdeado","3665 - Cinza Rato","3676 - Cinza Cimento", "4243 - Palha Clarissimo","4247 - Caqui Fossil","4341 - Areia Avermelhada", "5581 - Vinho", "5787 - Rosa Classico","9999 - Preto"],
+  colors: ["0001 - Branco","1204 - Verde Militar","1399 - Verde Aventura","2015 - Azul Claro Acinzentado","2261 - Azul Marinho","2715 - Azul Estratosfera","2954 - Azul Jeans","3301 - Cinza Cimento Esverdeado","3390 - Cinza Chumbo","3381 - Prata Esverdeado","3665 - Cinza Rato","3676 - Cinza Cimento", "4243 - Palha Clarissimo","4247 - Caqui Fossil","4341 - Areia Avermelhada", "5581 - Vinho", "5787 - Rosa Clássico","9999 - Preto"],
     image: "#"
 },
   {
@@ -132,7 +132,7 @@ const fabrics = [
   line: ["Esportivos", "Elastizados"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Camisas", "Agasalhos"],
-  colors: ["0001 - Branco", "1399 - Verde Aventura", "2080 - Azul Marinho", "2206 - Azul Acinzentado", "3375 - Chumbo Pirata", "3624 - Cinza Claro", "4247 - Cinza Fossil", "5384 - Vermelho Batom", "9999 - Preto"],
+  colors: ["0001 - Branco", "1399 - Verde Aventura", "2080 - Azul Marinho", "2206 - Azul Acinzentado", "3375 - Chumbo Pirata", "3624 - Cinza Claro", "4247 - Caqui Fossil", "5384 - Vermelho Batom", "9999 - Preto"],
     image: "#"
 },
 {
@@ -161,7 +161,7 @@ const fabrics = [
   line: ["Esportivos", "Elastizados"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Camisas", "Agasalhos"],
-  colors: ["0001 - Branco","1882 - Petróleo","2015 - Azul Claro","2500 - Azul Marinho Escuro","4033 - Areia", "9999 - Preto"],
+  colors: ["0001 - Branco","1882 - Petróleo","2015 - Azul Claro","2500 - Azul Marinho Escuro","4033 - Areia Silver", "9999 - Preto"],
     image: "#"
 },
 {
@@ -472,7 +472,7 @@ const fabrics = [
   line: ["Esportivos", "Origem Sustentável"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Camisas", "Agasalhos"],
-  colors: ["0001 - Branco","2513 - Azul Marinho","3351 - Cinza Esverdeado","4039 - Bege Tawny","4041 - Palha","7141 - Pêssego Fuzz","9999 - Preto"],
+  colors: ["0001 - Branco","2513 - Azul Marinho","3351 - Cinza Médio Esverdeado","4039 - Bege Tawny","4041 - Palha","7141 - Pêssego Fuzz","9999 - Preto"],
     image: "#"
 },
 {
@@ -498,7 +498,7 @@ const fabrics = [
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Forros de Jaquetas", "Jaquetas", "Bolsas", "Shorts"],
-  colors: ["0001 - Branco","1024 - Verde Musgo","2013 - Azul Piscina Fluor","2015 - Azul Claro Acinzentado","2261 - Azul Marinho","3375 - Chumbo","3624 - Cinza Claro","4243 - Palha Clarissimo","4244 - Kaki Escuro","5286 - Rosa Velho","5384 - Vermelho Batom","7131 - Laranja", "9999 - Preto"],
+  colors: ["0001 - Branco","1024 - Verde Musgo","2013 - Azul Piscina Fluor","2015 - Azul Claro Acinzentado","2261 - Azul Marinho","3375 - Chumbo Pirata","3624 - Cinza Claro","4243 - Palha Clarissimo","4244 - Caqui Escuro","5286 - Rosa Velho","5384 - Vermelho Batom","7131 - Laranja", "9999 - Preto"],
     image: "#"
 },
 {
@@ -525,7 +525,7 @@ const fabrics = [
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Bermudas", "Shorts", "Jaquetas"],
-  colors: ["0001 - Branco", "1204 - Verde Militar","4244 - Kaki Escuro","8208 - Preto","8209 - Lavanda"],
+  colors: ["0001 - Branco", "1204 - Verde Militar","4244 - Caqui Escuro","8208 - Preto","8209 - Lavanda"],
     image: "#"
 },
 {
@@ -538,7 +538,7 @@ const fabrics = [
   line: ["Esportivos"],
   ligamento: "Sarja",
   application: ["Bermudas", "Shorts", "Jaquetas", "Agasalhos Esportivos"],
-  colors: ["0001 - Branco","0130 - Amarelo Ouro","2044 - Azul Royal Médio","2092 - Azul Marinho Noite","5527 - Vermelho Batom", "9999 - Preto"],
+  colors: ["0001 - Branco","0130 - Amarelo Ouro","2044 - Azul Royal Médio","2092 - Azul Marinho Noite","5527 - Vermelho Danger", "9999 - Preto"],
     image: "#"
 },
 {
@@ -551,7 +551,7 @@ const fabrics = [
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Forros de Jaquetas", "Jaquetas", "Bolsas", "Shorts"],
-  colors: ["0001 - Branco","0011 - Amarelo Limão Fluor","0541 - Amarelo Manteiga","1000 - Verde água Claro","1017 - Verde Lago","1725 - Verde Oregano","1764 - Verde Limão","2073 - Azul Royal Escuro","2261 - Azul Marinho","2847 - Azul Acinzentado","2934 - Azul Navy","3280 - Cinza Asfalto","4123 - MOCHA MOUSSE","3381 - Prata Esverdeado","4243 - Palha Clarissimo","5025 - Rosa Fluor","5286 - Rosa Velho","5384 - Vermelho Batom","5469 - Rosa Bb","5665 - Vermelho Queimado","5810 - Rosa Chiclete II","6243 - Lilás Claro","6352 - Figo","7333 - Tangerina","9999 - Preto"],
+  colors: ["0001 - Branco","0011 - Amarelo Limão Fluor","0541 - Amarelo Manteiga","1000 - Verde água Claro","1017 - Verde Lago","1725 - Verde Oregano","1764 - Verde Limão","2073 - Azul Royal Escuro","2261 - Azul Marinho","2847 - Azul Acinzentado","2934 - Azul Navy","3280 - Cinza Asfalto","4123 - MOCHA MOUSSE","3381 - Prata Esverdeado","4243 - Palha Clarissimo","5025 - Rosa Fluor","5286 - Rosa Velho","5384 - Vermelho Batom","5469 - Rosa Bebê","5665 - Vermelho Queimado","5810 - Rosa Chiclete","6243 - Lilás Claro","6352 - Figo","7333 - Tangerina","9999 - Preto"],
     image: "#"
 },
 {
@@ -603,7 +603,7 @@ const fabrics = [
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Jaquetas"],
-  colors: ["0001 - Branco","0372 - Off White","0130 - Amarelo Ouro","0192 - Areia","0662 - Amarelo Banana","1013 - Amarelo Limão Fluor","1204 - Verde Militar","1913 - Evergreen","2014 - Azul Royal","2059 - Azul Piscina","2065 - Azul Nautico","2261 - Azul Marinho","3375 - Chumbo Pirata","4007 - Caramelo","4174 - Marrom","4244 - Caqui Escuro","4676 - Caqui Médio","5025 - Rosa Fluor","5527 - Vermelho Danger","5581 - Vinho","5787 - Rosa Classico","5978 - Vermelho","7131 - Laranja", "9999 - Preto"],
+  colors: ["0001 - Branco","0372 - Off White","0130 - Amarelo Ouro","0192 - Areia","0662 - Amarelo Banana","1013 - Amarelo Limão Fluor","1204 - Verde Militar","1913 - Evergreen","2014 - Azul Royal","2059 - Azul Piscina","2065 - Azul Nautico","2261 - Azul Marinho","3375 - Chumbo Pirata","4007 - Caramelo","4174 - Marrom","4244 - Caqui Escuro","4676 - Caqui Médio","5025 - Rosa Fluor","5527 - Vermelho Danger","5581 - Vinho","5787 - Rosa Clássico","5978 - Vermelho","7131 - Laranja", "9999 - Preto"],
     image: "#"
 },
 {
@@ -616,7 +616,7 @@ const fabrics = [
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Jaquetas"],
-  colors: ["0001 - Branco","0372 - Off White","0130 - Amarelo Ouro","0199 - Areia Escuro","0662 - Amarelo Banana","1013 - Amarelo Limão Fluor","1017 - Verde Lago","1204 - Verde Militar","1296 - Verde Street","1913 - Evergreen","2011 - Azul Petróleo","2014 - Azul Royal","2059 - Azul Piscina","2073 - Azul Royal Escuro","2261 - Azul Marinho","2500 - Azul Marinho Escuro","2847 - Azul Acinzentado","2954 - Azul Jeans","3345 - Cinza Rato","3351 - Cinza Médio Esverdeado","3375 - Chumbo Pirata","3624 - Cinza Claro","4004 - Ocre Biscut","4007 - Caramelo","4123 - MOCHA MOUSSE","4174 - Marrom","4244 - Caqui Escuro","4676 - Caqui Médio","5384 - Vermelho Batom","5527 - Vermelho Danger","5581 - Vinho","5787 - Rosa Classico","5810 - Rosa Chiclete","5978 - Vermelho","6267 - Roxo","7007 - Laranja Fluor","7131 - Laranja", "9999 - Preto"],
+  colors: ["0001 - Branco","0372 - Off White","0130 - Amarelo Ouro","0199 - Areia Escuro","0662 - Amarelo Banana","1013 - Amarelo Limão Fluor","1017 - Verde Lago","1204 - Verde Militar","1913 - Evergreen","2011 - Azul Petróleo","2014 - Azul Royal","2059 - Azul Piscina","2073 - Azul Royal Escuro","2261 - Azul Marinho","2500 - Azul Marinho Escuro","2847 - Azul Acinzentado","2954 - Azul Jeans","3345 - Cinza Rato","3351 - Cinza Médio Esverdeado","3375 - Chumbo Pirata","3624 - Cinza Claro","4004 - Ocre Biscut","4007 - Caramelo","4123 - MOCHA MOUSSE","4174 - Marrom","4244 - Caqui Escuro","4676 - Caqui Médio","5384 - Vermelho Batom","5527 - Vermelho Danger","5581 - Vinho","5787 - Rosa Clássico","5810 - Rosa Chiclete","5978 - Vermelho","6267 - Roxo","7007 - Laranja Fluor","7131 - Laranja", "9999 - Preto"],
     image: "#"
 },
 {
@@ -878,6 +878,7 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
   });
 
 });
+
 
 
 
