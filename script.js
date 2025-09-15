@@ -136,21 +136,6 @@ const fabrics = [
     image: "#"
 },
 {
-  name: "Mac Nyco Elastic",
-  code: "16106",
-  composition: [
-    { material: "Algodão", percentage: 49 },
-    { material: "Poliamida 6.6", percentage: 47 },
-    { material: "Elastano", percentage: 4 }
-  ],
-  gramWeight: 100,
-  line: ["Esportivos", "Elastizados"],
-  ligamento: "Tela",
-  application: ["Shorts", "Bermudas", "Camisas", "Agasalhos"],
-  colors: ["0001 - Branco","1882 - Petróleo","2015 - Azul Claro","2500 - Azul Marinho Escuro","4033 - Areia Silver", "9999 - Preto"],
-    image: "#"
-},
-{
   name: "Mac Puelon",
   code: "10163",
   composition: [
@@ -864,6 +849,7 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
   });
 
 });
+
 
 
 
