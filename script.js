@@ -108,20 +108,6 @@ const fabrics = [
     image: "#"
 },
 {
-  name: "Mac Ergonomic Flex PET",
-  code: "20110",
-  composition: [
-    { material: "Poliéster PET", percentage: 92 },
-    { material: "Elastano", percentage: 8 }
-  ],
-  gramWeight: 115,
-  line: ["Esportivos", "Elastizados","PET"],
-  ligamento: "Tela",
-  application: ["Shorts", "Bermudas", "Camisas", "Agasalhos"],
-  colors: ["0001 - Branco", "2694 - Azul Marinho", "9999 - Preto"],
-    image: "#"
-},
-{
   name: "Mac Stretch",
   code: "10166",
   composition: [
@@ -878,6 +864,7 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
   });
 
 });
+
 
 
 
