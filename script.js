@@ -765,6 +765,7 @@ function displayFabrics(list) {
     const div = document.createElement('div');
     div.className = 'fabric';
     const compString = fabric.composition.map(c => `${c.percentage}% ${c.material}`).join(", ");
+    const coresLista = fabric.colors.map(c => `<li>${c}</li>`).join('');
 
     div.innerHTML = `
       <img src="${fabric.code}.jpg" alt="${fabric.code}.jpg">
@@ -775,7 +776,8 @@ function displayFabrics(list) {
       <p><strong>Linha:</strong> ${fabric.line.join(", ")}</p>
       <p><strong>Ligamento:</strong> ${fabric.ligamento}</p>
       <p><strong>Aplicação:</strong> ${fabric.application.join(", ")}</p>
-      <p><strong>Cores:</strong> ${fabric.colors.join(", ")}</p>
+      <p><strong>Cores:</strong></p>
+      <ul>${coresLista}</ul>
     `;
 
     pageDiv.appendChild(div);
@@ -849,6 +851,7 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
   });
 
 });
+
 
 
 
