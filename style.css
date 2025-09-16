@@ -122,7 +122,7 @@ button:hover {
   list-style: none;      /* remove as bolinhas */
   padding: 0;            /* remove recuo padrão */
   margin: 5px 0 0 0;     /* opcional, ajusta espaço acima/baixo */
-  text-align: center;    /* centraliza o texto */
+  text-align: left;    /* ajustar o texto para a esquerda */
 }
 
 .fabric ul li {
@@ -158,3 +158,4 @@ button:hover {
   }
 
 }
+
