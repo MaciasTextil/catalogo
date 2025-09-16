@@ -118,6 +118,17 @@ button:hover {
   font-size: 0.9rem;
 }
 
+.fabric ul {
+  list-style: none;      /* remove as bolinhas */
+  padding: 0;            /* remove recuo padrão */
+  margin: 5px 0 0 0;     /* opcional, ajusta espaço acima/baixo */
+  text-align: center;    /* centraliza o texto */
+}
+
+.fabric ul li {
+  margin: 2px 0;         /* espaço entre cada cor */
+}
+
 /* --- Mobile: filtros empilhados --- */
 @media (max-width: 600px) {
   .filters {
@@ -145,4 +156,5 @@ button:hover {
   .page {
     grid-template-columns: repeat(2, 1fr);
   }
+
 }
