@@ -56,7 +56,7 @@ const fabrics = [
   code: "10177",
   composition: [
     { material: "Poliamida 6.6", percentage: 94 },
-    { material: "Elastano", percentage: 6 }
+    { material: "Elastano Lycra®", percentage: 6 }
   ],
   gramWeight: 130,
   line: ["Esportivos", "Elastizados", "Alfaiataria"],
@@ -73,7 +73,7 @@ const fabrics = [
     { material: "Elastano Lycra®", percentage: 9 }
   ],
   gramWeight: 172,
-  line: ["Esportivos"],
+  line: ["Esportivos", "4 sentidos"],
   ligamento: "Tela",
   application: ["Shorts"],
   colors: ["1204 - Verde Militar", "2261 - Azul Marinho", "4244 - Caqui Escuro", "4341 - Areia Avermelhada", "9999 - Preto"],
@@ -84,10 +84,10 @@ const fabrics = [
   code: "10173",
   composition: [
     { material: "Poliamida 6.6", percentage: 80 },
-    { material: "Elastano", percentage: 20 }
+    { material: "Elastano Lycra®", percentage: 20 }
   ],
   gramWeight: 134,
-  line: ["Esportivos", "Elastizados", "Alfaiataria"],
+  line: ["Esportivos", "Elastizados", "Alfaiataria", "4 sentidos"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Calças esportivas", "Jaquetas", "Coletes", "Bonés"],
   colors: ["0372 - Off White", "1204 - Verde Militar", "2261 - Azul Marinho", "4244 - Caqui Escuro", "9999 - Preto"],
@@ -98,7 +98,7 @@ const fabrics = [
   code: "10050",
   composition: [
     { material: "Poliamida 6.6", percentage: 94 },
-    { material: "Elastano", percentage: 6 }
+    { material: "Elastano Lycra®", percentage: 6 }
   ],
   gramWeight: 98,
   line: ["Esportivos", "Elastizados", "Alfaiataria"],
@@ -126,10 +126,10 @@ const fabrics = [
   code: "10166",
   composition: [
     { material: "Poliamida 6.6", percentage: 90 },
-    { material: "Elastano", percentage: 10 }
+    { material: "Elastano Lycra®", percentage: 10 }
   ],
   gramWeight: 125,
-  line: ["Esportivos", "Elastizados"],
+  line: ["Esportivos", "Elastizados", "4 sentidos"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Camisas", "Agasalhos"],
   colors: ["0001 - Branco", "0372 - Off White", "1204 - Verde Militar", "2080 - Azul Marinho", "4174 - Marrom", "4244 - Caqui Escuro", "5581 - Vinho", "9999 - Preto"],
@@ -154,7 +154,7 @@ const fabrics = [
   code: "10163",
   composition: [
     { material: "Poliamida 6.6", percentage: 94 },
-    { material: "Elastano", percentage: 6 }
+    { material: "Elastano Lycra®", percentage: 6 }
   ],
   gramWeight: 106,
   line: ["Esportivos", "Elastizados"],
@@ -878,6 +878,7 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
   });
 
 });
+
 
 
 
