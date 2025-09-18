@@ -66,15 +66,16 @@ const fabrics = [
     image: "#"
 },
 {
-  name: "#",
+  name: "Mac Stretch Air",
   code: "10178",
   composition: [
-    { material: "#", percentage: 100 },
+    { material: "Poliamida 6.6", percentage: 91 },
+    { material: "Elastano Lycra®", percentage: 9 }
   ],
-  gramWeight: #,
-  line: ["#"],
-  ligamento: "#",
-  application: ["#"],
+  gramWeight: 172,
+  line: ["Esportivos"],
+  ligamento: "Tela",
+  application: ["Shorts"],
   colors: ["1204 - Verde Militar", "2261 - Azul Marinho", "4244 - Caqui Escuro", "4341 - Areia Avermelhada", "9999 - Preto"],
     image: "#"
 },
@@ -877,6 +878,7 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
   });
 
 });
+
 
 
 
