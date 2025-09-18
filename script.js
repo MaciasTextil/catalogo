@@ -73,7 +73,7 @@ const fabrics = [
     { material: "Elastano Lycra®", percentage: 9 }
   ],
   gramWeight: 172,
-  line: ["Esportivos", "4 sentidos"],
+  line: ["Esportivos", "4 sentidos", "Elastizados"],
   ligamento: "Tela",
   application: ["Shorts"],
   colors: ["1204 - Verde Militar", "2261 - Azul Marinho", "4244 - Caqui Escuro", "4341 - Areia Avermelhada", "9999 - Preto"],
@@ -878,6 +878,7 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
   });
 
 });
+
 
 
 
