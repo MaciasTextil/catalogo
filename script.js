@@ -780,25 +780,28 @@ function displayFabrics(list) {
     return;
   }
 
-  let pageDiv = null;
-
-  list.forEach((fabric, index) => {
-    if (index  === 0) {
-      pageDiv = document.createElement('div');
-      pageDiv.className = 'page';
-      catalog.appendChild(pageDiv);
-    }
-
+  list.forEach(fabric => {
     const div = document.createElement('div');
     div.className = 'fabric';
-    const compString = fabric.composition.map(c => `${c.percentage}% ${c.material}`).join(", ");
+
+    // --- Atributos para o modal ---
+    div.dataset.nome       = fabric.name;
+    div.dataset.codigo     = fabric.code;
+    div.dataset.composicao = fabric.composition.map(c => `${c.percentage}% ${c.material}`).join(", ");
+    div.dataset.gramatura  = `${fabric.gramWeight} g/m²`;
+    div.dataset.linha      = fabric.line.join(", ");
+    div.dataset.ligamento  = fabric.ligamento;
+    div.dataset.aplicacao  = fabric.application.join(", ");
+    div.dataset.cores      = fabric.colors.join(", "); // salva como string
+    div.dataset.imagem     = `${fabric.code}.jpg`;
+
     const coresLista = fabric.colors.map(c => `<li>${c}</li>`).join('');
 
     div.innerHTML = `
       <img src="${fabric.code}.jpg" alt="${fabric.code}.jpg">
       <h3>${fabric.name}</h3>
       <p><strong>Código:</strong> ${fabric.code}</p>
-      <p><strong>Composição:</strong> ${compString}</p>
+      <p><strong>Composição:</strong> ${div.dataset.composicao}</p>
       <p><strong>Gramatura:</strong> ${fabric.gramWeight} g/m²</p>
       <p><strong>Linha:</strong> ${fabric.line.join(", ")}</p>
       <p><strong>Ligamento:</strong> ${fabric.ligamento}</p>
@@ -807,7 +810,7 @@ function displayFabrics(list) {
       <ul>${coresLista}</ul>
     `;
 
-    pageDiv.appendChild(div);
+    catalog.appendChild(div);
   });
 }
 
@@ -876,8 +879,118 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
 
     html2pdf().set(opt).from(element).save();
   });
-
 });
+
+// ===== Modal para detalhes do tecido =====
+document.addEventListener('DOMContentLoaded', () => {
+  const modal   = document.getElementById('tecidoModal');
+  const close   = modal.querySelector('.close');
+
+  const nome       = document.getElementById('m-nome');
+  const codigo     = document.getElementById('m-codigo');
+  const composicao = document.getElementById('m-composicao');
+  const gramatura  = document.getElementById('m-gramatura');
+  const linha      = document.getElementById('m-linha');
+  const ligamento  = document.getElementById('m-ligamento');
+  const aplicacao  = document.getElementById('m-aplicacao');
+  const cores      = document.getElementById('m-cores');
+  const img        = document.getElementById('m-imagem');
+
+  const catalog = document.getElementById('catalog');
+
+  // Criar contêiner para zoom
+  const imgContainer = document.createElement('div');
+  imgContainer.style.overflow = 'hidden';
+  imgContainer.style.width = '150px';
+  imgContainer.style.height = '150px';
+  imgContainer.style.borderRadius = '4px';
+  imgContainer.style.border = '1px solid #ccc';
+  imgContainer.appendChild(img);
+  img.style.transition = 'transform 0.2s ease, transform-origin 0.2s ease';
+  if (!img.parentNode || img.parentNode !== imgContainer) {
+    const infoDiv = img.parentNode;
+    infoDiv.insertBefore(imgContainer, img);
+  }
+
+  catalog.addEventListener('click', e => {
+    const card = e.target.closest('.fabric');
+    if (!card) return;
+
+    // Busca o objeto original para cores e imagem
+    const fabricData = fabrics.find(f => f.code === card.dataset.codigo);
+    if (!fabricData) return;
+
+    nome.textContent       = fabricData.name;
+    codigo.textContent     = fabricData.code;
+    composicao.textContent = fabricData.composition.map(c => `${c.percentage}% ${c.material}`).join(", ");
+    gramatura.textContent  = `${fabricData.gramWeight} g/m²`;
+    linha.textContent      = fabricData.line.join(", ");
+    ligamento.textContent  = fabricData.ligamento;
+    aplicacao.textContent  = fabricData.application.join(", ");
+
+    // cores em lista vertical
+    cores.innerHTML = "";
+    fabricData.colors.forEach(cor => {
+      const li = document.createElement("li");
+      li.textContent = cor;
+      cores.appendChild(li);
+    });
+
+    // imagem e clique para abrir em nova aba
+    img.src = fabricData.image !== "#" ? fabricData.image : "";
+    img.onclick = () => {
+      if (fabricData.image && fabricData.image !== "#") {
+        window.open(fabricData.image, "_blank");
+      }
+    };
+
+    // zoom que segue o mouse
+    imgContainer.onmousemove = e => {
+      const rect = img.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      img.style.transformOrigin = `${x}% ${y}%`;
+      img.style.transform = 'scale(2.5)'; // ajuste do zoom
+    };
+    imgContainer.onmouseleave = () => {
+      img.style.transform = 'scale(1)';
+      img.style.transformOrigin = 'center center';
+    };
+
+    modal.style.display = 'flex';
+  });
+
+  close.addEventListener('click', () => modal.style.display = 'none');
+  modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+});
+
+
+function abrirModal(src) {
+  const modal = document.getElementById("videoModal");
+  const video = document.getElementById("modalVideo");
+  video.src = src;
+  modal.style.display = "flex";
+  video.play();
+}
+
+function fecharModal() {
+  const modal = document.getElementById("videoModal");
+  const video = document.getElementById("modalVideo");
+  video.pause();
+  video.src = "";
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  const modal = document.getElementById("videoModal");
+  const video = document.getElementById("modalVideo");
+  if (event.target === modal) {
+    video.pause();
+    video.src = "";
+    modal.style.display = "none";
+  }
+}
+
 
 
 
