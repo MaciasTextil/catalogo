@@ -78,9 +78,9 @@ button:hover {
 
 /* --- Catálogo --- */
 .catalog {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 cards por linha */
+  gap: 20px;
 }
 
 .page {
@@ -91,12 +91,14 @@ button:hover {
 }
 
 .fabric {
+  width: 100%; /* opcional, o grid já controla o tamanho */
   background: #ffffff;
   border: 1px solid #7DA2CE;
   border-radius: 6px;
-  text-align: center;
-  padding: 12px;
+  padding: 10px;
   box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .fabric img {
@@ -148,14 +150,116 @@ button:hover {
     max-width: 100%;
   }
 
-  .catalog {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-  }
+  /* --- Catálogo em grade --- */
+.catalog {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 cards por linha */
+  gap: 20px;
+}
+
   .page {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
 
 }
 
+/* Thumbnails */
+.video-thumbnails {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.video-thumb {
+  width: 200px;
+  height: 120px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 1px solid #7DA2CE;
+  border-radius: 6px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+
+.modal {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+}
+.modal.hidden { display: none; }
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+  display: flex;             /* ativa flexbox */
+  gap: 20px;                 /* espaço entre imagem e infos */
+  align-items: flex-start;    /* alinha topo da imagem com topo das infos */
+  max-height: 90%;
+  overflow-y: auto;          /* permite rolar se o conteúdo for grande */
+}
+.modal-content .close {
+  position: absolute; top: 10px; right: 14px;
+  font-size: 22px; cursor: pointer;
+}
+.modal-content img {
+  width: 150px;               /* tamanho fixo da imagem */
+  height: auto;
+  border-radius: 4px;
+  flex-shrink: 0;             /* não deixa a imagem encolher */
+}
+
+.modal-content div.info {
+  flex: 1;                    /* ocupa o resto do espaço */
+}
+
+@media (max-width: 1200px) {
+  .catalog {
+    grid-template-columns: repeat(4, 1fr); /* 4 por linha */
+  }
+}
+
+@media (max-width: 900px) {
+  .catalog {
+    grid-template-columns: repeat(3, 1fr); /* 3 por linha */
+  }
+}
+
+@media (max-width: 600px) {
+  .catalog {
+    grid-template-columns: repeat(2, 1fr); /* 2 por linha */
+  }
+}
+
+@media (max-width: 400px) {
+  .catalog {
+    grid-template-columns: 1fr; /* 1 por linha */
+  }
+}
+
+#tecidoModal .img-container {
+  width: 150px;           /* tamanho da imagem no modal */
+  height: auto;
+  overflow: hidden;       /* mantém as bordas e não deixa passar do contêiner */
+  border-radius: 4px;
+}
+
+#tecidoModal .img-container img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.4s ease;
+  display: block;
+  cursor: zoom-in;
+}
+
+#tecidoModal .img-container:hover img {
+  transform: scale(10);    /* aumenta o zoom sem sair do contêiner */
+  transform-origin: 50% 30%;  /* horizontal 50%, vertical 70% */
+}
