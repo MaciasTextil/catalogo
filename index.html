@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" /> 
-     <link rel="shortcut icon" type="image/x-icon" href="icon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="icon.png">
   <title>Catálogo de tecidos</title>
 
   <!-- Choices.js CSS -->
@@ -10,47 +10,174 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* alternar seções */
+    .hidden { display: none; }
+    .nav-switch { display:flex; gap:8px; margin:16px 0; }
+    .nav-switch button{
+      padding:8px 14px; border:1px solid #ccc; border-radius:6px;
+      background:#fff; cursor:pointer;
+    }
+    .nav-switch button.active{
+      background:#222; color:#fff; border-color:#222;
+    }
+    .video-list video{
+      width:100%; max-width:600px; margin-bottom:16px;
+    }
+
+    /* modal */
+    .modal {
+      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,.6); justify-content:center; align-items:center;
+      z-index:1000;
+    }
+    .modal-content {
+      background:#fff; padding:20px; border-radius:8px;
+      max-width:600px; width:90%; max-height:90%; overflow:auto;
+      position:relative;
+    }
+    .modal-content img { max-width:100%; margin-top:10px; }
+    .modal-content .close {
+      position:absolute; top:8px; right:12px; font-size:28px; cursor:pointer;
+    }
+  </style>
 </head>
 <body>
   <h1>Catálogo de Tecidos</h1>
 
-  <div class="filters">
-    <div class="search-container">
-      <input type="text" id="searchInput" placeholder="Pesquisar tecido ou código..." />
-    </div>
-
-    <select id="compositionFilter">
-      <option value="">Composição</option>
-    </select>
-
-    <select id="gramWeightFilter">
-      <option value="">Gramatura</option>
-    </select>
-
-    <select id="lineFilter">
-      <option value="">Linha</option>
-    </select>
-
-    <select id="ligamentoFilter">
-      <option value="">Estrutura</option>
-    </select>
-
-    <select id="applicationFilter">
-      <option value="">Aplicação</option>
-    </select>
-
-    <select id="colorFilter">
-      <option value="">Cor</option>
-    </select>
-
-    <button onclick="salvarComoPDF()">Salvar como PDF</button>
-
+  <!-- Botões para trocar -->
+  <div class="nav-switch">
+    <button id="btn-catalogo" class="active">Artigos</button>
+    <button id="btn-videos">Vídeos</button>
   </div>
 
-  <div class="catalog" id="catalog"></div>
+  <!-- Seção catálogo -->
+  <section id="sec-catalogo">
+    <div class="filters">
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Pesquisar tecido ou código..." />
+      </div>
 
+      <select id="compositionFilter"><option value="">Composição</option></select>
+      <select id="gramWeightFilter"><option value="">Gramatura</option></select>
+      <select id="lineFilter"><option value="">Linha</option></select>
+      <select id="ligamentoFilter"><option value="">Estrutura</option></select>
+      <select id="applicationFilter"><option value="">Aplicação</option></select>
+      <select id="colorFilter"><option value="">Cor</option></select>
+
+      <button onclick="salvarComoPDF()">Salvar como PDF</button>
+    </div>
+
+    <div class="catalog" id="catalog"></div>
+  </section>
+
+  <!-- Seção vídeos -->
+  <section id="sec-videos" class="hidden">
+    <h2>Vídeos</h2>
+    <div class="video-list">
+      <video controls>
+        <source src="video1.mp4" type="video/mp4">
+        Seu navegador não suporta vídeo.
+      </video>
+      <video controls>
+        <source src="video2.mp4" type="video/mp4">
+        Seu navegador não suporta vídeo.
+      </video>
+    </div>
+  </section>
+
+  <!-- Modal de detalhes do tecido -->
+<div id="tecidoModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+
+    <!-- Container da imagem com zoom -->
+    <div class="img-container">
+      <img id="m-imagem" alt="Tecido">
+    </div>
+
+    <div class="info">
+      <h2 id="m-nome"></h2>
+      <p><strong>Código:</strong> <span id="m-codigo"></span></p>
+      <p><strong>Composição:</strong> <span id="m-composicao"></span></p>
+      <p><strong>Gramatura:</strong> <span id="m-gramatura"></span></p>
+      <p><strong>Linha:</strong> <span id="m-linha"></span></p>
+      <p><strong>Estrutura:</strong> <span id="m-ligamento"></span></p>
+      <p><strong>Aplicação:</strong> <span id="m-aplicacao"></span></p>
+      <p><strong>Cores:</strong></p>
+      <ul id="m-cores"></ul>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="script.js"></script>
+
+  <!-- Alternar seções -->
+  <script>
+    const btnCatalogo = document.getElementById('btn-catalogo');
+    const btnVideos   = document.getElementById('btn-videos');
+    const secCatalogo = document.getElementById('sec-catalogo');
+    const secVideos   = document.getElementById('sec-videos');
+
+    function showSection(section){
+      if(section === 'catalogo'){
+        secCatalogo.classList.remove('hidden');
+        secVideos.classList.add('hidden');
+        btnCatalogo.classList.add('active');
+        btnVideos.classList.remove('active');
+      } else {
+        secCatalogo.classList.add('hidden');
+        secVideos.classList.remove('hidden');
+        btnCatalogo.classList.remove('active');
+        btnVideos.classList.add('active');
+      }
+    }
+
+    btnCatalogo.addEventListener('click', () => showSection('catalogo'));
+    btnVideos.addEventListener('click',   () => showSection('videos'));
+  </script>
+
+  <!-- Modal JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal   = document.getElementById('tecidoModal');
+      const close   = modal.querySelector('.close');
+
+      const nome       = document.getElementById('m-nome');
+      const codigo     = document.getElementById('m-codigo');
+      const composicao = document.getElementById('m-composicao');
+      const gramatura  = document.getElementById('m-gramatura');
+      const linha      = document.getElementById('m-linha');
+      const ligamento  = document.getElementById('m-ligamento');
+      const aplicacao  = document.getElementById('m-aplicacao');
+      const cores      = document.getElementById('m-cores');
+      const img        = document.getElementById('m-imagem');
+
+      document.getElementById('catalog').addEventListener('click', e => {
+        const card = e.target.closest('.fabric');
+        if (!card) return;
+
+        nome.textContent       = card.dataset.nome;
+        codigo.textContent     = card.dataset.codigo;
+        composicao.textContent = card.dataset.composicao;
+        gramatura.textContent  = card.dataset.gramatura;
+        linha.textContent      = card.dataset.linha;
+        ligamento.textContent  = card.dataset.ligamento;
+        aplicacao.textContent  = card.dataset.aplicacao;
+        cores.textContent      = card.dataset.cores;
+        img.src                = card.dataset.imagem !== "#" ? card.dataset.imagem : "";
+
+        modal.style.display = 'flex';
+      });
+
+      close.addEventListener('click', () => modal.style.display = 'none');
+      modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+    });
+  </script>
 </body>
 </html>
