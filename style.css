@@ -91,7 +91,7 @@ button:hover {
 }
 
 .fabric {
-  width: 100%; /* opcional, o grid já controla o tamanho */
+  width: 100%;
   background: #ffffff;
   border: 1px solid #7DA2CE;
   border-radius: 6px;
@@ -120,15 +120,19 @@ button:hover {
   font-size: 0.9rem;
 }
 
+/* Lista de cores no catálogo */
 .fabric ul {
-  list-style: none;      /* remove as bolinhas */
-  padding: 0;            /* remove recuo padrão */
-  margin: 5px 0 0 0;     /* opcional, ajusta espaço acima/baixo */
-  text-align: left;    /* ajustar o texto para a esquerda */
+  list-style: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+  text-align: left;
 }
 
 .fabric ul li {
-  margin: 2px 0;         /* espaço entre cada cor */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
 }
 
 /* --- Mobile: filtros empilhados --- */
@@ -150,19 +154,14 @@ button:hover {
     max-width: 100%;
   }
 
-  /* --- Catálogo em grade --- */
-.catalog {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 cards por linha */
-  gap: 20px;
-}
+  .catalog {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   .page {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-}
-
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
 }
 
 /* Thumbnails */
@@ -184,82 +183,131 @@ button:hover {
   box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
-
+/* --- Modal --- */
 .modal {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0,0,0,0.6);
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 9999;
 }
+
 .modal.hidden { display: none; }
+
 .modal-content {
   background: #fff;
   padding: 20px;
   border-radius: 8px;
   max-width: 600px;
   width: 90%;
-  position: relative;
-  display: flex;             /* ativa flexbox */
-  gap: 20px;                 /* espaço entre imagem e infos */
-  align-items: flex-start;    /* alinha topo da imagem com topo das infos */
+  display: flex;           /* flexbox para imagem + texto */
+  gap: 20px;
+  align-items: flex-start;  /* topo alinhado */
   max-height: 90%;
-  overflow-y: auto;          /* permite rolar se o conteúdo for grande */
+  overflow-y: auto;
+  position: relative;
 }
+
 .modal-content .close {
-  position: absolute; top: 10px; right: 14px;
-  font-size: 22px; cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 22px;
+  cursor: pointer;
 }
-.modal-content img {
-  width: 150px;               /* tamanho fixo da imagem */
+
+/* Container do modal já existente */
+#tecidoModal .modal-content {
+  position: relative;
+}
+
+/* Imagem em tamanho normal */
+#tecidoModal .modal-content img {
+  width: 150px;
   height: auto;
-  border-radius: 4px;
-  flex-shrink: 0;             /* não deixa a imagem encolher */
-}
-
-.modal-content div.info {
-  flex: 1;                    /* ocupa o resto do espaço */
-}
-
-@media (max-width: 1200px) {
-  .catalog {
-    grid-template-columns: repeat(4, 1fr); /* 4 por linha */
-  }
-}
-
-@media (max-width: 900px) {
-  .catalog {
-    grid-template-columns: repeat(3, 1fr); /* 3 por linha */
-  }
-}
-
-@media (max-width: 600px) {
-  .catalog {
-    grid-template-columns: repeat(2, 1fr); /* 2 por linha */
-  }
-}
-
-@media (max-width: 400px) {
-  .catalog {
-    grid-template-columns: 1fr; /* 1 por linha */
-  }
-}
-
-#tecidoModal .img-container {
-  width: 150px;           /* tamanho da imagem no modal */
-  height: auto;
-  overflow: hidden;       /* mantém as bordas e não deixa passar do contêiner */
-  border-radius: 4px;
-}
-
-#tecidoModal .img-container img {
-  width: 100%;
-  height: auto;
-  transition: transform 0.4s ease;
+  border-radius: 6px;
+  flex-shrink: 0;
   display: block;
   cursor: zoom-in;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  z-index: 1;
 }
 
-#tecidoModal .img-container:hover img {
-  transform: scale(10);    /* aumenta o zoom sem sair do contêiner */
-  transform-origin: 50% 30%;  /* horizontal 50%, vertical 70% */
+/* Zoom só na foto principal do tecido */
+#tecidoModal #m-imagem:hover {
+  transform: scale(10) translateZ(0);
+  z-index: 3;
+}
+
+/* Container de texto no modal */
+#tecidoModal .modal-content .info {
+  flex: 1;
+}
+
+/* Remove margin extra dos textos do modal */
+#tecidoModal .modal-content .info h2,
+#tecidoModal .modal-content .info p {
+  margin-top: 0;
+}
+
+/* Lista de cores no modal */
+#tecidoModal ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#tecidoModal li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+
+/* Zoom da cor */
+#colorZoom {
+  position: absolute;
+  display: none;
+  width: 120px;
+  height: 120px;
+  border: 2px solid #000;
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+/* Lista de cores no container de cores */
+#coresContainer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#coresContainer li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+
+#catalogFooter {
+  margin-top: 40px;
+  padding: 15px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #003399;
+  background: linear-gradient(to bottom, #ffffff, #dbe9f6);
+  border: 1px solid #7DA2CE;
+  border-radius: 6px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+#catalogFooter p {
+  margin: 5px 0;
 }
