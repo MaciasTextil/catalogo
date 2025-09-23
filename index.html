@@ -41,15 +41,35 @@
     .modal-content .close {
       position:absolute; top:8px; right:12px; font-size:28px; cursor:pointer;
     }
+
+    /* Zoom das cores */
+    #colorZoom {
+      position: absolute;
+      display: none;
+      width: 120px;
+      height: 120px;
+      border: 2px solid #000;
+      background-size: cover;
+      background-position: center;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 4px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    }
+    .fabric li img {
+      cursor: zoom-in;
+    }
   </style>
 </head>
 <body>
+  <div id="colorZoom"></div>
   <h1>Catálogo de Tecidos</h1>
 
   <!-- Botões para trocar -->
   <div class="nav-switch">
     <button id="btn-catalogo" class="active">Artigos</button>
     <button id="btn-videos">Vídeos</button>
+    <button id="btn-cores">Cores</button>
   </div>
 
   <!-- Seção catálogo -->
@@ -65,8 +85,6 @@
       <select id="ligamentoFilter"><option value="">Estrutura</option></select>
       <select id="applicationFilter"><option value="">Aplicação</option></select>
       <select id="colorFilter"><option value="">Cor</option></select>
-
-      <button onclick="salvarComoPDF()">Salvar como PDF</button>
     </div>
 
     <div class="catalog" id="catalog"></div>
@@ -74,6 +92,7 @@
 
   <!-- Seção vídeos -->
   <section id="sec-videos" class="hidden">
+    <h2>Vídeos</h2>
     <div class="video-list">
       <video controls>
         <source src="video1.mp4" type="video/mp4">
@@ -86,12 +105,17 @@
     </div>
   </section>
 
+  <!-- Seção Cores -->
+   <section id="sec-cores" class="hidden">
+  <h2>Lista de Cores</h2>
+  <div id="coresContainer" class="catalog"></div>
+</section>
+
   <!-- Modal de detalhes do tecido -->
 <div id="tecidoModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
 
-    <!-- Container da imagem com zoom -->
     <div class="img-container">
       <img id="m-imagem" alt="Tecido">
     </div>
@@ -109,7 +133,6 @@
     </div>
   </div>
 </div>
-
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
@@ -168,16 +191,48 @@
         linha.textContent      = card.dataset.linha;
         ligamento.textContent  = card.dataset.ligamento;
         aplicacao.textContent  = card.dataset.aplicacao;
-        cores.textContent      = card.dataset.cores;
-        img.src                = card.dataset.imagem !== "#" ? card.dataset.imagem : "";
 
+        // renderizar cores com <li><img>
+        const fabricColors = card.dataset.cores.split(', ');
+        cores.innerHTML = fabricColors.map(c => {
+          const code = c.split(' ')[0];
+          const data = colorData[code] || {};
+          const pantone = data.pantone || "#";
+          const imgSrc = data.img || `${code}.png`;
+          return `<li><img src="${imgSrc}" alt="${c}" style="width:20px;height:20px;border:1px solid #ccc;margin-right:4px;"> ${c} – ${pantone}</li>`;
+        }).join('');
+
+        img.src = card.dataset.imagem !== "#" ? card.dataset.imagem : "";
         modal.style.display = 'flex';
       });
 
       close.addEventListener('click', () => modal.style.display = 'none');
       modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+
+      // Zoom automático das cores
+      const colorZoom = document.getElementById('colorZoom');
+      document.addEventListener('mouseover', function(e) {
+        if(e.target.tagName === 'IMG' && e.target.parentElement.tagName === 'LI'){
+          colorZoom.style.backgroundImage = `url(${e.target.src})`;
+          colorZoom.style.display = 'block';
+        }
+      });
+      document.addEventListener('mousemove', function(e) {
+        if(colorZoom.style.display === 'block'){
+          colorZoom.style.left = e.pageX + 15 + 'px';
+          colorZoom.style.top = e.pageY + 15 + 'px';
+        }
+      });
+      document.addEventListener('mouseout', function(e) {
+        if(e.target.tagName === 'IMG' && e.target.parentElement.tagName === 'LI'){
+          colorZoom.style.display = 'none';
+        }
+      });
     });
   </script>
 </body>
+<footer id="catalogFooter">
+  <p>Todos os códigos Pantone® são aproximações.</p>
+  <p>Todos os direitos reservados para Macias®.</p>
+</footer>
 </html>
-
