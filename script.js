@@ -241,7 +241,7 @@ const fabrics = [
   line: ["Esportivos", "PET"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Camisas", "Agasalhos", "Bolsas", "Acessórios"],
-  colors: ["Em análise"],
+  colors: ["N/A"],
     image: "#"
 },
 {
@@ -698,6 +698,101 @@ const fabrics = [
 }
 ];
 
+// tabela central de cores
+const colorData = {
+  "N/A": { name: "N/A", pantone: "Apenas sob consulta", img: "NA.png" },
+  "0001": { name: "0001 - Branco", pantone: "11-4001 TCX", img: "0001.png" },
+  "0011": { name: "0011 - Amarelo Limão Fluor", pantone: "Não encontrado", img: "NA.png" },
+  "0130": { name: "0130 - Amarelo Ouro", pantone: "14-0754 TCX", img: "0130.png" },
+  "0192": { name: "0192 - Areia", pantone: "14-6305 TCX", img: "0192.png" },
+  "0199": { name: "0199 - Areia Escuro", pantone: "14-6305 TCX", img: "0199.png" },
+  "0372": { name: "0372 - Off White", pantone: "11-0608 TCX", img: "0372.png" },
+  "0541": { name: "0541 - Amarelo Manteiga", pantone: "11-0619 TCX", img: "0541.png" },
+  "1000": { name: "1000 - Verde água Claro", pantone: "12-5507 TCX", img: "1000.png" },
+  "1013": { name: "1013 - Amarelo Limão Fluor", pantone: "Não encontrado", img: "NA.png" },
+  "1017": { name: "1017 - Verde Lago", pantone: "18-4735 TCX", img: "1017.png" },
+  "1104": { name: "1104 - Verde", pantone: "Não encontrado", img: "NA.png" },
+  "1204": { name: "1204 - Verde Militar", pantone: "19-0419 TCX", img: "1204.png" },
+  "1209": { name: "1209 - Verde Bayou", pantone: "Não encontrado", img: "NA.png" },
+  "1399": { name: "1399 - Verde Aventura", pantone: "18-0117 TCX", img: "1399.png" },
+  "1764": { name: "1764 - Verde Limão", pantone: "15-0343 TCX", img: "1764.png" },
+  "1913": { name: "1913 - Evergreen", pantone: "19-6026 TCX", img: "1913.png" },
+  "2011": { name: "2011 - Azul Petróleo", pantone: "19-4826 TCX", img: "2011.png" },
+  "2014": { name: "2014 - Azul Royal", pantone: "19-3955 TCX", img: "2014.png" },
+  "2015": { name: "2015 - Azul Claro Acinzentado", pantone: "16-4019 TCX", img: "2015.png" },
+  "2044": { name: "2044 - Azul Royal Médio", pantone: "19-3955 TCX", img: "2044.png" },
+  "2058": { name: "2058 - Azul Claro Céu", pantone: "Não encontrado", img: "NA.png" },
+  "2059": { name: "2059 - Azul Piscina", pantone: "17-4435 TCX", img: "2059.png" },
+  "2060": { name: "2060 - Turquesa", pantone: "17-4320 TCX", img: "2060.png" },
+  "2073": { name: "2073 - Azul Royal Escuro", pantone: "19-3864 TCX", img: "2073.png" },
+  "2080": { name: "2080 - Azul Marinho", pantone: "19-4027 TCX", img: "2080.png" },
+  "2092": { name: "2092 - Azul Marinho Noite", pantone: "19-3924 TCX", img: "2092.png" },
+  "2095": { name: "2095 - Azul Crystal", pantone: "Não encontrado", img: "NA.png" },
+  "2195": { name: "2195 - Azul Petróleo", pantone: "Não encontrado", img: "NA.png" },
+  "2203": { name: "2203 - Azul Marinho", pantone: "Não encontrado", img: "NA.png" },
+  "2220": { name: "2220 - Azul Claro", pantone: "Não encontrado", img: "NA.png" },
+  "2222": { name: "2222 - Azul Medieval", pantone: "19-3933 TCX", img: "2222.png" },
+  "2238": { name: "2238 - Azul Marinho", pantone: "19-3920 TCX", img: "2238.png" },
+  "2249": { name: "2249 - Azul Royal", pantone: "Não encontrado", img: "NA.png" },
+  "2261": { name: "2261 - Azul Marinho", pantone: "19-4024 TCX", img: "2261.png" },
+  "2271": { name: "2271 - Azul Marinho", pantone: "19-3933 TCX", img: "2271.png" },
+  "2500": { name: "2500 - Azul Marinho Escuro", pantone: "19-3921 TCX", img: "2500.png" },
+  "2513": { name: "2513 - Azul Marinho", pantone: "19-3923 TCX", img: "2513.png" },
+  "2694": { name: "2694 - Azul Marinho", pantone: "19-3933 TCX", img: "2694.png" },
+  "2715": { name: "2715 - Azul Estratosfera", pantone: "13-5309 TCX", img: "2715.png" },
+  "2847": { name: "2847 - Azul Acinzentado", pantone: "16-4120 TCX", img: "2847.png" },
+  "2858": { name: "2858 - Azul Claro Alaka", pantone: "Não encontrado", img: "NA.png" },
+  "2910": { name: "2910 - Azul Royal Claro", pantone: "18-4043 TCX", img: "2910.png" },
+  "2934": { name: "2934 - Azul Navy", pantone: "19-3832 TCX", img: "2934.png" },
+  "2954": { name: "2954 - Azul Jeans", pantone: "19-3919 TCX", img: "2954.png" },
+  "3010": { name: "3010 - Cinza", pantone: "Não encontrado", img: "NA.png" },
+  "3029": { name: "3029 - Cinza Tradewinds", pantone: "15-4307 TCX", img: "3029.png" },
+  "3301": { name: "3301 - Cinza Cimento Esverdeado", pantone: "17-6009 TCX", img: "3301.png" },
+  "3345": { name: "3345 - Cinza Rato", pantone: "18-0513 TCX", img: "3345.png" },
+  "3351": { name: "3351 - Cinza Médio Esverdeado", pantone: "17-6009 TCX", img: "3351.png" },
+  "3375": { name: "3375 - Chumbo Pirata", pantone: "19-4305 TCX", img: "3375.png" },
+  "3381": { name: "3381 - Prata Esverdeado", pantone: "15-4702 TCX", img: "3381.png" },
+  "3390": { name: "3390 - Cinza Chumbo", pantone: "19-0506 TCX", img: "3390.png" },
+  "3624": { name: "3624 - Cinza Claro", pantone: "17-6009 TCX", img: "3624.png" },
+  "3665": { name: "3665 - Cinza Rato", pantone: "18-0306 TCX", img: "3665.png" },
+  "3668": { name: "3668 - Cinza Claro", pantone: "15-4305 TCX", img: "3668.png" },
+  "3676": { name: "3676 - Cinza Cimento", pantone: "18-5806 TCX", img: "3676.png" },
+  "4004": { name: "4004 - Ocre Biscut", pantone: "16-1336 TCX", img: "4004.png" },
+  "4007": { name: "4007 - Caramelo", pantone: "17-1047 TCX", img: "4007.png" },
+  "4123": { name: "4123 - MOCHA MOUSSE", pantone: "17-1230 TCX", img: "4123.png" },
+  "4174": { name: "4174 - Marrom", pantone: "19-0915 TCX", img: "4174.png" },
+  "4236": { name: "4236 - Caqui Queimado", pantone: "19-0820 TCX", img: "4236.png" },
+  "4243": { name: "4243 - Palha Clarissimo", pantone: "13-0000 TCX", img: "4243.png" },
+  "4244": { name: "4244 - Caqui Escuro", pantone: "17-0618 TCX", img: "4244.png" },
+  "4247": { name: "4247 - Caqui Fossil", pantone: "17-0517 TCX", img: "4247.png" },
+  "4341": { name: "4341 - Areia Avermelhada", pantone: "13-6105 TCX", img: "4341.png" },
+  "4676": { name: "4676 - Caqui Médio", pantone: "18-0521 TCX", img: "4676.png" },
+  "4832": { name: "4832 - Marrom Chocolate", pantone: "19-1118 TCX", img: "4832.png" },
+  "5010": { name: "5010 - Vermelho Cereja", pantone: "18-1653 TCX", img: "5010.png" },
+  "5025": { name: "5025 - Rosa Fluor", pantone: "Não encontrado", img: "NA.png" },
+  "5079": { name: "5079 - Rosa", pantone: "Não encontrado", img: "NA.png" },
+  "5108": { name: "5108 - Vermelho", pantone: "Não encontrado", img: "NA.png" },
+  "5286": { name: "5286 - Rosa Velho", pantone: "15-1317 TCX", img: "5286.png" },
+  "5384": { name: "5384 - Vermelho Batom", pantone: "19-1764 TCX", img: "5384.png" },
+  "5527": { name: "5527 - Vermelho Danger", pantone: "18-1763 TCX", img: "5527.png" },
+  "5581": { name: "5581 - Vinho", pantone: "19-1725 TCX", img: "5581.png" },
+  "5665": { name: "5665 - Vermelho Queimado", pantone: "19-1656 TCX", img: "5665.png" },
+  "5787": { name: "5787 - Rosa Clássico", pantone: "12-1207 TCX", img: "5787.png" },
+  "5810": { name: "5810 - Rosa Chiclete", pantone: "17-1928 TCX", img: "5810.png" },
+  "5978": { name: "5978 - Vermelho", pantone: "19-1664 TCX", img: "5978.png" },
+  "6267": { name: "6267 - Roxo", pantone: "19-3737 TCX", img: "6267.png" },
+  "6419": { name: "6419 - Roxo Maravilha", pantone: "19-2820 TCX", img: "6419.png" },
+  "7007": { name: "7007 - Laranja Fluor", pantone: "Não encontrado", img: "NA.png" },
+  "7131": { name: "7131 - Laranja", pantone: "17-1452 TCX", img: "7131.png" },
+  "8000": { name: "8000 - Laranja + Preto", pantone: "Xadrez", img: "NA.png" },
+  "8038": { name: "8038 - Rosa Claro + Branco", pantone: "Xadrez", img: "NA.png" },
+  "8208": { name: "8208 - Preto", pantone: "Xadrez", img: "NA.png" },
+  "8209": { name: "8209 - Lavanda", pantone: "Xadrez", img: "NA.png" },
+  "9989": { name: "9989 - Preto Mescla", pantone: "Mescla", img: "9989.png" },
+  "9999": { name: "9999 - Preto", pantone: "19-4007 TCX", img: "9999.png" }
+};
+
+// ===== Elementos =====
 const catalog = document.getElementById('catalog');
 const compositionFilter = document.getElementById('compositionFilter');
 const gramWeightFilter = document.getElementById('gramWeightFilter');
@@ -706,14 +801,64 @@ const ligamentoFilter = document.getElementById('ligamentoFilter');
 const applicationFilter = document.getElementById('applicationFilter');
 const colorFilter = document.getElementById('colorFilter');
 const searchInput = document.getElementById('searchInput');
+const coresContainer = document.getElementById('coresContainer');
 
+const btnCatalogo = document.getElementById('btn-catalogo');
+const btnVideos   = document.getElementById('btn-videos');
+const btnCores    = document.getElementById('btn-cores');
+
+const secCatalogo = document.getElementById('sec-catalogo');
+const secVideos   = document.getElementById('sec-videos');
+const secCores    = document.getElementById('sec-cores');
+
+const tecidoModal = document.getElementById('tecidoModal');
+const modalClose  = tecidoModal.querySelector('.close');
+const mNome       = document.getElementById('m-nome');
+const mCodigo     = document.getElementById('m-codigo');
+const mComposicao = document.getElementById('m-composicao');
+const mGramatura  = document.getElementById('m-gramatura');
+const mLinha      = document.getElementById('m-linha');
+const mLigamento  = document.getElementById('m-ligamento');
+const mAplicacao  = document.getElementById('m-aplicacao');
+const mCores      = document.getElementById('m-cores');
+const mImagem     = document.getElementById('m-imagem');
+
+const colorZoom   = document.getElementById('colorZoom');
+
+// ===== Alternar seções =====
+function showSection(section) {
+  secCatalogo.classList.add('hidden');
+  secVideos.classList.add('hidden');
+  secCores.classList.add('hidden');
+
+  btnCatalogo.classList.remove('active');
+  btnVideos.classList.remove('active');
+  btnCores.classList.remove('active');
+
+  if (section === 'catalogo') {
+    secCatalogo.classList.remove('hidden');
+    btnCatalogo.classList.add('active');
+  } else if (section === 'videos') {
+    secVideos.classList.remove('hidden');
+    btnVideos.classList.add('active');
+  } else if (section === 'cores') {
+    secCores.classList.remove('hidden');
+    btnCores.classList.add('active');
+  }
+}
+
+btnCatalogo.addEventListener('click', () => showSection('catalogo'));
+btnVideos.addEventListener('click',   () => showSection('videos'));
+btnCores.addEventListener('click',    () => showSection('cores'));
+
+// ===== Gerar filtros =====
 function generateOptions() {
   compositionFilter.innerHTML = '<option value="">Composição</option>';
-  gramWeightFilter.innerHTML = '<option value="">Gramatura</option>';
-  lineFilter.innerHTML = '<option value="">Linha</option>';
-  ligamentoFilter.innerHTML = '<option value="">Ligamento</option>';
+  gramWeightFilter.innerHTML  = '<option value="">Gramatura</option>';
+  lineFilter.innerHTML        = '<option value="">Linha</option>';
+  ligamentoFilter.innerHTML   = '<option value="">Ligamento</option>';
   applicationFilter.innerHTML = '<option value="">Aplicação</option>';
-  colorFilter.innerHTML = '<option value="">Cor</option>';
+  colorFilter.innerHTML       = '<option value="">Cor</option>';
 
   const uniqueComps = [...new Set(fabrics.flatMap(f => f.composition.map(c => `${c.percentage}% ${c.material}`)))].sort();
   uniqueComps.forEach(m => {
@@ -723,7 +868,7 @@ function generateOptions() {
     compositionFilter.appendChild(option);
   });
 
-  const uniqueGrams = [...new Set(fabrics.map(f => f.gramWeight))].sort((a, b) => a - b);
+  const uniqueGrams = [...new Set(fabrics.map(f => f.gramWeight))].sort((a,b)=>a-b);
   uniqueGrams.forEach(g => {
     const option = document.createElement('option');
     option.value = g;
@@ -763,16 +908,18 @@ function generateOptions() {
     colorFilter.appendChild(option);
   });
 }
-
 generateOptions();
 
-new Choices(compositionFilter, { searchEnabled: true, searchResultLimit: 0, maxItemCount: -1, itemSelectText: '' });
-new Choices(gramWeightFilter, { searchEnabled: true, searchResultLimit: 0, maxItemCount: -1, itemSelectText: '' });
-new Choices(lineFilter, { searchEnabled: true, searchResultLimit: 0, maxItemCount: -1, itemSelectText: '' });
-new Choices(ligamentoFilter, { searchEnabled: true, searchResultLimit: 0, maxItemCount: -1, itemSelectText: '' });
-new Choices(applicationFilter, { searchEnabled: true, searchResultLimit: 0, maxItemCount: -1, itemSelectText: '' });
-new Choices(colorFilter, { searchEnabled: true, searchResultLimit: 0, maxItemCount: -1, itemSelectText: '' });
+// Choices.js
+[compositionFilter, gramWeightFilter, lineFilter, ligamentoFilter, applicationFilter, colorFilter]
+  .forEach(el => new Choices(el, {
+    searchEnabled: true,
+    searchResultLimit: 0,
+    maxItemCount: -1,
+    itemSelectText: ''
+  }));
 
+// ===== Filtrar e exibir catálogo =====
 function displayFabrics(list) {
   catalog.innerHTML = "";
   if (list.length === 0) {
@@ -784,7 +931,13 @@ function displayFabrics(list) {
     const div = document.createElement('div');
     div.className = 'fabric';
 
-    // --- Atributos para o modal ---
+    const coresLista = fabric.colors.map(c => {
+      const code = c.split(' ')[0];
+      const data = colorData[code] || {};
+      const img  = data.img || `${code}.png`;
+      return `<li><img src="${img}" alt="${c}" style="width:20px;height:20px;border:1px solid #ccc;margin-right:4px;"> ${c}</li>`;
+    }).join('');
+
     div.dataset.nome       = fabric.name;
     div.dataset.codigo     = fabric.code;
     div.dataset.composicao = fabric.composition.map(c => `${c.percentage}% ${c.material}`).join(", ");
@@ -792,216 +945,134 @@ function displayFabrics(list) {
     div.dataset.linha      = fabric.line.join(", ");
     div.dataset.ligamento  = fabric.ligamento;
     div.dataset.aplicacao  = fabric.application.join(", ");
-    div.dataset.cores      = fabric.colors.join(", "); // salva como string
+    div.dataset.cores      = fabric.colors.join(", ");
     div.dataset.imagem     = `${fabric.code}.jpg`;
 
-    const coresLista = fabric.colors.map(c => `<li>${c}</li>`).join('');
-
     div.innerHTML = `
-      <img src="${fabric.code}.jpg" alt="${fabric.code}.jpg">
+      <img src="${fabric.code}.jpg" alt="${fabric.code}">
       <h3>${fabric.name}</h3>
       <p><strong>Código:</strong> ${fabric.code}</p>
       <p><strong>Composição:</strong> ${div.dataset.composicao}</p>
-      <p><strong>Gramatura:</strong> ${fabric.gramWeight} g/m²</p>
-      <p><strong>Linha:</strong> ${fabric.line.join(", ")}</p>
-      <p><strong>Ligamento:</strong> ${fabric.ligamento}</p>
-      <p><strong>Aplicação:</strong> ${fabric.application.join(", ")}</p>
+      <p><strong>Gramatura:</strong> ${div.dataset.gramatura}</p>
+      <p><strong>Linha:</strong> ${div.dataset.linha}</p>
+      <p><strong>Ligamento:</strong> ${div.dataset.ligamento}</p>
+      <p><strong>Aplicação:</strong> ${div.dataset.aplicacao}</p>
       <p><strong>Cores:</strong></p>
       <ul>${coresLista}</ul>
     `;
-
     catalog.appendChild(div);
   });
 }
 
-function salvarComoPDF() {
-  window.print();
-}
-
 function filterFabrics() {
-  const comp = compositionFilter.value;
-  const gram = gramWeightFilter.value;
-  const line = lineFilter.value;
-  const ligamento = ligamentoFilter.value;
-  const app = applicationFilter.value;
+  const comp  = compositionFilter.value;
+  const gram  = gramWeightFilter.value;
+  const line  = lineFilter.value;
+  const lig   = ligamentoFilter.value;
+  const app   = applicationFilter.value;
   const color = colorFilter.value;
-  const search = searchInput.value.trim().toLowerCase();
+  const search= searchInput.value.trim().toLowerCase();
 
   const filtered = fabrics.filter(fabric => {
     const compValues = fabric.composition.map(c => `${c.percentage}% ${c.material}`);
-    const matchComp = comp === "" || compValues.includes(comp);
-    const matchGram = gram === "" || fabric.gramWeight === Number(gram);
-    const matchLine = line === "" || fabric.line.includes(line);
-    const matchLig = ligamento === "" || fabric.ligamento === ligamento;
-    const matchApp = app === "" || fabric.application.includes(app);
-    const matchColor = color === "" || fabric.colors.includes(color);
-    const matchSearch = search === "" || fabric.name.toLowerCase().includes(search) || fabric.code.toLowerCase().includes(search);
-
-    return matchComp && matchGram && matchLine && matchLig && matchApp && matchColor && matchSearch;
+    return (comp==="" || compValues.includes(comp)) &&
+           (gram==="" || fabric.gramWeight == Number(gram)) &&
+           (line==="" || fabric.line.includes(line)) &&
+           (lig===""  || fabric.ligamento === lig) &&
+           (app===""  || fabric.application.includes(app)) &&
+           (color===""|| fabric.colors.includes(color)) &&
+           (search===""|| fabric.name.toLowerCase().includes(search) || fabric.code.toLowerCase().includes(search));
   });
 
   displayFabrics(filtered);
 }
 
-compositionFilter.addEventListener('change', filterFabrics);
-gramWeightFilter.addEventListener('change', filterFabrics);
-lineFilter.addEventListener('change', filterFabrics);
-ligamentoFilter.addEventListener('change', filterFabrics);
-applicationFilter.addEventListener('change', filterFabrics);
-colorFilter.addEventListener('change', filterFabrics);
+[compositionFilter, gramWeightFilter, lineFilter, ligamentoFilter, applicationFilter, colorFilter]
+  .forEach(el => el.addEventListener('change', filterFabrics));
 searchInput.addEventListener('input', filterFabrics);
-
 displayFabrics(fabrics);
 
-document.getElementById('downloadPDF').addEventListener('click', () => {
-  const element = document.getElementById('catalog');
+// ===== Exibir lista de cores única e ordenada =====
+function displayColors() {
+  const allColors = fabrics.flatMap(f =>
+    f.colors.map(c => {
+      const code = c.split(' ')[0];
+      const data = colorData[code] || {};
+      return { code: code, name: c, img: data.img || `${code}.png` };
+    })
+  );
 
-  const images = element.getElementsByTagName('img');
-  const promises = [];
+  const uniqueSorted = Array.from(new Map(allColors.map(c => [c.code, c])).values())
+                            .sort((a,b) => a.code.localeCompare(b.code));
 
-  for (let img of images) {
-    if (!img.complete) {
-      promises.push(new Promise((resolve) => {
-        img.onload = img.onerror = resolve;
-      }));
-    }
-  }
+  coresContainer.innerHTML = uniqueSorted.map(c =>
+    `<li><img src="${c.img}" alt="${c.name}" style="width:20px;height:20px;border:1px solid #ccc;margin-right:4px;"> ${c.name}</li>`
+  ).join('');
+}
+displayColors();
 
-  Promise.all(promises).then(() => {
-    const opt = {
-      margin: 0.5,
-      filename: 'catalogo-tecidos.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
-      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-    };
+// ===== Modal detalhes + zoom na foto =====
+catalog.addEventListener('click', e => {
+  const card = e.target.closest('.fabric');
+  if (!card) return;
 
-    html2pdf().set(opt).from(element).save();
-  });
-});
+  const fabricData = fabrics.find(f => String(f.code) === String(card.dataset.codigo));
 
-// ===== Modal para detalhes do tecido =====
-document.addEventListener('DOMContentLoaded', () => {
-  const modal   = document.getElementById('tecidoModal');
-  const close   = modal.querySelector('.close');
+  if (fabricData) {
+    mNome.textContent       = fabricData.name;
+    mCodigo.textContent     = fabricData.code;
+    mComposicao.textContent = fabricData.composition.map(c => `${c.percentage}% ${c.material}`).join(", ");
+    mGramatura.textContent  = `${fabricData.gramWeight} g/m²`;
+    mLinha.textContent      = fabricData.line.join(", ");
+    mLigamento.textContent  = fabricData.ligamento;
+    mAplicacao.textContent  = fabricData.application.join(", ");
 
-  const nome       = document.getElementById('m-nome');
-  const codigo     = document.getElementById('m-codigo');
-  const composicao = document.getElementById('m-composicao');
-  const gramatura  = document.getElementById('m-gramatura');
-  const linha      = document.getElementById('m-linha');
-  const ligamento  = document.getElementById('m-ligamento');
-  const aplicacao  = document.getElementById('m-aplicacao');
-  const cores      = document.getElementById('m-cores');
-  const img        = document.getElementById('m-imagem');
-
-  const catalog = document.getElementById('catalog');
-
-  // Criar contêiner para zoom
-  const imgContainer = document.createElement('div');
-  imgContainer.style.overflow = 'hidden';
-  imgContainer.style.width = '150px';
-  imgContainer.style.height = '150px';
-  imgContainer.style.borderRadius = '4px';
-  imgContainer.style.border = '1px solid #ccc';
-  imgContainer.appendChild(img);
-  img.style.transition = 'transform 0.2s ease, transform-origin 0.2s ease';
-  if (!img.parentNode || img.parentNode !== imgContainer) {
-    const infoDiv = img.parentNode;
-    infoDiv.insertBefore(imgContainer, img);
-  }
-
-  catalog.addEventListener('click', e => {
-    const card = e.target.closest('.fabric');
-    if (!card) return;
-
-    // Busca o objeto original para cores e imagem
-    const fabricData = fabrics.find(f => f.code === card.dataset.codigo);
-    if (!fabricData) return;
-
-    nome.textContent       = fabricData.name;
-    codigo.textContent     = fabricData.code;
-    composicao.textContent = fabricData.composition.map(c => `${c.percentage}% ${c.material}`).join(", ");
-    gramatura.textContent  = `${fabricData.gramWeight} g/m²`;
-    linha.textContent      = fabricData.line.join(", ");
-    ligamento.textContent  = fabricData.ligamento;
-    aplicacao.textContent  = fabricData.application.join(", ");
-
-    // cores em lista vertical
-    cores.innerHTML = "";
-    fabricData.colors.forEach(cor => {
-      const li = document.createElement("li");
-      li.textContent = cor;
-      cores.appendChild(li);
+    mCores.innerHTML = "";
+    fabricData.colors.forEach(c => {
+      const li = document.createElement('li');
+      li.textContent = c;
+      mCores.appendChild(li);
     });
+  }
 
-    // imagem e clique para abrir em nova aba
-    img.src = fabricData.image !== "#" ? fabricData.image : "";
-    img.onclick = () => {
-      if (fabricData.image && fabricData.image !== "#") {
-        window.open(fabricData.image, "_blank");
-      }
-    };
+  mImagem.src = card.dataset.imagem || `${card.dataset.codigo}.jpg`;
 
-    // zoom que segue o mouse
-    imgContainer.onmousemove = e => {
-      const rect = img.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      img.style.transformOrigin = `${x}% ${y}%`;
-      img.style.transform = 'scale(2.5)'; // ajuste do zoom
-    };
-    imgContainer.onmouseleave = () => {
-      img.style.transform = 'scale(1)';
-      img.style.transformOrigin = 'center center';
-    };
-
-    modal.style.display = 'flex';
-  });
-
-  close.addEventListener('click', () => modal.style.display = 'none');
-  modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+  tecidoModal.style.display = 'flex';
 });
 
+// ===== Fechar modal =====
+modalClose.addEventListener('click', () => tecidoModal.style.display = 'none');
+tecidoModal.addEventListener('click', e => { if (e.target === tecidoModal) tecidoModal.style.display = 'none'; });
 
-function abrirModal(src) {
-  const modal = document.getElementById("videoModal");
-  const video = document.getElementById("modalVideo");
-  video.src = src;
-  modal.style.display = "flex";
-  video.play();
-}
-
-function fecharModal() {
-  const modal = document.getElementById("videoModal");
-  const video = document.getElementById("modalVideo");
-  video.pause();
-  video.src = "";
-  modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-  const modal = document.getElementById("videoModal");
-  const video = document.getElementById("modalVideo");
-  if (event.target === modal) {
-    video.pause();
-    video.src = "";
-    modal.style.display = "none";
+// ===== Zoom cores =====
+document.addEventListener('mouseover', e => {
+  if (e.target.tagName === 'IMG' && e.target.parentElement.tagName === 'LI') {
+    colorZoom.style.backgroundImage = `url(${e.target.src})`;
+    colorZoom.style.display = 'block';
   }
-}
+});
+document.addEventListener('mousemove', e => {
+  if (colorZoom.style.display === 'block') {
+    colorZoom.style.left = e.pageX + 15 + 'px';
+    colorZoom.style.top  = e.pageY + 15 + 'px';
+  }
+});
+document.addEventListener('mouseout', e => {
+  if (e.target.tagName === 'IMG' && e.target.parentElement.tagName === 'LI') {
+    colorZoom.style.display = 'none';
+  }
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// ===== Zoom na imagem do tecido dentro do modal =====
+mImagem.addEventListener('hover', () => {
+  // alterna zoom usando CSS transform
+  if (mImagem.classList.contains('zoomed')) {
+    mImagem.classList.remove('zoomed');
+    mImagem.style.transform = 'scale(1)';
+    mImagem.style.cursor = 'zoom-in';
+  } else {
+    mImagem.classList.add('zoomed');
+    mImagem.style.transform = 'scale(3)';
+    mImagem.style.cursor = 'zoom-out';
+  }
+});
