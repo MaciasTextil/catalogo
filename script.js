@@ -788,7 +788,7 @@ const colorData = {
   "8038": { name: "8038 - Rosa Claro + Branco", pantone: "Xadrez", img: "NA.png" },
   "8208": { name: "8208 - Preto", pantone: "Xadrez", img: "NA.png" },
   "8209": { name: "8209 - Lavanda", pantone: "Xadrez", img: "NA.png" },
-  "9989": { name: "9989 - Preto Mescla", pantone: "Mescla", img: "9989.png" },
+  "9989": { name: "9989 - Preto Mescla", pantone: "Mescla", img: "NA.png" },
   "9999": { name: "9999 - Preto", pantone: "19-4007 TCX", img: "9999.png" }
 };
 
@@ -1076,3 +1076,4 @@ mImagem.addEventListener('hover', () => {
     mImagem.style.cursor = 'zoom-out';
   }
 });
+
