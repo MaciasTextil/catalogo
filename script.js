@@ -1047,5 +1047,3 @@ mImagem.addEventListener('hover', () => {
     mImagem.style.cursor = 'zoom-out';
   }
 });
-
-
