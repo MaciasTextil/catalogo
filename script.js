@@ -298,35 +298,6 @@ const fabrics = [
     image: "#"
 },
 {
-  name: "Mac PolCarb",
-  code: "22279",
-  composition: [
-    { material: "Poliéster", percentage: 97 },
-    { material: "Carbono", percentage: 3 }
-  ],
-  gramWeight: 115,
-  line: ["Técnicos"],
-  ligamento: "Sarja",
-  application: ["Roupas profissionais com propriedade antiestática"],
-  colors: ["0001 - Branco","1104 - Verde","1209 - Verde Bayou","2058 - Azul Claro Céu","2095 - Azul Crystal","2195 - Azul Petróleo","2203 - Azul Marinho","2220 - Azul Claro","2249 - Azul Royal","2858 - Azul Claro Alaka","3010 - Cinza","5079 - Rosa","5108 - Vermelho", "9999 - Preto"],
-    image: "#"
-},
-{
-  name: "Mac PolCo Carb",
-  code: "26279",
-  composition: [
-    { material: "Algodão", percentage: 58},
-    { material: "Poliéster", percentage: 40 },
-    { material: "Carbono", percentage: 2 }
-  ],
-  gramWeight: 140,
-  line: ["Técnicos"],
-  ligamento: "Sarja",
-  application: ["Roupas profissionais com propriedade antiestática"],
-  colors: ["0001 - Branco","1104 - Verde","1209 - Verde Bayou","2058 - Azul Claro Céu","2095 - Azul Crystal","2195 - Azul Petróleo","2203 - Azul Marinho","2220 - Azul Claro","2249 - Azul Royal","2858 - Azul Claro Alaka","3010 - Cinza","5079 - Rosa","5108 - Vermelho", "9999 - Preto"],
-    image: "#"
-},
-{
   name: "Macnyl 500",
   code: "11133",
   composition: [
@@ -1076,4 +1047,5 @@ mImagem.addEventListener('hover', () => {
     mImagem.style.cursor = 'zoom-out';
   }
 });
+
 
