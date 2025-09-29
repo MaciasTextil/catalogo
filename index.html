@@ -63,7 +63,7 @@
 </head>
 <body>
   <div id="colorZoom"></div>
-  <h1>Catálogo de Tecidos</h1>
+  <h1 id="refreshTitle">Catálogo de Tecidos</h1>
 
   <!-- Botões para trocar -->
   <div class="nav-switch">
@@ -229,6 +229,9 @@
         }
       });
     });
+
+    document.getElementById('refreshTitle').onclick = () => location.reload();
+    
   </script>
 </body>
 <footer id="catalogFooter">
@@ -236,3 +239,4 @@
   <p>Todos os direitos reservados para Macias®.</p>
 </footer>
 </html>
+
