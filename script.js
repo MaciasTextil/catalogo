@@ -6,6 +6,7 @@ const fabrics = [
       { material: "Poliamida 6.6", percentage: 100 }
     ],
     gramWeight: 140,
+    width: 1.50,
     line: ["UV 50+", "BIO-D"],
     ligamento: "Tela",
     application: ["Camisas para pesca", "Camisas cargo", "Bonés", "Chapéus", "Jaquetas", "Shorts", "Bermudas"],
@@ -19,6 +20,7 @@ const fabrics = [
       { material: "Poliamida 6.6", percentage: 100 }
     ],
     gramWeight: 108,
+    width: 1.50,
     line: ["BIO-D"],
     ligamento: "Tela",
     application: ["Camisas para pesca", "Camisas cargo", "Bonés", "Chapéus", "Jaquetas", "Shorts", "Bermudas"],
@@ -32,6 +34,7 @@ const fabrics = [
       { material: "Poliamida 6.6", percentage: 100 }
     ],
     gramWeight: 143,
+    width: 1.50,
     line: ["UV 50+"],
     ligamento: "Tela",
     application: ["Camisas para pesca", "Camisas cargo", "Bonés", "Chapéus", "Jaquetas", "Shorts", "Bermudas"],
@@ -45,6 +48,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 112,
+  width: 1.50,
   line: ["UV 50+"],
   ligamento: "Tela",
   application: ["Camisas para pesca", "Camisas cargo", "Bonés", "Chapéus", "Jaquetas", "Shorts", "Bermudas"],
@@ -59,6 +63,7 @@ const fabrics = [
     { material: "Elastano Lycra®", percentage: 6 }
   ],
   gramWeight: 130,
+  width: 1.35,
   line: ["Esportivos", "Elastizados", "Alfaiataria"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Calças esportivas", "Jaquetas", "Coletes", "Bonés"],
@@ -73,6 +78,7 @@ const fabrics = [
     { material: "Elastano Lycra®", percentage: 9 }
   ],
   gramWeight: 172,
+  width: 1.30,
   line: ["Esportivos", "4 sentidos", "Elastizados"],
   ligamento: "Tela",
   application: ["Shorts"],
@@ -87,6 +93,7 @@ const fabrics = [
     { material: "Elastano Lycra®", percentage: 20 }
   ],
   gramWeight: 134,
+  width: 1.30,
   line: ["Esportivos", "Elastizados", "Alfaiataria", "4 sentidos"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Calças esportivas", "Jaquetas", "Coletes", "Bonés"],
@@ -101,6 +108,7 @@ const fabrics = [
     { material: "Elastano Lycra®", percentage: 6 }
   ],
   gramWeight: 98,
+  width: 1.35,
   line: ["Esportivos", "Elastizados", "Alfaiataria"],
   ligamento: "Maquinetado",
   application: ["Shorts", "Bermudas", "Calças esportivas", "Jaquetas", "Coletes", "Bonés"],
@@ -115,6 +123,7 @@ const fabrics = [
     { material: "Elastano", percentage: 8 }
   ],
   gramWeight: 114,
+  width: 1.45,
   line: ["Esportivos", "Elastizados"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Camisas", "Agasalhos"],
@@ -129,6 +138,7 @@ const fabrics = [
     { material: "Elastano Lycra®", percentage: 10 }
   ],
   gramWeight: 125,
+  width: 1.35,
   line: ["Esportivos", "Elastizados", "4 sentidos"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Camisas", "Agasalhos"],
@@ -143,6 +153,7 @@ const fabrics = [
     { material: "Elastomultiéster", percentage: 30 }
   ],
   gramWeight: 110,
+  width: 1.40,
   line: ["Esportivos", "Elastizados"],
   ligamento: "Tela",
   application: ["Bermudas", "Shorts", "Jaquetas leves"],
@@ -157,6 +168,7 @@ const fabrics = [
     { material: "Elastano Lycra®", percentage: 6 }
   ],
   gramWeight: 106,
+  width: 1.38,
   line: ["Esportivos", "Elastizados"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas"],
@@ -171,6 +183,7 @@ const fabrics = [
     { material: "Elastano", percentage: 4 }
   ],
   gramWeight: 96,
+  width: 1.40,
   line: ["Esportivos", "Elastizados"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas"],
@@ -185,6 +198,7 @@ const fabrics = [
     { material: "Elastano", percentage: 3 }
   ],
   gramWeight: 135,
+  width: 1.30,
   line: ["Esportivos", "Elastizados"],
   ligamento: "Sarja",
   application: ["Shorts", "Bermudas"],
@@ -198,6 +212,7 @@ const fabrics = [
     { material: "Poliéster PET", percentage: 100 }
   ],
   gramWeight: 167,
+  width: 1.50,
   line: ["PET", "Pesados"],
   ligamento: "Canele",
   application: ["Calças", "Ecobags", "Jalecos"],
@@ -212,6 +227,7 @@ const fabrics = [
     { material: "Poliéster PET", percentage: 46 }
   ],
   gramWeight: 174,
+  width: 1.60,
   line: ["Alfaiataria", "PET"],
   ligamento: "Sarja",
   application: ["Casacos", "Saias", "Calças", "Coletes", "Shorts"],
@@ -225,6 +241,7 @@ const fabrics = [
     { material: "Poliéster PET", percentage: 100 }
   ],
   gramWeight: 149,
+  width: 1.50,
   line: ["Esportivos", "PET"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Camisas", "Agasalhos", "Bolsas", "Acessórios"],
@@ -238,6 +255,7 @@ const fabrics = [
     { material: "Poliéster PET", percentage: 100 }
   ],
   gramWeight: 128,
+  width: 1.50,
   line: ["Esportivos", "PET"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Camisas", "Agasalhos", "Bolsas", "Acessórios"],
@@ -252,6 +270,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 37 }
   ],
   gramWeight: 150,
+  width: 1.60,
   line: ["BIO-D","Esportivos","UV 50+","Alfaiataria"],
   ligamento: "Canele",
   application: ["Calças cargo", "Camisas cargo", "Jaquetas","Bermudas","Peças de alfaiataria casual"],
@@ -259,12 +278,13 @@ const fabrics = [
     image: "#"
 },
 {
-  name: "Camberra PET",
+  name: "New Camberra PET",
   code: "22244",
   composition: [
     { material: "Poliéster PET", percentage: 100 }
   ],
   gramWeight: 130,
+  width: 1.50,
   line: ["Esportivos", "PET"],
   ligamento: "Sarja",
   application: ["Shorts", "Bermudas", "Jaquetas"],
@@ -278,6 +298,7 @@ const fabrics = [
     { material: "Poliéster PET", percentage: 100 }
   ],
   gramWeight: 101,
+  width: 1.50,
   line: ["Esportivos", "PET"],
   ligamento: "Maquinetado Rip Stop",
   application: ["Bermudas", "Shorts", "Jaquetas", "Forros de Jaquetas", "Forros de Bolsas"],
@@ -291,6 +312,7 @@ const fabrics = [
     { material: "Poliéster PET", percentage: 100 }
   ],
   gramWeight: 83,
+  width: 1.50,
   line: ["Esportivos", "PET"],
   ligamento: "Tela",
   application: ["Bermudas", "Shorts", "Jaquetas", "Agasalhos Esportivos"],
@@ -304,6 +326,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 213,
+  width: 1.50,
   line: ["Pesados"],
   ligamento: "Tela",
   application: ["Botas", "Coletes Balísticos", "Coturnos", "Malas", "Mochilas"],
@@ -317,6 +340,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 197,
+  width: 1.50,
   line: ["Pesados"],
   ligamento: "Maquinetado",
   application: ["Botas", "Coletes Balísticos", "Coturnos", "Malas", "Mochilas"],
@@ -330,6 +354,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 322,
+  width: 1.50,
   line: ["Pesados"],
   ligamento: "Tela",
   application: ["Botas", "Coletes Balísticos", "Coturnos", "Malas", "Mochilas"],
@@ -343,6 +368,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 246,
+  width: 1.50,
   line: ["Pesados"],
   ligamento: "Rip Stop",
   application: ["Botas", "Coletes Balísticos", "Coturnos", "Malas", "Mochilas"],
@@ -356,6 +382,7 @@ const fabrics = [
     { material: "Poliéster", percentage: 100 }
   ],
   gramWeight: 220,
+  width: 1.40,
   line: ["Pesados"],
   ligamento: "REPS",
   application: [
@@ -371,6 +398,7 @@ const fabrics = [
     { material: "Poliamida 6", percentage: 100 }
   ],
   gramWeight: 122,
+  width: 1.50,
   line: ["Pesados"],
   ligamento: "Tela",
   application: ["Jaquetas", "Malas", "Bolsas", "Malotes"],
@@ -384,6 +412,7 @@ const fabrics = [
     { material: "Poliéster", percentage: 100 }
   ],
   gramWeight: 130,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Sarja",
   application: ["Shorts", "Bermudas", "Jaquetas"],
@@ -397,6 +426,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 143,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Maquinetado Rip Stop",
   application: ["Calças", "Coletes", "Bermudas", "Shorts", "Bonés"],
@@ -410,6 +440,7 @@ const fabrics = [
     { material: "Poliéster", percentage: 100 }
   ],
   gramWeight: 112,
+  width: 1.50,
   line: ["Esportivos","Alfaiataria"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas"],
@@ -425,6 +456,7 @@ const fabrics = [
     { material: "Bambu", percentage: 23 }
   ],
   gramWeight: 102,
+  width: 1.50,
   line: ["Esportivos", "Origem Sustentável"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Camisas", "Agasalhos"],
@@ -438,6 +470,7 @@ const fabrics = [
     { material: "Poliéster", percentage: 100 }
   ],
   gramWeight: 138,
+  width: 1.60,
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Jaquetas", "Bermudas", "Peças Esportivas em Geral"],
@@ -451,6 +484,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 75,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Forros de Jaquetas", "Jaquetas", "Bolsas", "Shorts"],
@@ -464,6 +498,7 @@ const fabrics = [
     { material: "Poliéster", percentage: 100 }
   ],
   gramWeight: 102,
+  width: 1.55,
   line: ["Esportivos"],
   ligamento: "Maquinetado Rip Stop",
   application: ["Jaquetas", "Forros de Jaquetas", "Forros de Bolsas"],
@@ -478,6 +513,7 @@ const fabrics = [
     { material: "Poliéster", percentage: 11 }
   ],
   gramWeight: 101,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Bermudas", "Shorts", "Jaquetas"],
@@ -491,6 +527,7 @@ const fabrics = [
     { material: "Poliéster", percentage: 100 }
   ],
   gramWeight: 115,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Sarja",
   application: ["Bermudas", "Shorts", "Jaquetas", "Agasalhos Esportivos"],
@@ -504,6 +541,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 74,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Forros de Jaquetas", "Jaquetas", "Bolsas", "Shorts"],
@@ -517,6 +555,7 @@ const fabrics = [
     { material: "Poliéster", percentage: 100 }
   ],
   gramWeight: 101,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Maquinetado Rip Stop",
   application: ["Bermudas", "Shorts", "Jaquetas", "Forros de Jaquetas", "Forros de Bolsas"],
@@ -530,6 +569,7 @@ const fabrics = [
     { material: "Poliéster", percentage: 100 }
   ],
   gramWeight: 84,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Bermudas", "Shorts", "Jaquetas", "Agasalhos Esportivos"],
@@ -543,6 +583,7 @@ const fabrics = [
     { material: "Poliéster", percentage: 100 }
   ],
   gramWeight: 100,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Jaquetas"],
@@ -556,6 +597,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 138,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Jaquetas"],
@@ -569,6 +611,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 108,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Jaquetas"],
@@ -582,6 +625,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 73,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["#"],
@@ -596,6 +640,7 @@ const fabrics = [
     { material: "Poliéster", percentage: 47 }
   ],
   gramWeight: 95,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Bermudas", "Shorts", "Jaquetas"],
@@ -609,6 +654,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 100,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Bermudas", "Shorts", "Jaquetas", "Agasalhos Esportivos"],
@@ -622,6 +668,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 90,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Forros de Jaquetas", "Jaquetas", "Bolsas"],
@@ -635,6 +682,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 105,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Maquinetado",
   application: ["Forros de jaquetas", "Jaquetas", "Bolsas", "Shorts", "Entre outros"],
@@ -648,6 +696,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 72,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Rip Stop",
   application: ["Jaquetas corta vento", "Bolsas", "Entre outros"],
@@ -661,6 +710,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
   gramWeight: 123,
+  width: 1.50,
   line: ["Esportivos"],
   ligamento: "Rip Stop",
   application: ["Jaquetas", "Bonés", "Calças", "Pochetes", "Acessórios"],
@@ -767,6 +817,7 @@ const colorData = {
 const catalog = document.getElementById('catalog');
 const compositionFilter = document.getElementById('compositionFilter');
 const gramWeightFilter = document.getElementById('gramWeightFilter');
+const widthFilter = document.getElementById('widthFilter');
 const lineFilter = document.getElementById('lineFilter');
 const ligamentoFilter = document.getElementById('ligamentoFilter');
 const applicationFilter = document.getElementById('applicationFilter');
@@ -847,6 +898,15 @@ function generateOptions() {
     gramWeightFilter.appendChild(option);
   });
 
+  const uniqueWidths = [...new Set(fabrics.map(f => f.width))].sort((a, b) => a - b);
+widthFilter.innerHTML = '<option value="">Largura</option>';
+uniqueWidths.forEach(w => {
+  const option = document.createElement('option');
+  option.value = w;
+  option.textContent = `${w.toFixed(2).replace('.', ',')} m`;
+  widthFilter.appendChild(option);
+});
+
   const uniqueLines = [...new Set(fabrics.flatMap(f => f.line))].sort();
   uniqueLines.forEach(l => {
     const option = document.createElement('option');
@@ -882,7 +942,7 @@ function generateOptions() {
 generateOptions();
 
 // Choices.js
-[compositionFilter, gramWeightFilter, lineFilter, ligamentoFilter, applicationFilter, colorFilter]
+[compositionFilter, gramWeightFilter, widthFilter, lineFilter, ligamentoFilter, applicationFilter, colorFilter]
   .forEach(el => new Choices(el, {
     searchEnabled: true,
     searchResultLimit: 0,
@@ -913,6 +973,7 @@ function displayFabrics(list) {
     div.dataset.codigo     = fabric.code;
     div.dataset.composicao = fabric.composition.map(c => `${c.percentage}% ${c.material}`).join(", ");
     div.dataset.gramatura  = `${fabric.gramWeight} g/m²`;
+    div.dataset.largura    = fabric.width ? `${fabric.width.toFixed(2).replace('.', ',')} m` : "—"; // <-- AQUI
     div.dataset.linha      = fabric.line.join(", ");
     div.dataset.ligamento  = fabric.ligamento;
     div.dataset.aplicacao  = fabric.application.join(", ");
@@ -925,6 +986,7 @@ function displayFabrics(list) {
       <p><strong>Código:</strong> ${fabric.code}</p>
       <p><strong>Composição:</strong> ${div.dataset.composicao}</p>
       <p><strong>Gramatura:</strong> ${div.dataset.gramatura}</p>
+      <p><strong>Largura:</strong> ${div.dataset.largura}</p> <!-- <-- AQUI -->
       <p><strong>Linha:</strong> ${div.dataset.linha}</p>
       <p><strong>Ligamento:</strong> ${div.dataset.ligamento}</p>
       <p><strong>Aplicação:</strong> ${div.dataset.aplicacao}</p>
@@ -935,9 +997,11 @@ function displayFabrics(list) {
   });
 }
 
+
 function filterFabrics() {
   const comp  = compositionFilter.value;
   const gram  = gramWeightFilter.value;
+  const width = widthFilter.value;
   const line  = lineFilter.value;
   const lig   = ligamentoFilter.value;
   const app   = applicationFilter.value;
@@ -948,6 +1012,7 @@ function filterFabrics() {
     const compValues = fabric.composition.map(c => `${c.percentage}% ${c.material}`);
     return (comp==="" || compValues.includes(comp)) &&
            (gram==="" || fabric.gramWeight == Number(gram)) &&
+           (width==="" || fabric.width == Number(width)) && // ← adiciona isso
            (line==="" || fabric.line.includes(line)) &&
            (lig===""  || fabric.ligamento === lig) &&
            (app===""  || fabric.application.includes(app)) &&
@@ -958,7 +1023,7 @@ function filterFabrics() {
   displayFabrics(filtered);
 }
 
-[compositionFilter, gramWeightFilter, lineFilter, ligamentoFilter, applicationFilter, colorFilter]
+[compositionFilter, gramWeightFilter, widthFilter, lineFilter, ligamentoFilter, applicationFilter, colorFilter]
   .forEach(el => el.addEventListener('change', filterFabrics));
 searchInput.addEventListener('input', filterFabrics);
 displayFabrics(fabrics);
