@@ -9,7 +9,7 @@
 body {
   font-family: Tahoma, Verdana, Arial, sans-serif;
   margin: 20px;
-  background-image: url(halloween.png);
+  background: linear-gradient(180deg, #CFE7FF 0%, #EAF6FF 100%);
   color: #000;
   -webkit-font-smoothing: antialiased;
 }
@@ -285,6 +285,7 @@ button:hover {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
 
 
 
