@@ -596,8 +596,8 @@ const fabrics = [
   composition: [
     { material: "Poliamida 6.6", percentage: 100 }
   ],
-  gramWeight: 138,
-  width: 1.50,
+  gramWeight: 136,
+  width: 1.52,
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Jaquetas"],
@@ -1112,3 +1112,4 @@ mImagem.addEventListener('hover', () => {
     mImagem.style.cursor = 'zoom-out';
   }
 });
+
