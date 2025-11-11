@@ -439,7 +439,7 @@ const fabrics = [
   composition: [
     { material: "Poliéster", percentage: 100 }
   ],
-  gramWeight: 112,
+  gramWeight: 114,
   width: 1.50,
   line: ["Esportivos","Alfaiataria"],
   ligamento: "Tela",
@@ -526,7 +526,7 @@ const fabrics = [
   composition: [
     { material: "Poliéster", percentage: 100 }
   ],
-  gramWeight: 115,
+  gramWeight: 112,
   width: 1.50,
   line: ["Esportivos"],
   ligamento: "Sarja",
@@ -1112,4 +1112,5 @@ mImagem.addEventListener('hover', () => {
     mImagem.style.cursor = 'zoom-out';
   }
 });
+
 
