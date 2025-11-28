@@ -1,291 +1,376 @@
-/* style.css — versão atualizada
-   Objetivo: melhorar visualização mobile, empilhar botões, evitar zoom estranho,
-   e documentar o máximo possível cada bloco.
-*/
+/* =========================================================
+   STYLE.CSS — Versão Final
+   Zoom extremo sobreposto no modal + sem bolinhas + sem zoom no hover
+   ========================================================= */
 
-/* ------------------------
-   Reset base / aparência
-   ------------------------ */
+/* =========================================================
+   BASE / RESET / APARÊNCIA GERAL
+   ========================================================= */
 body {
-  font-family: Tahoma, Verdana, Arial, sans-serif;
-  margin: 20px;
-  background: linear-gradient(180deg, #CFE7FF 0%, #EAF6FF 100%);
-  color: #000;
-  -webkit-font-smoothing: antialiased;
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    margin: 20px;
+    background: linear-gradient(180deg, #CFE7FF 0%, #EAF6FF 100%);
+    color: #000;
+    -webkit-font-smoothing: antialiased;
 }
 
 h1 {
-  text-align: center;
-  color: #003399;
-  background: linear-gradient(to bottom, #ffffff, #dbe9f6);
-  border: 1px solid #7DA2CE;
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 20px;
-  box-shadow: 1px 1px 2px #999;
-  cursor: pointer; /* <<< torna o h1 "botão" */
+    text-align: center;
+    color: #003399;
+    background: linear-gradient(to bottom, #ffffff, #dbe9f6);
+    border: 1px solid #7DA2CE;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 2px #999;
+    cursor: pointer;
 }
 
-/* ------------------------
-   Filtros / controles (topo)
-   ------------------------ */
+/* =========================================================
+   FILTROS / CONTROLES / CHOICES.JS
+   ========================================================= */
 .filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 30px;
-  justify-content: center;
-}
-.filters > * {
-  flex: 0 1 auto;
-}
-.filters .choices {
-  min-width: 200px;
-  max-width: 250px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+    justify-content: center;
 }
 
-/* ------------------------
-   Estilo moderno para Choices.js
-   ------------------------ */
-/* Aplicar box-sizing global para não cortar bordas */
+.filters > * {
+    flex: 0 1 auto;
+}
+
+.filters .choices {
+    min-width: 200px;
+    max-width: 250px;
+}
+
 .choices,
 .choices * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-/* Ajuste na largura para garantir que a borda apareça */
 .choices__inner {
-  width: 100%; /* ocupa todo o container */
-  min-width: 10px;
-  padding: 6px 10px !important;
-  border: 1px solid #7DA2CE !important;
-  border-radius: 8px !important;
-  background: #fff !important;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important;
-  transition: all 0.25s ease;
-  text-align: left;
-  min-height: 34px !important;
-  font-size: 0.85rem !important;
+    width: 100%;
+    padding: 6px 10px !important;
+    border: 1px solid #7DA2CE !important;
+    border-radius: 8px !important;
+    background: #fff !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+    transition: all 0.25s ease;
+    text-align: left;
+    min-height: 34px !important;
+    font-size: 0.85rem !important;
 }
 
 .choices__inner:hover {
-  border-color: #0052cc !important;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.15) !important;
+    border-color: #0052cc !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15) !important;
 }
+
 .choices__inner.is-focused,
 .is-open .choices__inner {
-  border-color: #0066ff !important;
-  box-shadow: 0 0 0 3px rgba(0,102,255,0.2) !important;
-}
-.choices__list--dropdown {
-  border-radius: 0 0 8px 8px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
-  border: 1px solid #7DA2CE;
-}
-.choices__list--dropdown .choices__item {
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-.choices__list--dropdown .choices__item--selectable:hover {
-  background: #e0edff;
-  color: #003399;
+    border-color: #0066ff !important;
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.2) !important;
 }
 
-/* ------------------------
-   Inputs e botões
-   ------------------------ */
+.choices__list--dropdown {
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+    border: 1px solid #7DA2CE;
+}
+
+.choices__list--dropdown .choices__item {
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.choices__list--dropdown .choices__item--selectable:hover {
+    background: #e0edff;
+    color: #003399;
+}
+
+/* =========================================================
+   INPUTS / BOTÕES
+   ========================================================= */
 .search-container input,
 button {
-  font-family: Tahoma, Verdana, sans-serif;
-  padding: 7px 10px;
-  border: 1px solid #7DA2CE;
-  background: #fff;
-  border-radius: 6px;
-  min-width: 140px;
-  max-width: 220px;
-  box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
-  text-align: left;
+    font-family: Tahoma, Verdana, sans-serif;
+    padding: 7px 10px;
+    border: 1px solid #7DA2CE;
+    background: #fff;
+    border-radius: 6px;
+    min-width: 140px;
+    max-width: 220px;
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1);
+    text-align: left;
 }
+
 button {
-  background: linear-gradient(to bottom, #ffffff, #dbe9f6);
-  cursor: pointer;
-  color: #003399;
-  box-shadow: 1px 1px 2px #999;
-  transition: background 0.25s ease;
+    background: linear-gradient(to bottom, #ffffff, #dbe9f6);
+    cursor: pointer;
+    color: #003399;
+    box-shadow: 1px 1px 2px #999;
+    transition: background 0.25s ease;
 }
+
 button:hover {
-  background: linear-gradient(to bottom, #f0f8ff, #c7def1);
-}
-#downloadPDF {
-  display: block;
-  margin: 0 auto;
+    background: linear-gradient(to bottom, #f0f8ff, #c7def1);
 }
 
-/* ------------------------
-   Catálogo
-   ------------------------ */
+/* =========================================================
+   CATÁLOGO / CARDS
+   ========================================================= */
 .catalog {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1800px;
 }
-.page {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 20px;
-  page-break-after: always;
-}
+
 .fabric {
-  width: 100%;
-  background: #ffffff;
-  border: 1px solid #7DA2CE;
-  border-radius: 6px;
-  padding: 10px;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-  overflow: hidden;
-  box-sizing: border-box;
-}
-.fabric img {
-  width: 100%;
-  max-width: 180px;
-  height: auto;
-  margin-bottom: 8px;
-  border-radius: 4px;
-  display: block;
-}
-.fabric h3 { margin: 0 0 5px; font-size: 1rem; color: #003399; }
-.fabric p  { margin: 2px 0; font-size: 0.9rem; }
-.fabric ul { list-style: none; padding: 0; margin: 5px 0 0 0; text-align: left; }
-.fabric ul li { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
-
-/* ------------------------
-   Breakpoints
-   ------------------------ */
-@media (max-width: 600px) {
-  /* já existente … */
-
-  /* força os botões em coluna */
-  .filters button {
-    width: 90%;
-    max-width: 100%;
-    display: block;
-  }
-
-  /* se houver vários botões, cada um embaixo do outro */
-  .filters {
+    background: #ffffff;
+    border: 1px solid #7DA2CE;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
     flex-direction: column;
     align-items: center;
-  }
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
-/* ------------------------
-   Thumbnails / vídeos
-   ------------------------ */
-.video-thumbnails { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 20px 0; }
-.video-thumb { width: 200px; height: 120px; object-fit: cover; cursor: pointer; border: 1px solid #7DA2CE; border-radius: 6px; box-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
 
-/* ------------------------
-   Modal
-   ------------------------ */
-.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 9999; }
-.modal.hidden { display: none; }
-.modal-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 600px;
-  width: 90%;
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  max-height: 90%;
-  overflow-y: auto;
-  position: relative;
+.fabric:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+    border-color: #0052cc;
 }
-.modal-content .close { position: absolute; top: 10px; right: 14px; font-size: 22px; cursor: pointer; }
-#tecidoModal .modal-content { position: relative; }
-#tecidoModal .modal-content img {
-  width: 150px;
-  height: auto;
-  border-radius: 6px;
-  flex-shrink: 0;
-  display: block;
-  cursor: zoom-in;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  z-index: 1;
-}
-#tecidoModal #m-imagem:hover { transform: scale(10) translateZ(0); z-index: 3; }
-#tecidoModal .modal-content .info { flex: 1; }
-#tecidoModal .modal-content .info h2,
-#tecidoModal .modal-content .info p { margin-top: 0; }
-#tecidoModal ul { list-style: none; padding: 0; margin: 0; }
-#tecidoModal li { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
-#colorZoom { position: absolute; display: none; width: 120px; height: 120px; border: 2px solid #000; background-size: cover; background-position: center; pointer-events: none; z-index: 9999; border-radius: 4px; box-shadow: 0 0 8px rgba(0,0,0,0.3); }
-#coresContainer ul { list-style: none; padding: 0; margin: 0; }
-#coresContainer li { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
 
-/* ------------------------
-   Footer
-   ------------------------ */
-#catalogFooter {
-  margin-top: 40px;
-  padding: 15px;
-  text-align: center;
-  font-size: 0.85rem;
-  color: #003399;
-  background: linear-gradient(to bottom, #ffffff, #dbe9f6);
-  border: 1px solid #7DA2CE;
-  border-radius: 6px;
-  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+/* sem zoom ao passar o mouse */
+.fabric > img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 6px;
+    transition: transform 0.5s ease, filter 0.4s ease;
+    transform-origin: center center;
+    z-index: 0;
 }
-#catalogFooter p { margin: 5px 0; }
 
-/* ------------------------
-   Estilo dos botões de navegação
-   ------------------------ */
-.nav-switch button {
-  font-family: Tahoma, Verdana, sans-serif;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 8px;
-  background: #f7faff;
-  color: #003399;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+.fabric:hover > img {
+    transform: none;
+    filter: none;
 }
-.nav-switch button:hover {
-  background: #e0edff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.12);
-}
-.nav-switch button.active {
-  background: linear-gradient(to right, #0052cc, #0066ff);
-  color: #fff;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-}
-@media (max-width: 600px) {
-  .nav-switch button {
-    width: 90%;
+
+.fabric h3 {
+    margin: 5px 0 8px;
     font-size: 1rem;
-  }
+    color: #003399;
+    z-index: 3;
+    position: relative;
 }
 
-/* Mobile: 2 tecidos por linha */
-@media (max-width: 600px) {
-  .catalog {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px; /* ajusta o espaçamento se quiser */
-  }
+.fabric p {
+    margin: 2px 0;
+    font-size: 0.9rem;
+    text-align: left;
+    width: 100%;
+    position: relative;
+    z-index: 3;
 }
 
-/* Tablets: 3 tecidos por linha */
-@media (min-width: 601px) and (max-width: 1024px) {
-  .catalog {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.fabric ul {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    text-align: left;
+    width: 100%;
+    position: relative;
+    z-index: 3;
 }
 
+.fabric ul li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 5px;
+}
 
+/* =========================================================
+   MODAL / ZOOM EXTREMO SOBREPOSTO
+   ========================================================= */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
 
+.modal.hidden {
+    display: none;
+}
 
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    max-height: 90%;
+    overflow: visible; /* 🔥 permite que a imagem ultrapasse os limites */
+    position: relative;
+}
+
+.modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* Zoom extremamente ampliado e sobreposto */
+#tecidoModal .modal-content img {
+    width: 180px;
+    height: auto;
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: block;
+    cursor: zoom-in;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transform-origin: center center;
+    position: relative;
+    z-index: 5;
+}
+
+#tecidoModal #m-imagem.zoomed {
+    transform: scale(7);
+    cursor: zoom-out;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+    translate: -50% -50%;
+    z-index: 99999; /* sobrepõe tudo */
+}
+
+#tecidoModal #m-imagem:hover {
+    transform: scale(7);
+    cursor: zoom-out;
+    z-index: 99999;
+}
+
+#tecidoModal .modal-content .info {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+#tecidoModal .modal-content .info h2,
+#tecidoModal .modal-content .info p {
+    margin-top: 0;
+}
+
+/* remove bolinhas das listas de cores */
+#tecidoModal ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#tecidoModal li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 5px;
+}
+
+/* =========================================================
+   ZOOM DE COR
+   ========================================================= */
+#colorZoom {
+    position: absolute;
+    display: none;
+    width: 120px;
+    height: 120px;
+    border: 2px solid #000;
+    background-size: cover;
+    background-position: center;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================================
+   LISTA DE CORES
+   ========================================================= */
+#sec-cores .fabric {
+    text-align: center;
+    padding: 12px;
+}
+
+#sec-cores .fabric img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    transition: transform 0.5s ease;
+}
+
+#sec-cores .fabric:hover img {
+    transform: scale(3.9);
+    filter: none;
+}
+
+#sec-cores .fabric h3,
+#sec-cores .fabric .cor-destaque {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #003399;
+    margin: 4px 0;
+}
+
+#sec-cores .fabric:hover h3 {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+/* =========================================================
+   CORREÇÃO Z-INDEX (SELECTS)
+   ========================================================= */
+.choices {
+    position: relative;
+    z-index: 1000;
+}
+
+.choices__list--dropdown {
+    z-index: 2000;
+}
+
+.fabric {
+    position: relative;
+    z-index: 1;
+}
+
+.fabric > img {
+    z-index: 0;
+}
