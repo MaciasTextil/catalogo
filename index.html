@@ -1,43 +1,89 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" /> 
-  <link rel="shortcut icon" type="image/x-icon" href="icon.png">
-  <title>Catálogo de tecidos</title>
 
+<head>
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" type="image/x-icon" href="icon.png">
+  <title>Catálogo de Tecidos</title>
+
+  <!-- =========================================================
+       ESTILOS E DEPENDÊNCIAS
+  ========================================================= -->
   <!-- Choices.js CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 
-  <!-- CSS -->
+  <!-- CSS Principal -->
   <link rel="stylesheet" href="style.css" />
 
+  <!-- Estilos adicionais locais -->
   <style>
-    .hidden { display: none; }
-    .nav-switch { display:flex; gap:8px; margin:16px 0; }
-    .nav-switch button{
-      padding:8px 14px; border:1px solid #ccc; border-radius:6px;
-      background:#fff; cursor:pointer;
+    .hidden {
+      display: none;
     }
-    .nav-switch button.active{
-      background:#222; color:#fff; border-color:#222;
+
+    .nav-switch {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0;
     }
-    .video-list video{
-      width:100%; max-width:600px; margin-bottom:16px;
+
+    .nav-switch button {
+      padding: 8px 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
     }
+
+    .nav-switch button.active {
+      background: #222;
+      color: #fff;
+      border-color: #222;
+    }
+
+    .video-list video {
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 16px;
+    }
+
     .modal {
-      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,.6); justify-content:center; align-items:center;
-      z-index:1000;
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, .6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
     }
+
     .modal-content {
-      background:#fff; padding:20px; border-radius:8px;
-      max-width:600px; width:90%; max-height:90%; overflow:auto;
-      position:relative;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 90%;
+      overflow: auto;
+      position: relative;
     }
-    .modal-content img { max-width:100%; margin-top:10px; }
+
+    .modal-content img {
+      max-width: 100%;
+      margin-top: 10px;
+    }
+
     .modal-content .close {
-      position:absolute; top:8px; right:12px; font-size:28px; cursor:pointer;
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 28px;
+      cursor: pointer;
     }
+
     #colorZoom {
       position: absolute;
       display: none;
@@ -49,15 +95,24 @@
       pointer-events: none;
       z-index: 9999;
       border-radius: 4px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
     }
+
     .fabric li img {
       cursor: zoom-in;
     }
   </style>
 </head>
+
 <body>
+  <!-- =========================================================
+       EFEITO DE ZOOM DE COR
+  ========================================================= -->
   <div id="colorZoom"></div>
+
+  <!-- =========================================================
+       CABEÇALHO / NAVEGAÇÃO
+  ========================================================= -->
   <h1 id="refreshTitle">Catálogo de Tecidos</h1>
 
   <div class="nav-switch">
@@ -66,34 +121,62 @@
     <button id="btn-cores">Cores</button>
   </div>
 
+  <!-- =========================================================
+       SEÇÃO — CATÁLOGO DE TECIDOS
+  ========================================================= -->
   <section id="sec-catalogo">
     <div class="filters">
+
+      <!-- Campo de busca -->
       <div class="search-container">
         <input type="text" id="searchInput" placeholder="Pesquisar tecido ou código..." />
       </div>
 
+      <!-- Filtros -->
       <select id="compositionFilter"><option value="">Composição</option></select>
-      <select id="gramWeightFilter"><option value="">Gramatura</option></select>
       <select id="widthFilter"><option value="">Largura</option></select>
       <select id="lineFilter"><option value="">Linha</option></select>
       <select id="ligamentoFilter"><option value="">Estrutura</option></select>
       <select id="applicationFilter"><option value="">Aplicação</option></select>
       <select id="colorFilter"><option value="">Cor</option></select>
+      <select id="gramWeightFilter"><option value="">Gramatura</option></select>
+
+      <!-- Faixa de gramatura -->
+      <div class="gramatura-range">
+        <input type="number" id="gramMin" placeholder="Gram. Mínima" min="0" style="width:80px;">
+        <span>–</span>
+        <input type="number" id="gramMax" placeholder="Gram. Máxima" min="0" style="width:80px;">
+        <button id="btnGramRange">Filtrar</button>
+      </div>
     </div>
 
+    <!-- Catálogo dinâmico -->
     <div class="catalog" id="catalog"></div>
   </section>
 
+  <!-- =========================================================
+       SEÇÃO — VÍDEOS
+  ========================================================= -->
   <section id="sec-videos" class="hidden">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/sg4qdn8Bb_A?si=TnkL-QbzLoMP9vGX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/sg4qdn8Bb_A?si=TnkL-QbzLoMP9vGX"
+      title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+    </iframe>
   </section>
 
+  <!-- =========================================================
+       SEÇÃO — LISTA DE CORES
+  ========================================================= -->
   <section id="sec-cores" class="hidden">
     <h2>Lista de Cores</h2>
     <div id="coresContainer" class="catalog"></div>
   </section>
 
-  <!-- Modal com largura adicionada -->
+  <!-- =========================================================
+       MODAL DE DETALHES DO TECIDO
+  ========================================================= -->
   <div id="tecidoModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -117,18 +200,24 @@
     </div>
   </div>
 
+  <!-- =========================================================
+       SCRIPTS E DEPENDÊNCIAS
+  ========================================================= -->
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="script.js"></script>
 
+  <!-- =========================================================
+       SCRIPT — NAVEGAÇÃO ENTRE SEÇÕES
+  ========================================================= -->
   <script>
     const btnCatalogo = document.getElementById('btn-catalogo');
-    const btnVideos   = document.getElementById('btn-videos');
+    const btnVideos = document.getElementById('btn-videos');
     const secCatalogo = document.getElementById('sec-catalogo');
-    const secVideos   = document.getElementById('sec-videos');
+    const secVideos = document.getElementById('sec-videos');
 
-    function showSection(section){
-      if(section === 'catalogo'){
+    function showSection(section) {
+      if (section === 'catalogo') {
         secCatalogo.classList.remove('hidden');
         secVideos.classList.add('hidden');
         btnCatalogo.classList.add('active');
@@ -142,37 +231,40 @@
     }
 
     btnCatalogo.addEventListener('click', () => showSection('catalogo'));
-    btnVideos.addEventListener('click',   () => showSection('videos'));
+    btnVideos.addEventListener('click', () => showSection('videos'));
   </script>
 
+  <!-- =========================================================
+       SCRIPT — MODAL E ZOOM DE COR
+  ========================================================= -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const modal   = document.getElementById('tecidoModal');
-      const close   = modal.querySelector('.close');
+      const modal = document.getElementById('tecidoModal');
+      const close = modal.querySelector('.close');
 
-      const nome       = document.getElementById('m-nome');
-      const codigo     = document.getElementById('m-codigo');
+      const nome = document.getElementById('m-nome');
+      const codigo = document.getElementById('m-codigo');
       const composicao = document.getElementById('m-composicao');
-      const gramatura  = document.getElementById('m-gramatura');
-      const largura    = document.getElementById('m-largura'); // <- NOVO
-      const linha      = document.getElementById('m-linha');
-      const ligamento  = document.getElementById('m-ligamento');
-      const aplicacao  = document.getElementById('m-aplicacao');
-      const cores      = document.getElementById('m-cores');
-      const img        = document.getElementById('m-imagem');
+      const gramatura = document.getElementById('m-gramatura');
+      const largura = document.getElementById('m-largura');
+      const linha = document.getElementById('m-linha');
+      const ligamento = document.getElementById('m-ligamento');
+      const aplicacao = document.getElementById('m-aplicacao');
+      const cores = document.getElementById('m-cores');
+      const img = document.getElementById('m-imagem');
 
       document.getElementById('catalog').addEventListener('click', e => {
         const card = e.target.closest('.fabric');
         if (!card) return;
 
-        nome.textContent       = card.dataset.nome;
-        codigo.textContent     = card.dataset.codigo;
+        nome.textContent = card.dataset.nome;
+        codigo.textContent = card.dataset.codigo;
         composicao.textContent = card.dataset.composicao;
-        gramatura.textContent  = card.dataset.gramatura;
-        largura.textContent    = card.dataset.largura || "—"; // <- NOVO
-        linha.textContent      = card.dataset.linha;
-        ligamento.textContent  = card.dataset.ligamento;
-        aplicacao.textContent  = card.dataset.aplicacao;
+        gramatura.textContent = card.dataset.gramatura;
+        largura.textContent = card.dataset.largura || "—";
+        linha.textContent = card.dataset.linha;
+        ligamento.textContent = card.dataset.ligamento;
+        aplicacao.textContent = card.dataset.aplicacao;
 
         const fabricColors = card.dataset.cores.split(', ');
         cores.innerHTML = fabricColors.map(c => {
@@ -180,7 +272,11 @@
           const data = colorData[code] || {};
           const pantone = data.pantone || "#";
           const imgSrc = data.img || `${code}.png`;
-          return `<li><img src="${imgSrc}" alt="${c}" style="width:20px;height:20px;border:1px solid #ccc;margin-right:4px;"> ${c} – ${pantone}</li>`;
+          return `
+            <li>
+              <img src="${imgSrc}" alt="${c}" style="width:20px;height:20px;border:1px solid #ccc;margin-right:4px;">
+              ${c} – ${pantone}
+            </li>`;
         }).join('');
 
         img.src = card.dataset.imagem !== "#" ? card.dataset.imagem : "";
@@ -191,20 +287,22 @@
       modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
 
       const colorZoom = document.getElementById('colorZoom');
-      document.addEventListener('mouseover', function(e) {
-        if(e.target.tagName === 'IMG' && e.target.parentElement.tagName === 'LI'){
+      document.addEventListener('mouseover', e => {
+        if (e.target.tagName === 'IMG' && e.target.parentElement.tagName === 'LI') {
           colorZoom.style.backgroundImage = `url(${e.target.src})`;
           colorZoom.style.display = 'block';
         }
       });
-      document.addEventListener('mousemove', function(e) {
-        if(colorZoom.style.display === 'block'){
+
+      document.addEventListener('mousemove', e => {
+        if (colorZoom.style.display === 'block') {
           colorZoom.style.left = e.pageX + 15 + 'px';
           colorZoom.style.top = e.pageY + 15 + 'px';
         }
       });
-      document.addEventListener('mouseout', function(e) {
-        if(e.target.tagName === 'IMG' && e.target.parentElement.tagName === 'LI'){
+
+      document.addEventListener('mouseout', e => {
+        if (e.target.tagName === 'IMG' && e.target.parentElement.tagName === 'LI') {
           colorZoom.style.display = 'none';
         }
       });
@@ -213,8 +311,13 @@
     document.getElementById('refreshTitle').onclick = () => location.reload();
   </script>
 </body>
+
+<!-- =========================================================
+     RODAPÉ
+========================================================= -->
 <footer id="catalogFooter">
   <p>Todos os códigos Pantone® são aproximações.</p>
   <p>Todos os direitos reservados para Macias®.</p>
 </footer>
+
 </html>
