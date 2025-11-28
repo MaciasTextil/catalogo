@@ -813,17 +813,26 @@ const colorData = {
   "9999": { name: "9999 - Preto", pantone: "19-4007 TCX", img: "9999.png" }
 };
 
-// ===== Elementos =====
-const catalog = document.getElementById('catalog');
+/* =========================================================
+   SCRIPT.JS — Versão Organizada e Comentada
+   ========================================================= */
+
+/* =========================================================
+   ELEMENTOS DOM
+   ========================================================= */
+const catalog           = document.getElementById('catalog');
 const compositionFilter = document.getElementById('compositionFilter');
-const gramWeightFilter = document.getElementById('gramWeightFilter');
-const widthFilter = document.getElementById('widthFilter');
-const lineFilter = document.getElementById('lineFilter');
-const ligamentoFilter = document.getElementById('ligamentoFilter');
+const gramWeightFilter  = document.getElementById('gramWeightFilter');
+const gramMinInput      = document.getElementById('gramMin');
+const gramMaxInput      = document.getElementById('gramMax');
+const btnGramRange      = document.getElementById('btnGramRange');
+const widthFilter       = document.getElementById('widthFilter');
+const lineFilter        = document.getElementById('lineFilter');
+const ligamentoFilter   = document.getElementById('ligamentoFilter');
 const applicationFilter = document.getElementById('applicationFilter');
-const colorFilter = document.getElementById('colorFilter');
-const searchInput = document.getElementById('searchInput');
-const coresContainer = document.getElementById('coresContainer');
+const colorFilter       = document.getElementById('colorFilter');
+const searchInput       = document.getElementById('searchInput');
+const coresContainer    = document.getElementById('coresContainer');
 
 const btnCatalogo = document.getElementById('btn-catalogo');
 const btnVideos   = document.getElementById('btn-videos');
@@ -844,19 +853,23 @@ const mLigamento  = document.getElementById('m-ligamento');
 const mAplicacao  = document.getElementById('m-aplicacao');
 const mCores      = document.getElementById('m-cores');
 const mImagem     = document.getElementById('m-imagem');
-
 const colorZoom   = document.getElementById('colorZoom');
 
-// ===== Alternar seções =====
+/* =========================================================
+   NAVEGAÇÃO ENTRE SEÇÕES
+   ========================================================= */
 function showSection(section) {
+  // Oculta todas
   secCatalogo.classList.add('hidden');
   secVideos.classList.add('hidden');
   secCores.classList.add('hidden');
 
+  // Remove destaque dos botões
   btnCatalogo.classList.remove('active');
   btnVideos.classList.remove('active');
   btnCores.classList.remove('active');
 
+  // Exibe conforme a seção
   if (section === 'catalogo') {
     secCatalogo.classList.remove('hidden');
     btnCatalogo.classList.add('active');
@@ -869,20 +882,29 @@ function showSection(section) {
   }
 }
 
+// Eventos de navegação
 btnCatalogo.addEventListener('click', () => showSection('catalogo'));
 btnVideos.addEventListener('click',   () => showSection('videos'));
 btnCores.addEventListener('click',    () => showSection('cores'));
 
-// ===== Gerar filtros =====
+/* =========================================================
+   GERAÇÃO DE FILTROS DINÂMICOS
+   ========================================================= */
 function generateOptions() {
+  // Reseta selects
   compositionFilter.innerHTML = '<option value="">Composição</option>';
   gramWeightFilter.innerHTML  = '<option value="">Gramatura</option>';
   lineFilter.innerHTML        = '<option value="">Linha</option>';
   ligamentoFilter.innerHTML   = '<option value="">Ligamento</option>';
   applicationFilter.innerHTML = '<option value="">Aplicação</option>';
   colorFilter.innerHTML       = '<option value="">Cor</option>';
+  widthFilter.innerHTML       = '<option value="">Largura</option>';
 
-  const uniqueComps = [...new Set(fabrics.flatMap(f => f.composition.map(c => `${c.percentage}% ${c.material}`)))].sort();
+  // === Composição ===
+  const uniqueComps = [...new Set(
+    fabrics.flatMap(f => f.composition.map(c => `${c.percentage}% ${c.material}`))
+  )].sort();
+
   uniqueComps.forEach(m => {
     const option = document.createElement('option');
     option.value = m;
@@ -890,7 +912,8 @@ function generateOptions() {
     compositionFilter.appendChild(option);
   });
 
-  const uniqueGrams = [...new Set(fabrics.map(f => f.gramWeight))].sort((a,b)=>a-b);
+  // === Gramatura ===
+  const uniqueGrams = [...new Set(fabrics.map(f => f.gramWeight))].sort((a, b) => a - b);
   uniqueGrams.forEach(g => {
     const option = document.createElement('option');
     option.value = g;
@@ -898,15 +921,16 @@ function generateOptions() {
     gramWeightFilter.appendChild(option);
   });
 
+  // === Largura ===
   const uniqueWidths = [...new Set(fabrics.map(f => f.width))].sort((a, b) => a - b);
-widthFilter.innerHTML = '<option value="">Largura</option>';
-uniqueWidths.forEach(w => {
-  const option = document.createElement('option');
-  option.value = w;
-  option.textContent = `${w.toFixed(2).replace('.', ',')} m`;
-  widthFilter.appendChild(option);
-});
+  uniqueWidths.forEach(w => {
+    const option = document.createElement('option');
+    option.value = w;
+    option.textContent = `${w.toFixed(2).replace('.', ',')} m`;
+    widthFilter.appendChild(option);
+  });
 
+  // === Linha ===
   const uniqueLines = [...new Set(fabrics.flatMap(f => f.line))].sort();
   uniqueLines.forEach(l => {
     const option = document.createElement('option');
@@ -915,6 +939,7 @@ uniqueWidths.forEach(w => {
     lineFilter.appendChild(option);
   });
 
+  // === Ligamento ===
   const uniqueLigamentos = [...new Set(fabrics.map(f => f.ligamento))].sort();
   uniqueLigamentos.forEach(lig => {
     const option = document.createElement('option');
@@ -923,6 +948,7 @@ uniqueWidths.forEach(w => {
     ligamentoFilter.appendChild(option);
   });
 
+  // === Aplicação ===
   const uniqueApps = [...new Set(fabrics.flatMap(f => f.application))].sort();
   uniqueApps.forEach(a => {
     const option = document.createElement('option');
@@ -931,6 +957,7 @@ uniqueWidths.forEach(w => {
     applicationFilter.appendChild(option);
   });
 
+  // === Cor ===
   const uniqueColors = [...new Set(fabrics.flatMap(f => f.colors))].sort();
   uniqueColors.forEach(c => {
     const option = document.createElement('option');
@@ -941,18 +968,30 @@ uniqueWidths.forEach(w => {
 }
 generateOptions();
 
-// Choices.js
-[compositionFilter, gramWeightFilter, widthFilter, lineFilter, ligamentoFilter, applicationFilter, colorFilter]
-  .forEach(el => new Choices(el, {
-    searchEnabled: true,
-    searchResultLimit: 0,
-    maxItemCount: -1,
-    itemSelectText: ''
-  }));
+/* =========================================================
+   CHOICES.JS — MELHORIA DOS SELECTS
+   ========================================================= */
+[
+  compositionFilter,
+  gramWeightFilter,
+  widthFilter,
+  lineFilter,
+  ligamentoFilter,
+  applicationFilter,
+  colorFilter
+].forEach(el => new Choices(el, {
+  searchEnabled: true,
+  searchResultLimit: 0,
+  maxItemCount: -1,
+  itemSelectText: ''
+}));
 
-// ===== Filtrar e exibir catálogo =====
+/* =========================================================
+   EXIBIÇÃO DO CATÁLOGO DE TECIDOS
+   ========================================================= */
 function displayFabrics(list) {
   catalog.innerHTML = "";
+
   if (list.length === 0) {
     catalog.innerHTML = "<p>Nenhum tecido encontrado.</p>";
     return;
@@ -962,155 +1001,136 @@ function displayFabrics(list) {
     const div = document.createElement('div');
     div.className = 'fabric';
 
+    // Gera lista de cores
     const coresLista = fabric.colors.map(c => {
       const code = c.split(' ')[0];
       const data = colorData[code] || {};
       const img  = data.img || `${code}.png`;
-      return `<li><img src="${img}" alt="${c}" style="width:20px;height:20px;border:1px solid #ccc;margin-right:4px;"> ${c}</li>`;
+      return `
+        <li>
+          <img src="${img}" alt="${c}" style="width:20px;height:20px;border:1px solid #ccc;margin-right:4px;">
+          ${c}
+        </li>`;
     }).join('');
 
+    // Atribui datasets
     div.dataset.nome       = fabric.name;
     div.dataset.codigo     = fabric.code;
     div.dataset.composicao = fabric.composition.map(c => `${c.percentage}% ${c.material}`).join(", ");
     div.dataset.gramatura  = `${fabric.gramWeight} g/m²`;
-    div.dataset.largura    = fabric.width ? `${fabric.width.toFixed(2).replace('.', ',')} m` : "—"; // <-- AQUI
+    div.dataset.largura    = fabric.width ? `${fabric.width.toFixed(2).replace('.', ',')} m` : "—";
     div.dataset.linha      = fabric.line.join(", ");
     div.dataset.ligamento  = fabric.ligamento;
     div.dataset.aplicacao  = fabric.application.join(", ");
     div.dataset.cores      = fabric.colors.join(", ");
     div.dataset.imagem     = `${fabric.code}.jpg`;
 
+    // Template HTML do card
     div.innerHTML = `
       <img src="${fabric.code}.jpg" alt="${fabric.code}">
       <h3>${fabric.name}</h3>
       <p><strong>Código:</strong> ${fabric.code}</p>
       <p><strong>Composição:</strong> ${div.dataset.composicao}</p>
       <p><strong>Gramatura:</strong> ${div.dataset.gramatura}</p>
-      <p><strong>Largura:</strong> ${div.dataset.largura}</p> <!-- <-- AQUI -->
+      <p><strong>Largura:</strong> ${div.dataset.largura}</p>
       <p><strong>Linha:</strong> ${div.dataset.linha}</p>
       <p><strong>Ligamento:</strong> ${div.dataset.ligamento}</p>
       <p><strong>Aplicação:</strong> ${div.dataset.aplicacao}</p>
       <p><strong>Cores:</strong></p>
       <ul>${coresLista}</ul>
     `;
+
     catalog.appendChild(div);
   });
 }
 
-
+/* =========================================================
+   FILTRO DE TECIDOS (SELECTS, BUSCA, GRAMATURA)
+   ========================================================= */
 function filterFabrics() {
-  const comp  = compositionFilter.value;
-  const gram  = gramWeightFilter.value;
-  const width = widthFilter.value;
-  const line  = lineFilter.value;
-  const lig   = ligamentoFilter.value;
-  const app   = applicationFilter.value;
-  const color = colorFilter.value;
-  const search= searchInput.value.trim().toLowerCase();
+  const comp   = compositionFilter.value;
+  const gram   = gramWeightFilter.value;
+  const width  = widthFilter.value;
+  const line   = lineFilter.value;
+  const lig    = ligamentoFilter.value;
+  const app    = applicationFilter.value;
+  const color  = colorFilter.value;
+  const search = searchInput.value.trim().toLowerCase();
+
+  const min = parseFloat(gramMinInput?.value) || 0;
+  const max = parseFloat(gramMaxInput?.value) || Infinity;
 
   const filtered = fabrics.filter(fabric => {
     const compValues = fabric.composition.map(c => `${c.percentage}% ${c.material}`);
-    return (comp==="" || compValues.includes(comp)) &&
-           (gram==="" || fabric.gramWeight == Number(gram)) &&
-           (width==="" || fabric.width == Number(width)) && // ← adiciona isso
-           (line==="" || fabric.line.includes(line)) &&
-           (lig===""  || fabric.ligamento === lig) &&
-           (app===""  || fabric.application.includes(app)) &&
-           (color===""|| fabric.colors.includes(color)) &&
-           (search===""|| fabric.name.toLowerCase().includes(search) || fabric.code.toLowerCase().includes(search));
+    const gramMatch =
+      (gram === "" && (fabric.gramWeight >= min && fabric.gramWeight <= max)) ||
+      (gram !== "" && fabric.gramWeight == Number(gram));
+
+    return (
+      (comp === ""  || compValues.includes(comp)) &&
+      gramMatch &&
+      (width === "" || fabric.width == Number(width)) &&
+      (line === ""  || fabric.line.includes(line)) &&
+      (lig === ""   || fabric.ligamento === lig) &&
+      (app === ""   || fabric.application.includes(app)) &&
+      (color === "" || fabric.colors.includes(color)) &&
+      (search === ""|| fabric.name.toLowerCase().includes(search) || fabric.code.toLowerCase().includes(search))
+    );
   });
 
   displayFabrics(filtered);
 }
 
-[compositionFilter, gramWeightFilter, widthFilter, lineFilter, ligamentoFilter, applicationFilter, colorFilter]
-  .forEach(el => el.addEventListener('change', filterFabrics));
-searchInput.addEventListener('input', filterFabrics);
-displayFabrics(fabrics);
-
-// ===== Exibir lista de cores única e ordenada =====
+/* =========================================================
+   EXIBIÇÃO DA LISTA DE CORES
+   ========================================================= */
 function displayColors() {
-  const allColors = fabrics.flatMap(f =>
-    f.colors.map(c => {
-      const code = c.split(' ')[0];
-      const data = colorData[code] || {};
-      return { code: code, name: c, img: data.img || `${code}.png` };
-    })
+  coresContainer.innerHTML = "";
+
+  const colorKeys = Object.keys(colorData).sort((a, b) =>
+    a.localeCompare(b, 'pt-BR', { numeric: true })
   );
 
-  const uniqueSorted = Array.from(new Map(allColors.map(c => [c.code, c])).values())
-                            .sort((a,b) => a.code.localeCompare(b.code));
+  colorKeys.forEach(code => {
+    const data = colorData[code];
+    if (!data) return;
 
-  coresContainer.innerHTML = uniqueSorted.map(c =>
-    `<li><img src="${c.img}" alt="${c.name}" style="width:20px;height:20px;border:1px solid #ccc;margin-right:4px;"> ${c.name}</li>`
-  ).join('');
+    // Remove prefixo numérico do nome
+    const cleanName = data.name.length > 7 ? data.name.substring(7).trim() : data.name;
+
+    const div = document.createElement("div");
+    div.className = "fabric";
+    div.innerHTML = `
+      <img src="${data.img}" alt="${cleanName}">
+      <h3 class="cor-destaque">${code}</h3>
+      <h3>${cleanName}</h3>
+      <h3 class="cor-destaque">${data.pantone}</h3>
+    `;
+    coresContainer.appendChild(div);
+  });
 }
-displayColors();
 
-// ===== Modal detalhes + zoom na foto =====
-catalog.addEventListener('click', e => {
-  const card = e.target.closest('.fabric');
-  if (!card) return;
-
-  const fabricData = fabrics.find(f => String(f.code) === String(card.dataset.codigo));
-
-  if (fabricData) {
-    mNome.textContent       = fabricData.name;
-    mCodigo.textContent     = fabricData.code;
-    mComposicao.textContent = fabricData.composition.map(c => `${c.percentage}% ${c.material}`).join(", ");
-    mGramatura.textContent  = `${fabricData.gramWeight} g/m²`;
-    mLinha.textContent      = fabricData.line.join(", ");
-    mLigamento.textContent  = fabricData.ligamento;
-    mAplicacao.textContent  = fabricData.application.join(", ");
-
-    mCores.innerHTML = "";
-    fabricData.colors.forEach(c => {
-      const li = document.createElement('li');
-      li.textContent = c;
-      mCores.appendChild(li);
-    });
-  }
-
-  mImagem.src = card.dataset.imagem || `${card.dataset.codigo}.jpg`;
-
-  tecidoModal.style.display = 'flex';
+// Exibir cores ao clicar em “Cores”
+btnCores.addEventListener('click', () => {
+  showSection('cores');
+  displayColors();
 });
 
-// ===== Fechar modal =====
-modalClose.addEventListener('click', () => tecidoModal.style.display = 'none');
-tecidoModal.addEventListener('click', e => { if (e.target === tecidoModal) tecidoModal.style.display = 'none'; });
+/* =========================================================
+   EVENTOS DE INTERAÇÃO
+   ========================================================= */
+[
+  compositionFilter,
+  gramWeightFilter,
+  widthFilter,
+  lineFilter,
+  ligamentoFilter,
+  applicationFilter,
+  colorFilter
+].forEach(el => el.addEventListener('change', filterFabrics));
 
-// ===== Zoom cores =====
-document.addEventListener('mouseover', e => {
-  if (e.target.tagName === 'IMG' && e.target.parentElement.tagName === 'LI') {
-    colorZoom.style.backgroundImage = `url(${e.target.src})`;
-    colorZoom.style.display = 'block';
-  }
-});
-document.addEventListener('mousemove', e => {
-  if (colorZoom.style.display === 'block') {
-    colorZoom.style.left = e.pageX + 15 + 'px';
-    colorZoom.style.top  = e.pageY + 15 + 'px';
-  }
-});
-document.addEventListener('mouseout', e => {
-  if (e.target.tagName === 'IMG' && e.target.parentElement.tagName === 'LI') {
-    colorZoom.style.display = 'none';
-  }
-});
+btnGramRange?.addEventListener('click', filterFabrics);
+searchInput.addEventListener('input', filterFabrics);
 
-// ===== Zoom na imagem do tecido dentro do modal =====
-mImagem.addEventListener('hover', () => {
-  // alterna zoom usando CSS transform
-  if (mImagem.classList.contains('zoomed')) {
-    mImagem.classList.remove('zoomed');
-    mImagem.style.transform = 'scale(1)';
-    mImagem.style.cursor = 'zoom-in';
-  } else {
-    mImagem.classList.add('zoomed');
-    mImagem.style.transform = 'scale(3)';
-    mImagem.style.cursor = 'zoom-out';
-  }
-});
-
-
+// Exibe o catálogo inicial
+displayFabrics(fabrics);
