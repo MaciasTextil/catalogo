@@ -531,7 +531,7 @@ const fabrics = [
   line: ["Esportivos"],
   ligamento: "Sarja",
   application: ["Bermudas", "Shorts", "Jaquetas", "Agasalhos Esportivos"],
-  colors: ["0001 - Branco","0130 - Amarelo Ouro","2044 - Azul Royal Médio","2092 - Azul Marinho Noite","5527 - Vermelho Danger", "9999 - Preto"],
+  colors: ["0001 - Branco","0130 - Amarelo Ouro","2044 - Azul Royal Médio","2092 - Azul Marinho Noite","5384 - Vermelho Batom", "9999 - Preto"],
     image: "#"
 },
 {
@@ -1134,3 +1134,4 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
