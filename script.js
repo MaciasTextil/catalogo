@@ -38,7 +38,7 @@ const fabrics = [
     line: ["UV 50+"],
     ligamento: "Tela",
     application: ["Camisas para pesca", "Camisas cargo", "Bonés", "Chapéus", "Jaquetas", "Shorts", "Bermudas"],
-    colors: ["0001 - Branco", "2261 - Azul Marinho", "3390 - Cinza Chumbo", "4236 - Caqui Queimado", "4341 - Areia Avermelhada", "4676 - Caqui Médio", "4832 - Marrom Chocolate", "9999 - Preto"],
+    colors: ["0001 - Branco", "1204 - Verde Militar", "2261 - Azul Marinho", "3390 - Cinza Chumbo", "4236 - Caqui Queimado", "4341 - Areia Avermelhada", "4676 - Caqui Médio", "4832 - Marrom Chocolate", "9999 - Preto"],
     image: "#"
   },
   {
@@ -492,20 +492,6 @@ const fabrics = [
     image: "#"
 },
 {
-  name: "Waimea",
-  code: "22039",
-  composition: [
-    { material: "Poliéster", percentage: 100 }
-  ],
-  gramWeight: 102,
-  width: 1.55,
-  line: ["Esportivos"],
-  ligamento: "Maquinetado Rip Stop",
-  application: ["Jaquetas", "Forros de Jaquetas", "Forros de Bolsas"],
-  colors: ["0001 - Branco","2060 - Turquesa","2694 - Azul Marinho", "9999 - Preto"],
-    image: "#"
-},
-{
   name: "Mac Milão",
   code: "12197",
   composition: [
@@ -545,7 +531,7 @@ const fabrics = [
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Forros de Jaquetas", "Jaquetas", "Bolsas", "Shorts"],
-  colors: ["0001 - Branco","0541 - Amarelo Manteiga","1000 - Verde água Claro","1017 - Verde Lago","1764 - Verde Limão","2261 - Azul Marinho","2847 - Azul Acinzentado","2934 - Azul Navy","4123 - MOCHA MOUSSE","3381 - Prata Esverdeado","4243 - Palha Clarissimo","5025 - Rosa Fluor","5286 - Rosa Velho","5384 - Vermelho Batom","5665 - Vermelho Queimado","5810 - Rosa Chiclete","9999 - Preto"],
+  colors: ["0001 - Branco","0541 - Amarelo Manteiga","1000 - Verde água Claro","1017 - Verde Lago","1764 - Verde Limão","2261 - Azul Marinho","2847 - Azul Acinzentado","2934 - Azul Navy","4123 - MOCHA MOUSSE","3381 - Prata Esverdeado","4243 - Palha Clarissimo", "5016 - Rosa","5025 - Rosa Fluor","5286 - Rosa Velho","5384 - Vermelho Batom","5665 - Vermelho Queimado", "5787 - Rosa Clássico","5810 - Rosa Chiclete","6243 - Lilas Clarinho","9999 - Preto"],
     image: "#"
 },
 {
@@ -559,7 +545,7 @@ const fabrics = [
   line: ["Esportivos"],
   ligamento: "Maquinetado Rip Stop",
   application: ["Bermudas", "Shorts", "Jaquetas", "Forros de Jaquetas", "Forros de Bolsas"],
-  colors: ["0001 - Branco","1013 - Amarelo Limão Fluor","2694 - Azul Marinho","4247 - Caqui Fossil","9999 - Preto"],
+  colors: ["0001 - Branco","2694 - Azul Marinho","4247 - Caqui Fossil","9999 - Preto"],
     image: "#"
 },
 {
@@ -615,7 +601,7 @@ const fabrics = [
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Jaquetas"],
-  colors: ["0001 - Branco","0372 - Off White","0199 - Areia Escuro","1204 - Verde Militar","1913 - Evergreen","2011 - Azul Petróleo","2014 - Azul Royal","2073 - Azul Royal Escuro","2261 - Azul Marinho","2500 - Azul Marinho Escuro","2847 - Azul Acinzentado","2954 - Azul Jeans","3345 - Cinza Rato","3351 - Cinza Médio Esverdeado","3375 - Chumbo Pirata","3624 - Cinza Claro","4004 - Ocre Biscut","4007 - Caramelo","4123 - MOCHA MOUSSE","4174 - Marrom","4244 - Caqui Escuro","4676 - Caqui Médio","5384 - Vermelho Batom","5527 - Vermelho Danger","5581 - Vinho","5810 - Rosa Chiclete","5978 - Vermelho","6267 - Roxo","7007 - Laranja Fluor","7131 - Laranja", "9999 - Preto"],
+  colors: ["0001 - Branco","0372 - Off White","0199 - Areia Escuro","1204 - Verde Militar","1913 - Evergreen","2011 - Azul Petróleo","2014 - Azul Royal","2065 - Azul Nautico","2073 - Azul Royal Escuro","2261 - Azul Marinho","2500 - Azul Marinho Escuro","2847 - Azul Acinzentado","3345 - Cinza Rato","3351 - Cinza Médio Esverdeado","3375 - Chumbo Pirata","3624 - Cinza Claro","4004 - Ocre Biscut","4007 - Caramelo","4174 - Marrom","4244 - Caqui Escuro","4676 - Caqui Médio","5384 - Vermelho Batom","5581 - Vinho","5810 - Rosa Chiclete","5978 - Vermelho","6267 - Roxo","7007 - Laranja Fluor","7131 - Laranja", "9999 - Preto"],
     image: "#"
 },
 {
@@ -745,6 +731,7 @@ const colorData = {
   "2058": { name: "2058 - Azul Claro Céu", pantone: "Não encontrado", img: "NA.png" },
   "2059": { name: "2059 - Azul Piscina", pantone: "17-4435 TCX", img: "2059.png" },
   "2060": { name: "2060 - Turquesa", pantone: "17-4320 TCX", img: "2060.png" },
+  "2065": { name: "2060 - Azul Nautico", pantone: "19-4056 TCX", img: "2065.png" },
   "2073": { name: "2073 - Azul Royal Escuro", pantone: "19-3864 TCX", img: "2073.png" },
   "2080": { name: "2080 - Azul Marinho", pantone: "19-4027 TCX", img: "2080.png" },
   "2092": { name: "2092 - Azul Marinho Noite", pantone: "19-3924 TCX", img: "2092.png" },
@@ -790,6 +777,7 @@ const colorData = {
   "4676": { name: "4676 - Caqui Médio", pantone: "18-0521 TCX", img: "4676.png" },
   "4832": { name: "4832 - Marrom Chocolate", pantone: "19-1118 TCX", img: "4832.png" },
   "5010": { name: "5010 - Vermelho Cereja", pantone: "18-1653 TCX", img: "5010.png" },
+  "5016": { name: "5016 - Rosa", pantone: "16-1518 TCX", img: "5016.png" },
   "5025": { name: "5025 - Rosa Fluor", pantone: "Não encontrado", img: "NA.png" },
   "5079": { name: "5079 - Rosa", pantone: "Não encontrado", img: "NA.png" },
   "5108": { name: "5108 - Vermelho", pantone: "Não encontrado", img: "NA.png" },
@@ -801,6 +789,7 @@ const colorData = {
   "5787": { name: "5787 - Rosa Clássico", pantone: "12-1207 TCX", img: "5787.png" },
   "5810": { name: "5810 - Rosa Chiclete", pantone: "17-1928 TCX", img: "5810.png" },
   "5978": { name: "5978 - Vermelho", pantone: "19-1664 TCX", img: "5978.png" },
+  "6243": { name: "6243 - Lilas Clarinho", pantone: "14-3812 TCX", img: "6243.png" },
   "6267": { name: "6267 - Roxo", pantone: "19-3737 TCX", img: "6267.png" },
   "6419": { name: "6419 - Roxo Maravilha", pantone: "19-2820 TCX", img: "6419.png" },
   "7007": { name: "7007 - Laranja Fluor", pantone: "Não encontrado", img: "NA.png" },
@@ -1134,4 +1123,5 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
