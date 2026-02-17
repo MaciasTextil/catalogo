@@ -71,7 +71,7 @@ const fabrics = [
     image: "#"
 },
 {
-  name: "Mac Stretch Air",
+  name: "Mactel Elastic 4Way",
   code: "10178",
   composition: [
     { material: "Poliamida 6.6", percentage: 91 },
@@ -1123,5 +1123,6 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
 
