@@ -122,8 +122,8 @@ const fabrics = [
     { material: "Poliéster", percentage: 92 },
     { material: "Elastano", percentage: 8 }
   ],
-  gramWeight: 114,
-  width: 1.45,
+  gramWeight: 105,
+  width: 1.35,
   line: ["Esportivos", "Elastizados"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Camisas", "Agasalhos"],
@@ -1123,6 +1123,7 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
 
 
