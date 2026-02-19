@@ -531,7 +531,7 @@ const fabrics = [
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Forros de Jaquetas", "Jaquetas", "Bolsas", "Shorts"],
-  colors: ["0001 - Branco","0541 - Amarelo Manteiga","1000 - Verde água Claro","1017 - Verde Lago","1764 - Verde Limão","2261 - Azul Marinho","2847 - Azul Acinzentado","2934 - Azul Navy","4123 - MOCHA MOUSSE","3381 - Prata Esverdeado","4243 - Palha Clarissimo", "5016 - Rosa","5025 - Rosa Fluor","5286 - Rosa Velho","5384 - Vermelho Batom","5665 - Vermelho Queimado", "5787 - Rosa Clássico","5810 - Rosa Chiclete","6243 - Lilas Clarinho","9999 - Preto"],
+  colors: ["0001 - Branco","0541 - Amarelo Manteiga","1000 - Verde água Claro","1017 - Verde Lago","1764 - Verde Limão","2261 - Azul Marinho","2847 - Azul Acinzentado","2934 - Azul Navy","3381 - Prata Esverdeado","4123 - MOCHA MOUSSE","4243 - Palha Clarissimo", "5016 - Rosa","5025 - Rosa Fluor","5286 - Rosa Velho","5384 - Vermelho Batom","5665 - Vermelho Queimado", "5787 - Rosa Clássico","5810 - Rosa Chiclete","6243 - Lilas Clarinho","9999 - Preto"],
     image: "#"
 },
 {
@@ -1123,6 +1123,7 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
 
 
