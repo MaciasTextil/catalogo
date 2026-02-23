@@ -682,7 +682,7 @@ const fabrics = [
 const colorData = {
   "N/A": { name: "N/A", pantone: "Apenas sob consulta", img: "NA.png" },
   "0001": { name: "0001 - Branco", pantone: "11-4001 TCX", img: "0001.png" },
-  "0011": { name: "0011 - Amarelo Limão Fluor", pantone: "Não encontrado", img: "NA.png" },
+  "0011": { name: "0011 - Amarelo Limão Fluor", pantone: "Não encontrado", img: "0011.png" },
   "0130": { name: "0130 - Amarelo Ouro", pantone: "14-0754 TCX", img: "0130.png" },
   "0192": { name: "0192 - Areia", pantone: "14-6305 TCX", img: "0192.png" },
   "0199": { name: "0199 - Areia Escuro", pantone: "14-6305 TCX", img: "0199.png" },
@@ -1097,3 +1097,4 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
