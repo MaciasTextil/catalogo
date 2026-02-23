@@ -105,9 +105,211 @@
 </head>
 
 <body>
-  <p>
-    O catálogo está fora de ar para acerto da paleta de cores dos artigos, consulte a paleta atual em: <a href="https://www.flipsnack.com/maciastextil/" target="_blank"> https://www.flipsnack.com/maciastextil/ </a>
-  </p>
+  <!-- =========================================================
+       EFEITO DE ZOOM DE COR
+  ========================================================= -->
+  <div id="colorZoom"></div>
+
+  <!-- =========================================================
+       CABEÇALHO / NAVEGAÇÃO
+  ========================================================= -->
+  <h1 id="refreshTitle">Catálogo de Tecidos</h1>
+
+  <div class="nav-switch">
+    <button id="btn-catalogo" class="active">Artigos</button>
+    <button id="btn-videos">Vídeos</button>
+    <button id="btn-cores">Cores</button>
+  </div>
+
+  <!-- =========================================================
+       SEÇÃO — CATÁLOGO DE TECIDOS
+  ========================================================= -->
+  <section id="sec-catalogo">
+    <div class="filters">
+
+      <!-- Campo de busca -->
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Pesquisar tecido ou código..." />
+      </div>
+
+      <!-- Filtros -->
+      <select id="compositionFilter"><option value="">Composição</option></select>
+      <select id="widthFilter"><option value="">Largura</option></select>
+      <select id="lineFilter"><option value="">Linha</option></select>
+      <select id="ligamentoFilter"><option value="">Estrutura</option></select>
+      <select id="applicationFilter"><option value="">Aplicação</option></select>
+      <select id="colorFilter"><option value="">Cor</option></select>
+      <select id="gramWeightFilter"><option value="">Gramatura</option></select>
+
+      <!-- Faixa de gramatura -->
+      <div class="gramatura-range">
+        <input type="number" id="gramMin" placeholder="Gram. Mínima" min="0" style="width:80px;">
+        <span>–</span>
+        <input type="number" id="gramMax" placeholder="Gram. Máxima" min="0" style="width:80px;">
+        <button id="btnGramRange">Filtrar</button>
+      </div>
+    </div>
+
+    <!-- Catálogo dinâmico -->
+    <div class="catalog" id="catalog"></div>
+  </section>
+
+  <!-- =========================================================
+       SEÇÃO — VÍDEOS
+  ========================================================= -->
+  <section id="sec-videos" class="hidden">
+    <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/sg4qdn8Bb_A?si=TnkL-QbzLoMP9vGX"
+      title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+    </iframe>
+  </section>
+
+  <!-- =========================================================
+       SEÇÃO — LISTA DE CORES
+  ========================================================= -->
+  <section id="sec-cores" class="hidden">
+    <h2>Lista de Cores</h2>
+    <div id="coresContainer" class="catalog"></div>
+  </section>
+
+  <!-- =========================================================
+       MODAL DE DETALHES DO TECIDO
+  ========================================================= -->
+  <div id="tecidoModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+
+      <div class="img-container">
+        <img id="m-imagem" alt="Tecido">
+      </div>
+
+      <div class="info">
+        <h2 id="m-nome"></h2>
+        <p><strong>Código:</strong> <span id="m-codigo"></span></p>
+        <p><strong>Composição:</strong> <span id="m-composicao"></span></p>
+        <p><strong>Gramatura:</strong> <span id="m-gramatura"></span></p>
+        <p><strong>Largura:</strong> <span id="m-largura"></span></p>
+        <p><strong>Linha:</strong> <span id="m-linha"></span></p>
+        <p><strong>Estrutura:</strong> <span id="m-ligamento"></span></p>
+        <p><strong>Aplicação:</strong> <span id="m-aplicacao"></span></p>
+        <p><strong>Cores:</strong></p>
+        <ul id="m-cores"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       SCRIPTS E DEPENDÊNCIAS
+  ========================================================= -->
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+
+  <!-- =========================================================
+       SCRIPT — NAVEGAÇÃO ENTRE SEÇÕES
+  ========================================================= -->
+  <script>
+    const btnCatalogo = document.getElementById('btn-catalogo');
+    const btnVideos = document.getElementById('btn-videos');
+    const secCatalogo = document.getElementById('sec-catalogo');
+    const secVideos = document.getElementById('sec-videos');
+
+    function showSection(section) {
+      if (section === 'catalogo') {
+        secCatalogo.classList.remove('hidden');
+        secVideos.classList.add('hidden');
+        btnCatalogo.classList.add('active');
+        btnVideos.classList.remove('active');
+      } else {
+        secCatalogo.classList.add('hidden');
+        secVideos.classList.remove('hidden');
+        btnCatalogo.classList.remove('active');
+        btnVideos.classList.add('active');
+      }
+    }
+
+    btnCatalogo.addEventListener('click', () => showSection('catalogo'));
+    btnVideos.addEventListener('click', () => showSection('videos'));
+  </script>
+
+  <!-- =========================================================
+       SCRIPT — MODAL E ZOOM DE COR
+  ========================================================= -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('tecidoModal');
+      const close = modal.querySelector('.close');
+
+      const nome = document.getElementById('m-nome');
+      const codigo = document.getElementById('m-codigo');
+      const composicao = document.getElementById('m-composicao');
+      const gramatura = document.getElementById('m-gramatura');
+      const largura = document.getElementById('m-largura');
+      const linha = document.getElementById('m-linha');
+      const ligamento = document.getElementById('m-ligamento');
+      const aplicacao = document.getElementById('m-aplicacao');
+      const cores = document.getElementById('m-cores');
+      const img = document.getElementById('m-imagem');
+
+      document.getElementById('catalog').addEventListener('click', e => {
+        const card = e.target.closest('.fabric');
+        if (!card) return;
+
+        nome.textContent = card.dataset.nome;
+        codigo.textContent = card.dataset.codigo;
+        composicao.textContent = card.dataset.composicao;
+        gramatura.textContent = card.dataset.gramatura;
+        largura.textContent = card.dataset.largura || "—";
+        linha.textContent = card.dataset.linha;
+        ligamento.textContent = card.dataset.ligamento;
+        aplicacao.textContent = card.dataset.aplicacao;
+
+        const fabricColors = card.dataset.cores.split(', ');
+        cores.innerHTML = fabricColors.map(c => {
+          const code = c.split(' ')[0];
+          const data = colorData[code] || {};
+          const pantone = data.pantone || "#";
+          const imgSrc = data.img || `${code}.png`;
+          return `
+            <li>
+              <img src="${imgSrc}" alt="${c}" style="width:20px;height:20px;border:1px solid #ccc;margin-right:4px;">
+              ${c} – ${pantone}
+            </li>`;
+        }).join('');
+
+        img.src = card.dataset.imagem !== "#" ? card.dataset.imagem : "";
+        modal.style.display = 'flex';
+      });
+
+      close.addEventListener('click', () => modal.style.display = 'none');
+      modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+
+      const colorZoom = document.getElementById('colorZoom');
+      document.addEventListener('mouseover', e => {
+        if (e.target.tagName === 'IMG' && e.target.parentElement.tagName === 'LI') {
+          colorZoom.style.backgroundImage = `url(${e.target.src})`;
+          colorZoom.style.display = 'block';
+        }
+      });
+
+      document.addEventListener('mousemove', e => {
+        if (colorZoom.style.display === 'block') {
+          colorZoom.style.left = e.pageX + 15 + 'px';
+          colorZoom.style.top = e.pageY + 15 + 'px';
+        }
+      });
+
+      document.addEventListener('mouseout', e => {
+        if (e.target.tagName === 'IMG' && e.target.parentElement.tagName === 'LI') {
+          colorZoom.style.display = 'none';
+        }
+      });
+    });
+
+    document.getElementById('refreshTitle').onclick = () => location.reload();
+  </script>
 </body>
 
 <!-- =========================================================
@@ -119,3 +321,4 @@
 </footer>
 
 </html>
+
