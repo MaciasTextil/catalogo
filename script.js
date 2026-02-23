@@ -1,19 +1,5 @@
 const fabrics = [
   {
-    name: "Tomahawk Bio-D",
-    code: "51134",
-    composition: [
-      { material: "Poliamida 6.6", percentage: 100 }
-    ],
-    gramWeight: 140,
-    width: 1.50,
-    line: ["UV 50+", "BIO-D"],
-    ligamento: "Tela",
-    application: ["Camisas para pesca", "Camisas cargo", "Bonés", "Chapéus", "Jaquetas", "Shorts", "Bermudas"],
-    colors: ["0192 - Areia", "4236 - Cinza Fossil", "9999 - Preto"],
-    image: "#"
-  },
-  {
     name: "Destroyer Bio-D",
     code: "51132",
     composition: [
@@ -24,7 +10,7 @@ const fabrics = [
     line: ["BIO-D"],
     ligamento: "Tela",
     application: ["Camisas para pesca", "Camisas cargo", "Bonés", "Chapéus", "Jaquetas", "Shorts", "Bermudas"],
-    colors: ["0001 - Branco", "0192 - Areia", "1204 - Verde Militar", "2261 - Azul Marinho", "3390 - Cinza Chumbo", "4236 - Cinza Fossil", "9999 - Preto"],
+    colors: ["0001 - Branco", "0192 - Areia", "1227 - Verde Militar Escuro", "2261 - Azul Marinho", "3390 - Cinza Chumbo", "4236 - Cinza Fossil", "9999 - Preto"],
     image: "#"
   },
   {
@@ -245,7 +231,7 @@ const fabrics = [
   line: ["Esportivos", "PET"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Camisas", "Agasalhos", "Bolsas", "Acessórios"],
-  colors: ["0001 - Branco", "9999 - Preto"],
+  colors: ["0001 - Branco", "1356 - Verde Musgo Escuro" ,"2694 - Azul Marinho", "4174 - Marrom" , "9999 - Preto"],
     image: "#"
 },
 {
@@ -274,7 +260,7 @@ const fabrics = [
   line: ["BIO-D","Esportivos","UV 50+","Alfaiataria"],
   ligamento: "Canele",
   application: ["Calças cargo", "Camisas cargo", "Jaquetas","Bermudas","Peças de alfaiataria casual"],
-  colors: ["1204 - Verde Militar","2261 - Azul Marinho","4244 - Caqui Escuro", "9999 - Preto"],
+  colors: ["1204 - Verde Militar","4244 - Caqui Escuro", "9999 - Preto"],
     image: "#"
 },
 {
@@ -464,20 +450,6 @@ const fabrics = [
     image: "#"
 },
 {
-  name: "Mac Swim",
-  code: "22135",
-  composition: [
-    { material: "Poliéster", percentage: 100 }
-  ],
-  gramWeight: 138,
-  width: 1.60,
-  line: ["Esportivos"],
-  ligamento: "Tela",
-  application: ["Jaquetas", "Bermudas", "Peças Esportivas em Geral"],
-  colors: ["0001 - Branco", "9999 - Preto"],
-    image: "#"
-},
-{
   name: "Dubai Opaco",
   code: "11169",
   composition: [
@@ -535,20 +507,6 @@ const fabrics = [
     image: "#"
 },
 {
-  name: "Carmel",
-  code: "22037",
-  composition: [
-    { material: "Poliéster", percentage: 100 }
-  ],
-  gramWeight: 101,
-  width: 1.50,
-  line: ["Esportivos"],
-  ligamento: "Maquinetado Rip Stop",
-  application: ["Bermudas", "Shorts", "Jaquetas", "Forros de Jaquetas", "Forros de Bolsas"],
-  colors: ["0001 - Branco","2694 - Azul Marinho","4247 - Caqui Fossil","9999 - Preto"],
-    image: "#"
-},
-{
   name: "Gol!!!",
   code: "22417",
   composition: [
@@ -587,7 +545,7 @@ const fabrics = [
   line: ["Esportivos"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Jaquetas"],
-  colors: ["0001 - Branco","0372 - Off White","0130 - Amarelo Ouro","0192 - Areia","1013 - Amarelo Limão Fluor","1204 - Verde Militar","1913 - Evergreen","2014 - Azul Royal","2059 - Azul Piscina","2261 - Azul Marinho","4174 - Marrom","4244 - Caqui Escuro","4676 - Caqui Médio","5527 - Vermelho Danger","5581 - Vinho","5978 - Vermelho", "9999 - Preto"],
+  colors: ["0001 - Branco","0372 - Off White","0130 - Amarelo Ouro","0192 - Areia","1013 - Amarelo Limão Fluor","1204 - Verde Militar","1913 - Evergreen","2014 - Azul Royal","2059 - Azul Piscina", "2065 - Azul Nautico", "2261 - Azul Marinho", "4174 - Marrom", "4244 - Caqui Escuro","4676 - Caqui Médio","5527 - Vermelho Danger","5581 - Vinho","5978 - Vermelho","7007 - Laranja Fluor", "9999 - Preto"],
     image: "#"
 },
 {
@@ -672,7 +630,7 @@ const fabrics = [
   line: ["Esportivos"],
   ligamento: "Maquinetado",
   application: ["Forros de jaquetas", "Jaquetas", "Bolsas", "Shorts", "Entre outros"],
-  colors: ["0001 - Branco","9999 - Preto"],
+  colors: ["0001 - Branco","2261 - Azul Marinho" ,"9999 - Preto"],
   image: "#"
 },
 {
@@ -702,6 +660,21 @@ const fabrics = [
   application: ["Jaquetas", "Bonés", "Calças", "Pochetes", "Acessórios"],
   colors: ["9999 - Preto"],
   image: "#"
+},
+{
+  name: "Mac High Stretch",
+  code: "10184",
+  composition: [
+    { material: "Poliamida 6.6", percentage: 86 },
+    { material: "Elastano Lycra®", percentage: 14 }
+  ],
+  gramWeight: 205,
+  width: 1.30,
+  line: ["Esportivos", "Elastizados", "Alfaiataria", "4 sentidos"],
+  ligamento: "Tela",
+  application: ["Shorts", "Bermudas", "Calças esportivas", "Jaquetas", "Coletes", "Bonés"],
+  colors: ["0372 - Off White", "1204 - Verde Militar", "2261 - Azul Marinho", "4244 - Caqui Escuro", "9999 - Preto"],
+    image: "#"
 }
 ];
 
@@ -721,6 +694,7 @@ const colorData = {
   "1104": { name: "1104 - Verde", pantone: "Não encontrado", img: "NA.png" },
   "1204": { name: "1204 - Verde Militar", pantone: "19-0419 TCX", img: "1204.png" },
   "1209": { name: "1209 - Verde Bayou", pantone: "Não encontrado", img: "NA.png" },
+  "1359": { name: "1356 - Verde Musgo Escuro", pantone: "19-0618 TCx", img: "1356.png" },
   "1399": { name: "1399 - Verde Aventura", pantone: "18-0117 TCX", img: "1399.png" },
   "1764": { name: "1764 - Verde Limão", pantone: "15-0343 TCX", img: "1764.png" },
   "1913": { name: "1913 - Evergreen", pantone: "19-6026 TCX", img: "1913.png" },
@@ -1123,8 +1097,3 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
-
-
-
-
-
