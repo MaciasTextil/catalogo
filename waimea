@@ -25,7 +25,7 @@ const fabrics = [
   width: 1.45,
   line: ["Esportivos", "Elastizados"],
   ligamento: "Tela",
-  application: ["Shorts", "Bermudas", "Agasalhos, "Camisas"],
+  application: ["Shorts", "Bermudas", "Agasalhos", "Camisas"],
   colors: ["0372 - Off White", "9999 - Preto"],
     image: "#"
 },
@@ -1113,6 +1113,7 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
 
 
