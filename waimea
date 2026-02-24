@@ -22,7 +22,7 @@ const fabrics = [
     { material: "Elastano Lycra®", percentage: 4 }
   ],
   gramWeight: 100,
-  width: 1.55,
+  width: 1.45,
   line: ["Esportivos", "Elastizados"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Agasalhos, "Camisas"],
@@ -1113,6 +1113,7 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
 
 
