@@ -14,6 +14,20 @@ const fabrics = [
     image: "#"
   },
   {
+  name: "Waimea",
+  code: "22039",
+  composition: [
+    { material: "Poliéster", percentage: 100 }
+  ],
+  gramWeight: 102,
+  width: 1.55,
+  line: ["Esportivos"],
+  ligamento: "Maquinetado Rip Stop",
+  application: ["Jaquetas", "Forros de Jaquetas", "Forros de Bolsas"],
+  colors: ["0372 - Off White", "9999 - Preto"],
+    image: "#"
+},
+  {
     name: "Tomahawk",
     code: "51133",
     composition: [
@@ -1097,4 +1111,5 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
