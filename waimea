@@ -14,16 +14,18 @@ const fabrics = [
     image: "#"
   },
   {
-  name: "Waimea",
-  code: "22039",
+  name: "Mac Nyco Elastic",
+  code: "16106",
   composition: [
-    { material: "Poliéster", percentage: 100 }
+    { material: "Algodão", percentage: 49 },
+    { material: "Poliamida 6.6", percentage: 47 },
+    { material: "Elastano Lycra®", percentage: 4 }
   ],
-  gramWeight: 102,
+  gramWeight: 100,
   width: 1.55,
-  line: ["Esportivos"],
-  ligamento: "Maquinetado Rip Stop",
-  application: ["Jaquetas", "Forros de Jaquetas", "Forros de Bolsas"],
+  line: ["Esportivos", "Elastizados"],
+  ligamento: "Tela",
+  application: ["Shorts", "Bermudas", "Agasalhos, "Camisas"],
   colors: ["0372 - Off White", "9999 - Preto"],
     image: "#"
 },
@@ -1111,5 +1113,6 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
 
