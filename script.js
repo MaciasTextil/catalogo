@@ -710,7 +710,7 @@ const colorData = {
   "1104": { name: "1104 - Verde", pantone: "Não encontrado", img: "NA.png" },
   "1204": { name: "1204 - Verde Militar", pantone: "19-0419 TCX", img: "1204.png" },
   "1209": { name: "1209 - Verde Bayou", pantone: "Não encontrado", img: "NA.png" },
-  "1359": { name: "1356 - Verde Musgo Escuro", pantone: "19-0618 TCx", img: "1356.png" },
+  "1356": { name: "1356 - Verde Musgo Escuro", pantone: "19-0618 TCx", img: "1356.png" },
   "1399": { name: "1399 - Verde Aventura", pantone: "18-0117 TCX", img: "1399.png" },
   "1764": { name: "1764 - Verde Limão", pantone: "15-0343 TCX", img: "1764.png" },
   "1913": { name: "1913 - Evergreen", pantone: "19-6026 TCX", img: "1913.png" },
@@ -1113,6 +1113,7 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
 
 
