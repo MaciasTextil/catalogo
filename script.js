@@ -308,6 +308,20 @@ const fabrics = [
     image: "#"
 },
 {
+  name: "Carmel",
+  code: "22037",
+  composition: [
+    { material: "Poliéster PET", percentage: 100 }
+  ],
+  gramWeight: 101,
+  width: 1.50,
+  line: ["Esportivos"],
+  ligamento: "Maquinetado Rip Stop",
+  application: ["Bermudas", "Shorts", "Jaquetas", "Forros de Jaquetas", "Forros de Bolsas"],
+  colors: ["0001 - Branco", "2694 - Azul Marinho", "4247 - Caqui Fossil", "9999 - Preto"],
+    image: "#"
+},
+{
   name: "Mac Sport Light PET",
   code: "22131",
   composition: [
@@ -710,6 +724,7 @@ const colorData = {
   "1104": { name: "1104 - Verde", pantone: "Não encontrado", img: "NA.png" },
   "1204": { name: "1204 - Verde Militar", pantone: "19-0419 TCX", img: "1204.png" },
   "1209": { name: "1209 - Verde Bayou", pantone: "Não encontrado", img: "NA.png" },
+  "1227": { name: "1227 - Verde Militar Escuro", pantone: "19-0417 TCX", img: "1227.png" },
   "1356": { name: "1356 - Verde Musgo Escuro", pantone: "19-0618 TCx", img: "1356.png" },
   "1399": { name: "1399 - Verde Aventura", pantone: "18-0117 TCX", img: "1399.png" },
   "1764": { name: "1764 - Verde Limão", pantone: "15-0343 TCX", img: "1764.png" },
@@ -1113,6 +1128,7 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
 
 
