@@ -698,7 +698,7 @@ const fabrics = [
     { material: "Poliamida 6.6", percentage: 86 },
     { material: "Elastano Lycra®", percentage: 14 }
   ],
-  gramWeight: 205,
+  gramWeight: 158,
   width: 1.30,
   line: ["Esportivos", "Elastizados", "Alfaiataria", "4 sentidos"],
   ligamento: "Tela",
@@ -1128,6 +1128,7 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
 
 
