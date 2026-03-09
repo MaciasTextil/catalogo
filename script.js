@@ -450,20 +450,6 @@ const fabrics = [
     image: "#"
 },
 {
-  name: "Mac Simbel",
-  code: "22410",
-  composition: [
-    { material: "Poliéster", percentage: 100 }
-  ],
-  gramWeight: 114,
-  width: 1.50,
-  line: ["Esportivos","Alfaiataria"],
-  ligamento: "Tela",
-  application: ["Shorts", "Bermudas"],
-  colors: ["0001 - Branco","2092 - Azul Marinho Noite","3029 - Cinza Tradewinds", "9999 - Preto"],
-    image: "#"
-},
-{
   name: "Mac Bambu",
   code: "16120",
   composition: [
@@ -1128,6 +1114,7 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
 
 
