@@ -251,20 +251,6 @@ const fabrics = [
     image: "#"
 },
 {
-  name: "Mac Baggy PET",
-  code: "22134",
-  composition: [
-    { material: "Poliéster PET", percentage: 100 }
-  ],
-  gramWeight: 128,
-  width: 1.50,
-  line: ["Esportivos", "PET"],
-  ligamento: "Tela",
-  application: ["Shorts", "Bermudas", "Camisas", "Agasalhos", "Bolsas", "Acessórios"],
-  colors: ["N/A"],
-    image: "#"
-},
-{
   name: "Mac Canelon Bio-D",
   code: "16601",
   composition: [
@@ -1114,6 +1100,7 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
 
 
