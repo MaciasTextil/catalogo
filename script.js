@@ -748,7 +748,7 @@ const colorData = {
   "4174": { name: "4174 - Marrom", pantone: "19-0915 TCX", img: "4174.png" },
   "4236": { name: "4236 - Caqui Queimado", pantone: "19-0820 TCX", img: "4236.png" },
   "4243": { name: "4243 - Palha Clarissimo", pantone: "13-0000 TCX", img: "4243.png" },
-  "4244": { name: "4244 - Caqui Escuro", pantone: "17-0618 TCX", img: "4244.png" },
+  "4244": { name: "4244 - Caqui Escuro", pantone: "19-0618 TCX", img: "4244.png" },
   "4247": { name: "4247 - Caqui Fossil", pantone: "17-0517 TCX", img: "4247.png" },
   "4341": { name: "4341 - Areia Avermelhada", pantone: "13-6105 TCX", img: "4341.png" },
   "4676": { name: "4676 - Caqui Médio", pantone: "18-0521 TCX", img: "4676.png" },
@@ -1100,6 +1100,7 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
 
 
