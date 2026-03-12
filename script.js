@@ -144,7 +144,7 @@ const fabrics = [
   line: ["Esportivos", "Elastizados", "4 sentidos"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Camisas", "Agasalhos"],
-  colors: ["0001 - Branco", "0372 - Off White", "1204 - Verde Militar", "2080 - Azul Marinho", "4174 - Marrom", "4244 - Caqui Escuro", "5581 - Vinho", "9999 - Preto"],
+  colors: ["0001 - Branco", "0372 - Off White", "1204 - Verde Militar", "2261 - Azul Marinho", "4174 - Marrom", "4244 - Caqui Escuro", "5581 - Vinho", "9999 - Preto"],
     image: "#"
 },
 {
@@ -1100,6 +1100,7 @@ searchInput.addEventListener('input', filterFabrics);
 
 // Exibe o catálogo inicial
 displayFabrics(fabrics);
+
 
 
 
