@@ -99,7 +99,7 @@ const fabrics = [
   line: ["Esportivos", "Elastizados", "Alfaiataria", "4 sentidos"],
   ligamento: "Tela",
   application: ["Shorts", "Bermudas", "Calças esportivas", "Jaquetas", "Coletes", "Bonés"],
-  colors: ["0372 - Off White", "1204 - Verde Militar", "2261 - Azul Marinho", "4244 - Caqui Escuro", "9999 - Preto"],
+  colors: ["0372 - Off White", "1204 - Verde Militar", "2245 - Marinho Noite", "4244 - Caqui Escuro", "9999 - Preto"],
     image: "#"
 },
 {
@@ -718,6 +718,7 @@ const colorData = {
   "2220": { name: "2220 - Azul Claro", pantone: "Não encontrado", img: "NA.png" },
   "2222": { name: "2222 - Azul Medieval", pantone: "19-3933 TCX", img: "2222.png" },
   "2238": { name: "2238 - Azul Marinho", pantone: "19-3920 TCX", img: "2238.png" },
+  "2238": { name: "2245 - Marinho Noite", pantone: "19-3924 TCX", img: "2245.png" },
   "2249": { name: "2249 - Azul Royal", pantone: "Não encontrado", img: "NA.png" },
   "2261": { name: "2261 - Azul Marinho", pantone: "19-4024 TCX", img: "2261.png" },
   "2271": { name: "2271 - Azul Marinho", pantone: "19-3933 TCX", img: "2271.png" },
