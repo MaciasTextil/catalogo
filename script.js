@@ -608,20 +608,6 @@ const fabrics = [
     image: "#"
 },
 {
-  name: "Macnyl 70",
-  code: "11158",
-  composition: [
-    { material: "Poliamida 6.6", percentage: 100 }
-  ],
-  gramWeight: 90,
-  width: 1.50,
-  line: ["Esportivos"],
-  ligamento: "Tela",
-  application: ["Forros de Jaquetas", "Jaquetas", "Bolsas"],
-  colors: ["N/A"],
-    image: "#"
-},
-{
   name: "Mac Piquet",
   code: "11020",
   composition: [
