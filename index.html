@@ -1,324 +1,289 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-  <meta charset="UTF-8" />
-  <link rel="shortcut icon" type="image/x-icon" href="icon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo de Tecidos</title>
-
-  <!-- =========================================================
-       ESTILOS E DEPENDÊNCIAS
-  ========================================================= -->
-  <!-- Choices.js CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
-
-  <!-- CSS Principal -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Estilos adicionais locais -->
-  <style>
-    .hidden {
-      display: none;
-    }
-
-    .nav-switch {
-      display: flex;
-      gap: 8px;
-      margin: 16px 0;
-    }
-
-    .nav-switch button {
-      padding: 8px 14px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      background: #fff;
-      cursor: pointer;
-    }
-
-    .nav-switch button.active {
-      background: #222;
-      color: #fff;
-      border-color: #222;
-    }
-
-    .video-list video {
-      width: 100%;
-      max-width: 600px;
-      margin-bottom: 16px;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, .6);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .modal-content {
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      max-width: 600px;
-      width: 90%;
-      max-height: 90%;
-      overflow: auto;
-      position: relative;
-    }
-
-    .modal-content img {
-      max-width: 100%;
-      margin-top: 10px;
-    }
-
-    .modal-content .close {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      font-size: 28px;
-      cursor: pointer;
-    }
-
-    #colorZoom {
-      position: absolute;
-      display: none;
-      width: 120px;
-      height: 120px;
-      border: 2px solid #000;
-      background-size: cover;
-      background-position: center;
-      pointer-events: none;
-      z-index: 9999;
-      border-radius: 4px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .fabric li img {
-      cursor: zoom-in;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <!-- =========================================================
-       EFEITO DE ZOOM DE COR
-  ========================================================= -->
-  <div id="colorZoom"></div>
 
-  <!-- =========================================================
-       CABEÇALHO / NAVEGAÇÃO
-  ========================================================= -->
-  <h1 id="refreshTitle">Catálogo de Tecidos</h1>
-
-  <div class="nav-switch">
-    <button id="btn-catalogo" class="active">Artigos</button>
-    <button id="btn-videos">Vídeos</button>
-    <button id="btn-cores">Cores</button>
-  </div>
-
-  <!-- =========================================================
-       SEÇÃO — CATÁLOGO DE TECIDOS
-  ========================================================= -->
-  <section id="sec-catalogo">
-    <div class="filters">
-
-      <!-- Campo de busca -->
-      <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Pesquisar tecido ou código..." />
-      </div>
-
-      <!-- Filtros -->
-      <select id="compositionFilter"><option value="">Composição</option></select>
-      <select id="widthFilter"><option value="">Largura</option></select>
-      <select id="lineFilter"><option value="">Linha</option></select>
-      <select id="ligamentoFilter"><option value="">Estrutura</option></select>
-      <select id="applicationFilter"><option value="">Aplicação</option></select>
-      <select id="colorFilter"><option value="">Cor</option></select>
-      <select id="gramWeightFilter"><option value="">Gramatura</option></select>
-
-      <!-- Faixa de gramatura -->
-      <div class="gramatura-range">
-        <input type="number" id="gramMin" placeholder="Gram. Mínima" min="0" style="width:80px;">
-        <span>–</span>
-        <input type="number" id="gramMax" placeholder="Gram. Máxima" min="0" style="width:80px;">
-        <button id="btnGramRange">Filtrar</button>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="icon.png" alt="Logo" class="brand-logo">
+        <div class="brand-text">
+          <h1 class="brand-title">Catálogo de Tecidos</h1>
+          <!-- <p class="brand-sub">Linha completa de tecidos técnicos</p> -->
+        </div>
       </div>
     </div>
 
-    <!-- Catálogo dinâmico -->
-    <div class="catalog" id="catalog"></div>
-  </section>
+    <div class="view-tabs">
+      <button class="view-tab active" data-view="fabrics">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        Tecidos
+      </button>
+      <button class="view-tab" data-view="events">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Eventos
+      </button>
+      <button class="view-tab" data-view="videos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Vídeos
+      </button>
+      <button class="view-tab" data-view="colors">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 9 9"/><circle cx="12" cy="8" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="8" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="16" r="1.5" fill="currentColor" stroke="none"/></svg>
+        Cores
+      </button>
+      <!-- REPRESENTANTES (desativado temporariamente)
+      <button class="view-tab" data-view="reps">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Representantes
+      </button>
+      -->
+    </div>
 
-  <!-- =========================================================
-       SEÇÃO — VÍDEOS
-  ========================================================= -->
-  <section id="sec-videos" class="hidden">
-    <iframe width="560" height="315"
-      src="https://www.youtube.com/embed/sg4qdn8Bb_A?si=TnkL-QbzLoMP9vGX"
-      title="YouTube video player" frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-    </iframe>
-  </section>
-
-  <!-- =========================================================
-       SEÇÃO — LISTA DE CORES
-  ========================================================= -->
-  <section id="sec-cores" class="hidden">
-    <h2>Lista de Cores</h2>
-    <div id="coresContainer" class="catalog"></div>
-  </section>
-
-  <!-- =========================================================
-       MODAL DE DETALHES DO TECIDO
-  ========================================================= -->
-  <div id="tecidoModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-
-      <div class="img-container">
-        <img id="m-imagem" alt="Tecido">
+    <div class="filter-bar" id="filter-bar">
+      <span class="filter-bar-label">Segmento</span>
+      <div class="dropdown" id="segment-dropdown">
+        <button class="dropdown-btn" id="segment-btn" aria-haspopup="listbox" aria-expanded="false">
+          <span id="segment-label">Todos</span>
+          <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="dropdown-list" id="segment-list" role="listbox" aria-label="Segmentos"></div>
       </div>
 
-      <div class="info">
-        <h2 id="m-nome"></h2>
-        <p><strong>Código:</strong> <span id="m-codigo"></span></p>
-        <p><strong>Composição:</strong> <span id="m-composicao"></span></p>
-        <p><strong>Gramatura:</strong> <span id="m-gramatura"></span></p>
-        <p><strong>Largura:</strong> <span id="m-largura"></span></p>
-        <p><strong>Linha:</strong> <span id="m-linha"></span></p>
-        <p><strong>Estrutura:</strong> <span id="m-ligamento"></span></p>
-        <p><strong>Aplicação:</strong> <span id="m-aplicacao"></span></p>
-        <p><strong>Cores:</strong></p>
-        <ul id="m-cores"></ul>
+      <div class="filter-chips-scroll">
+        <span class="filter-bar-sep"></span>
+        <span class="filter-bar-label">Material</span>
+        <button class="chip quick-material-chip" data-material="Poliamida">Poliamida</button>
+        <button class="chip quick-material-chip" data-material="Poliéster">Poliéster</button>
       </div>
+
+      <button class="advanced-toggle" id="advanced-toggle" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 6h18M7 12h10M11 18h2"/>
+        </svg>
+        <span>Filtros</span>
+        <span class="filter-badge hidden" id="filter-badge">0</span>
+      </button>
+    </div>
+
+    <div class="advanced-panel" id="advanced-panel">
+      <div class="advanced-inner">
+        <div class="filter-group">
+          <label class="filter-label">Gramatura (g/m²)</label>
+          <div class="range-row">
+            <input type="number" class="range-input" id="gram-min" placeholder="Mín" min="0">
+            <span class="range-sep">—</span>
+            <input type="number" class="range-input" id="gram-max" placeholder="Máx" min="0">
+            <span class="range-hint" id="gram-hint"></span>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Largura (m)</label>
+          <div class="pill-group" id="width-filters"></div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Ligamento</label>
+          <div class="pill-group" id="ligamento-filters"></div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Aplicação</label>
+          <div class="dropdown dropdown-dark" id="application-dropdown">
+            <button class="dropdown-btn dropdown-btn-dark" id="application-btn" aria-haspopup="listbox" aria-expanded="false">
+              <span id="application-label">Todas</span>
+              <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="dropdown-list dropdown-list-dark" id="application-list" role="listbox" aria-multiselectable="true" aria-label="Aplicações"></div>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Composição</label>
+          <div class="dropdown dropdown-dark" id="material-dropdown">
+            <button class="dropdown-btn dropdown-btn-dark" id="material-btn" aria-haspopup="listbox" aria-expanded="false">
+              <span id="material-label">Todos</span>
+              <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="dropdown-list dropdown-list-dark" id="material-list" role="listbox" aria-multiselectable="true" aria-label="Composição"></div>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Cor (nome ou código)</label>
+          <input type="search" class="text-input" id="color-search" placeholder="Ex: 0001, branco, verde militar...">
+        </div>
+
+        <div class="advanced-actions">
+          <button class="btn-clear" id="clear-filters">Limpar filtros</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="fabrics-view">
+      <div class="fabrics-search-bar">
+        <div class="fabric-search-wrap" id="filter-search-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input type="search" id="search-input" placeholder="Buscar por nome ou código...">
+          <button class="search-clear" id="search-clear" aria-label="Limpar busca">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="results-bar">
+        <span id="results-count"></span>
+        <button class="select-toggle-btn" id="select-toggle-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="9 11 12 14 22 4"/></svg>
+          Selecionar
+        </button>
+      </div>
+      <div class="fabric-grid" id="fabric-grid"></div>
+      <div class="no-results hidden" id="no-results">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <p>Nenhum tecido encontrado com os filtros atuais.</p>
+      </div>
+    </section>
+
+    <div class="selection-bar hidden" id="selection-bar">
+      <span class="selection-count" id="selection-count">Nenhum tecido selecionado</span>
+      <div class="selection-actions">
+        <button class="btn-select-all" id="btn-select-all">Selecionar todos</button>
+        <button class="btn-download-csv" id="btn-download-csv" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          CSV
+        </button>
+        <button class="btn-download-pdf" id="btn-download-pdf" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          PDF
+        </button>
+        <button class="btn-cancel-select" id="btn-cancel-select">Cancelar</button>
+      </div>
+    </div>
+
+    <!-- REPRESENTANTES (desativado temporariamente)
+    <section id="reps-view" class="hidden">
+      <div class="reps-wrap">
+        <div class="map-panel">
+          <div class="map-header">
+            <h2 class="map-title">Representantes comerciais</h2>
+            <p class="map-sub">Clique em um estado para ver o representante responsável</p>
+            <div class="region-legend">
+              <span class="legend-item"><span class="legend-dot" data-region="Norte"></span>Norte</span>
+              <span class="legend-item"><span class="legend-dot" data-region="Nordeste"></span>Nordeste</span>
+              <span class="legend-item"><span class="legend-dot" data-region="Centro-Oeste"></span>Centro-Oeste</span>
+              <span class="legend-item"><span class="legend-dot" data-region="Sudeste"></span>Sudeste</span>
+              <span class="legend-item"><span class="legend-dot" data-region="Sul"></span>Sul</span>
+            </div>
+          </div>
+          <div class="brazil-map-wrap">
+            <div id="brazil-map" aria-label="Mapa do Brasil"></div>
+          </div>
+          <div class="map-tooltip hidden" id="map-tooltip"></div>
+        </div>
+        <aside class="reps-sidebar">
+          <h3 class="reps-title" id="reps-sidebar-title">Todos os representantes</h3>
+          <div class="reps-list" id="reps-list"></div>
+        </aside>
+      </div>
+    </section>
+    -->
+
+    <section id="events-view" class="hidden">
+      <div class="calendar-wrap">
+        <div class="calendar">
+          <div class="calendar-header">
+            <button class="cal-nav" id="cal-prev" aria-label="Mês anterior">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <h2 class="cal-title" id="cal-title"></h2>
+            <button class="cal-nav" id="cal-next" aria-label="Próximo mês">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <button class="cal-today" id="cal-today">Hoje</button>
+          </div>
+          <div class="cal-weekdays">
+            <span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+        </div>
+
+        <aside class="events-sidebar">
+          <h3 class="events-title">Próximos eventos</h3>
+          <div class="events-list" id="events-list"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="videos-view" class="hidden">
+      <div class="video-wrap">
+        <h2 class="video-section-title">Vídeos</h2>
+        <div class="video-grid">
+          <div class="video-item">
+            <iframe
+              src="https://www.youtube.com/embed/sg4qdn8Bb_A"
+              title="Vídeo institucional"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="colors-view" class="hidden">
+      <div class="colors-page-wrap">
+        <div class="colors-page-header">
+          <h2 class="colors-page-title">Catálogo de Cores</h2>
+          <div class="colors-search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="search" id="colors-page-search" placeholder="Nome, código ou Pantone...">
+          </div>
+        </div>
+        <p class="colors-page-count" id="colors-page-count"></p>
+        <div class="colors-page-grid" id="colors-page-grid"></div>
+        <p class="colors-no-results hidden" id="colors-no-results">Nenhuma cor encontrada.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Todos os códigos Pantone® são aproximações.</p>
+    <p>Todos os direitos reservados para Macias®.</p>
+  </footer>
+
+  <div class="modal-overlay hidden" id="modal-overlay">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modal-close" aria-label="Fechar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <div class="modal-content" id="modal-content"></div>
     </div>
   </div>
 
-  <!-- =========================================================
-       SCRIPTS E DEPENDÊNCIAS
-  ========================================================= -->
-  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="script.js"></script>
+  <noscript>
+    <div style="padding:2rem;text-align:center;font-family:sans-serif">
+      Este site requer JavaScript para funcionar.
+    </div>
+  </noscript>
 
-  <!-- =========================================================
-       SCRIPT — NAVEGAÇÃO ENTRE SEÇÕES
-  ========================================================= -->
-  <script>
-    const btnCatalogo = document.getElementById('btn-catalogo');
-    const btnVideos = document.getElementById('btn-videos');
-    const secCatalogo = document.getElementById('sec-catalogo');
-    const secVideos = document.getElementById('sec-videos');
-
-    function showSection(section) {
-      if (section === 'catalogo') {
-        secCatalogo.classList.remove('hidden');
-        secVideos.classList.add('hidden');
-        btnCatalogo.classList.add('active');
-        btnVideos.classList.remove('active');
-      } else {
-        secCatalogo.classList.add('hidden');
-        secVideos.classList.remove('hidden');
-        btnCatalogo.classList.remove('active');
-        btnVideos.classList.add('active');
-      }
-    }
-
-    btnCatalogo.addEventListener('click', () => showSection('catalogo'));
-    btnVideos.addEventListener('click', () => showSection('videos'));
-  </script>
-
-  <!-- =========================================================
-       SCRIPT — MODAL E ZOOM DE COR
-  ========================================================= -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const modal = document.getElementById('tecidoModal');
-      const close = modal.querySelector('.close');
-
-      const nome = document.getElementById('m-nome');
-      const codigo = document.getElementById('m-codigo');
-      const composicao = document.getElementById('m-composicao');
-      const gramatura = document.getElementById('m-gramatura');
-      const largura = document.getElementById('m-largura');
-      const linha = document.getElementById('m-linha');
-      const ligamento = document.getElementById('m-ligamento');
-      const aplicacao = document.getElementById('m-aplicacao');
-      const cores = document.getElementById('m-cores');
-      const img = document.getElementById('m-imagem');
-
-      document.getElementById('catalog').addEventListener('click', e => {
-        const card = e.target.closest('.fabric');
-        if (!card) return;
-
-        nome.textContent = card.dataset.nome;
-        codigo.textContent = card.dataset.codigo;
-        composicao.textContent = card.dataset.composicao;
-        gramatura.textContent = card.dataset.gramatura;
-        largura.textContent = card.dataset.largura || "—";
-        linha.textContent = card.dataset.linha;
-        ligamento.textContent = card.dataset.ligamento;
-        aplicacao.textContent = card.dataset.aplicacao;
-
-        const fabricColors = card.dataset.cores.split(', ');
-        cores.innerHTML = fabricColors.map(c => {
-          const code = c.split(' ')[0];
-          const data = colorData[code] || {};
-          const pantone = data.pantone || "#";
-          const imgSrc = data.img || `${code}.png`;
-          return `
-            <li>
-              <img src="${imgSrc}" alt="${c}" style="width:20px;height:20px;border:1px solid #ccc;margin-right:4px;">
-              ${c} – ${pantone}
-            </li>`;
-        }).join('');
-
-        img.src = card.dataset.imagem !== "#" ? card.dataset.imagem : "";
-        modal.style.display = 'flex';
-      });
-
-      close.addEventListener('click', () => modal.style.display = 'none');
-      modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
-
-      const colorZoom = document.getElementById('colorZoom');
-      document.addEventListener('mouseover', e => {
-        if (e.target.tagName === 'IMG' && e.target.parentElement.tagName === 'LI') {
-          colorZoom.style.backgroundImage = `url(${e.target.src})`;
-          colorZoom.style.display = 'block';
-        }
-      });
-
-      document.addEventListener('mousemove', e => {
-        if (colorZoom.style.display === 'block') {
-          colorZoom.style.left = e.pageX + 15 + 'px';
-          colorZoom.style.top = e.pageY + 15 + 'px';
-        }
-      });
-
-      document.addEventListener('mouseout', e => {
-        if (e.target.tagName === 'IMG' && e.target.parentElement.tagName === 'LI') {
-          colorZoom.style.display = 'none';
-        }
-      });
-    });
-
-    document.getElementById('refreshTitle').onclick = () => location.reload();
-  </script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
 </body>
-
-<!-- =========================================================
-     RODAPÉ
-========================================================= -->
-<footer id="catalogFooter">
-  <p>Todos os códigos Pantone® são aproximações.</p>
-  <p>Todos os direitos reservados para Macias®.</p>
-</footer>
-
 </html>
-
