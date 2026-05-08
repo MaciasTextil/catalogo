@@ -20,7 +20,9 @@
   const colorCodeFrom = str => str.split(' ')[0];
   const compositionText = comp => comp.map(c => `${c.material} ${c.percentage}%`).join(' · ');
   const compositionLines = comp => comp.map(c => `<span class="comp-line"><strong>${c.percentage}%</strong> ${c.material}</span>`).join('');
-  const fabricImagePath = code => `${code}.jpg`;
+  const fabricImagePath      = code => `${code}.jpg`;
+  const fabricThumbPath      = code => `${code}-thumb.jpg`;
+  const fabricOriginalPath   = code => `_backup_originais/${code}.jpg`;
 
   // Ícones das instruções de lavagem (na mesma ordem de washingInstructions)
   // Seguem o estilo de símbolos têxteis (tina/balde + modificadores) quando aplicável
@@ -693,11 +695,12 @@
   // ─── Render: card ────────────────────────────────────────────
   function renderCard(f) {
     const isNA = f.colors[0] === 'N/A';
-    const imgPath = fabricImagePath(f.code);
+    const thumbPath = fabricThumbPath(f.code);
+    const fullPath  = fabricImagePath(f.code);
 
     const imageHtml = `
-      <img src="${imgPath}" alt="${f.name}" loading="lazy" decoding="async"
-           onerror="this.parentElement.innerHTML='<div class=\\'card-image-placeholder\\'><svg viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\'/><path d=\\'M3 9h18M9 21V9\\'/></svg><span>Foto em breve</span></div>'">`;
+      <img src="${thumbPath}" alt="${f.name}" loading="lazy" decoding="async"
+           onerror="this.src='${fullPath}';this.onerror=function(){this.parentElement.innerHTML='<div class=\\'card-image-placeholder\\'><svg viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\'/><path d=\\'M3 9h18M9 21V9\\'/></svg><span>Foto em breve</span></div>'};">`;
 
     const visible = f.colors.slice(0, MAX_CARD_COLORS);
     const more = f.colors.length - MAX_CARD_COLORS;
@@ -803,7 +806,8 @@
   function openModal(f) {
     const isNA = f.colors[0] === 'N/A';
     const apps = f.application.filter(a => a && a !== '#');
-    const imgPath = fabricImagePath(f.code);
+    const imgPath  = fabricImagePath(f.code);
+    const origPath = fabricOriginalPath(f.code);
     const cs = state.colorSearch;
 
     const html = `
@@ -818,8 +822,11 @@
       </div>
 
       <div class="modal-image">
-        <img src="${imgPath}" alt="${f.name}"
+        <img src="${imgPath}" alt="${f.name}" id="modal-fabric-img"
+             data-orig="${origPath}" data-loaded="false"
+             title="Clique para ver em alta qualidade"
              onerror="this.parentElement.innerHTML='<div class=\\'modal-image-placeholder\\'><svg viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\'/><path d=\\'M3 9h18M9 21V9\\'/></svg><span>Foto em breve</span></div>'">
+        <span class="modal-img-hint">Clique para ampliar</span>
       </div>
 
       <div class="modal-grid">
@@ -879,6 +886,80 @@
     document.getElementById('modal-content').innerHTML = html;
     document.getElementById('modal-overlay').classList.remove('hidden');
     document.body.style.overflow = 'hidden';
+
+    // Clique na foto do modal → abre lightbox com original em alta qualidade
+    const fabricImg = document.getElementById('modal-fabric-img');
+    if (fabricImg) {
+      fabricImg.addEventListener('click', () => openLightbox(fabricImg.dataset.orig));
+    }
+  }
+
+  // ─── Lightbox ────────────────────────────────────────────────
+  let lbPhotos = null;   // array de srcs quando há navegação
+  let lbIndex  = 0;
+
+  function openLightbox(src, photos = null, index = 0) {
+    lbPhotos = photos;
+    lbIndex  = index;
+
+    const lb      = document.getElementById('lightbox');
+    const prev    = document.getElementById('lightbox-prev');
+    const next    = document.getElementById('lightbox-next');
+    const counter = document.getElementById('lightbox-counter');
+
+    // Mostrar/ocultar setas e contador
+    const hasNav = photos && photos.length > 1;
+    prev.classList.toggle('hidden', !hasNav);
+    next.classList.toggle('hidden', !hasNav);
+    counter.classList.toggle('hidden', !hasNav);
+
+    lb.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    lbLoadImage(src);
+  }
+
+  function lbLoadImage(src) {
+    const lbImg   = document.getElementById('lightbox-img');
+    const spinner = document.getElementById('lightbox-spinner');
+    const counter = document.getElementById('lightbox-counter');
+
+    lbImg.classList.add('hidden');
+    spinner.classList.remove('hidden');
+
+    if (lbPhotos) {
+      counter.textContent = `${lbIndex + 1} / ${lbPhotos.length}`;
+    }
+
+    lbImg.onload = () => {
+      spinner.classList.add('hidden');
+      lbImg.classList.remove('hidden');
+    };
+    lbImg.onerror = () => {
+      spinner.classList.add('hidden');
+      // fallback: remove prefixo _backup_originais/ se existir
+      lbImg.src = src.replace('_backup_originais/', '');
+      lbImg.classList.remove('hidden');
+    };
+    lbImg.src = src;
+  }
+
+  function lbNavigate(dir) {
+    if (!lbPhotos) return;
+    lbIndex = (lbIndex + dir + lbPhotos.length) % lbPhotos.length;
+    lbLoadImage(lbPhotos[lbIndex]);
+  }
+
+  function closeLightbox() {
+    const lb = document.getElementById('lightbox');
+    lb.classList.add('hidden');
+    document.getElementById('lightbox-img').src = '';
+    lbPhotos = null;
+    if (!document.getElementById('modal-overlay').classList.contains('hidden')) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
   }
 
   function closeModal() {
@@ -1011,12 +1092,31 @@
           </div>` : ''}
         </div>
         <p class="event-desc">${e.description || ''}</p>
+        ${ e.gallery === true ? `
+        <button class="event-gallery-btn" data-action="open-gallery">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          Ver fotos
+        </button>` : e.gallery === false ? `
+        <p class="event-gallery-soon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+          Fotos ainda não adicionadas
+        </p>` : '' }
       </div>
     `).join('');
 
     document.getElementById('modal-content').innerHTML = html;
     document.getElementById('modal-overlay').classList.remove('hidden');
     document.body.style.overflow = 'hidden';
+
+    // "Ver fotos" button → close modal and open gallery tab
+    const galleryBtn = document.querySelector('.event-gallery-btn[data-action="open-gallery"]');
+    if (galleryBtn) {
+      galleryBtn.addEventListener('click', () => {
+        closeModal();
+        switchView('gallery');
+        document.querySelector('.view-tab[data-view="gallery"]').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    }
   }
 
   function switchView(view) {
@@ -1046,6 +1146,11 @@
   }
 
   // ─── Gallery page ─────────────────────────────────────────────
+  // Deriva o nome da miniatura: "foto.jpg" → "foto-thumb.jpg"
+  function thumbSrc(src) {
+    return src.replace(/(\.[^.]+)$/, '-thumb$1');
+  }
+
   function renderGallery() {
     const grid = document.getElementById('gallery-grid');
     const empty = document.getElementById('gallery-empty');
@@ -1059,27 +1164,20 @@
 
     grid.innerHTML = galleryPhotos.map((p, i) => `
       <div class="gallery-item" data-index="${i}">
-        <img src="${p.src}" alt="${p.caption || ''}" loading="lazy" decoding="async"
-             onerror="this.closest('.gallery-item').style.display='none'">
+        <img src="${thumbSrc(p.src)}" alt="${p.caption || ''}" loading="lazy" decoding="async"
+             onerror="this.src='${p.src}'">
         ${p.caption ? `<div class="gallery-caption">${p.caption}</div>` : ''}
       </div>`).join('');
 
     grid.dataset.rendered = '1';
 
-    // Click to open in modal
+    // Click → abre lightbox com navegação entre todas as fotos
+    const allSrcs = galleryPhotos.map(p => p.src);
     grid.addEventListener('click', e => {
       const item = e.target.closest('.gallery-item');
       if (!item) return;
-      const photo = galleryPhotos[Number(item.dataset.index)];
-      if (!photo) return;
-      document.getElementById('modal-content').innerHTML = `
-        <div style="text-align:center;padding:0.5rem 0 1rem">
-          <img src="${photo.src}" alt="${photo.caption || ''}"
-               style="max-width:100%;max-height:75vh;border-radius:8px;display:block;margin:0 auto">
-          ${photo.caption ? `<p style="margin-top:0.85rem;font-size:0.88rem;color:var(--text-muted)">${photo.caption}</p>` : ''}
-        </div>`;
-      document.getElementById('modal-overlay').classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
+      const idx = Number(item.dataset.index);
+      openLightbox(galleryPhotos[idx].src, allSrcs, idx);
     });
   }
 
@@ -1461,7 +1559,38 @@
     document.getElementById('modal-overlay').addEventListener('click', e => {
       if (e.target.id === 'modal-overlay') closeModal();
     });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // Lightbox — fechar
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target.id === 'lightbox') closeLightbox();
+    });
+
+    // Lightbox — setas
+    document.getElementById('lightbox-prev').addEventListener('click', e => { e.stopPropagation(); lbNavigate(-1); });
+    document.getElementById('lightbox-next').addEventListener('click', e => { e.stopPropagation(); lbNavigate(+1); });
+
+    // Lightbox — swipe mobile
+    let lbTouchX = 0;
+    document.getElementById('lightbox').addEventListener('touchstart', e => {
+      lbTouchX = e.touches[0].clientX;
+    }, { passive: true });
+    document.getElementById('lightbox').addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - lbTouchX;
+      if (Math.abs(dx) > 50) lbNavigate(dx < 0 ? +1 : -1);
+    }, { passive: true });
+
+    // Teclado
+    document.addEventListener('keydown', e => {
+      const lbOpen = !document.getElementById('lightbox').classList.contains('hidden');
+      if (lbOpen) {
+        if (e.key === 'ArrowLeft')  lbNavigate(-1);
+        if (e.key === 'ArrowRight') lbNavigate(+1);
+        if (e.key === 'Escape')     closeLightbox();
+      } else if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
   }
 
   init();

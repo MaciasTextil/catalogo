@@ -75,19 +75,36 @@ const events = [
   { date: "2026-12-25", type: "feriado", title: "Natal",                      location: "-", description: "Feriado nacional. Fábrica e escritório fechados." },
 
   // ── Feiras ─────────────────────────────────────────────────
-  { date: "2026-05-05", type: "feira", title: "FebraTêxtil 2026",  location: "Expo Center Norte, São Paulo - SP", description: "Feira Brasileira do Varejo Têxtil. De 5 a 7 de maio de 2026." },
-  { date: "2026-05-06", type: "feira", title: "FebraTêxtil 2026",  location: "Expo Center Norte, São Paulo - SP", description: "Feira Brasileira do Varejo Têxtil — 2º dia." },
-  { date: "2026-05-07", type: "feira", title: "FebraTêxtil 2026",  location: "Expo Center Norte, São Paulo - SP", description: "Feira Brasileira do Varejo Têxtil — último dia." },
-  { date: "2026-10-20", type: "feira", title: "ONDM Brasil 2026",  location: "Av. Marginal Oeste - Centro, Balneário Camboriú - SC", description: "Organização Nacional dos Distribuidores de Malhas. De 20 a 22 de outubro de 2026." },
-  { date: "2026-10-21", type: "feira", title: "ONDM Brasil 2026",  location: "Av. Marginal Oeste - Centro, Balneário Camboriú - SC", description: "ONDM Brasil — 2º dia." },
-  { date: "2026-10-22", type: "feira", title: "ONDM Brasil 2026",  location: "Av. Marginal Oeste - Centro, Balneário Camboriú - SC", description: "ONDM Brasil — último dia." }
+  { date: "2026-05-05", type: "feira", title: "FebraTêxtil 2026",  location: "Expo Center Norte, São Paulo - SP", description: "Feira Brasileira do Varejo Têxtil. De 5 a 7 de maio de 2026.", gallery: true },
+  { date: "2026-05-06", type: "feira", title: "FebraTêxtil 2026",  location: "Expo Center Norte, São Paulo - SP", description: "Feira Brasileira do Varejo Têxtil — 2º dia.", gallery: true },
+  { date: "2026-05-07", type: "feira", title: "FebraTêxtil 2026",  location: "Expo Center Norte, São Paulo - SP", description: "Feira Brasileira do Varejo Têxtil — último dia.", gallery: true },
+  { date: "2026-10-20", type: "feira", title: "ONDM Brasil 2026",  location: "Av. Marginal Oeste - Centro, Balneário Camboriú - SC", description: "Organização Nacional dos Distribuidores de Malhas. De 20 a 22 de outubro de 2026.", gallery: false },
+  { date: "2026-10-21", type: "feira", title: "ONDM Brasil 2026",  location: "Av. Marginal Oeste - Centro, Balneário Camboriú - SC", description: "ONDM Brasil — 2º dia.", gallery: false },
+  { date: "2026-10-22", type: "feira", title: "ONDM Brasil 2026",  location: "Av. Marginal Oeste - Centro, Balneário Camboriú - SC", description: "ONDM Brasil — último dia.", gallery: false }
 ];
 
 // Galeria de fotos das feiras
-// Adicione as fotos na pasta /fotos/ e liste os arquivos abaixo.
-// Exemplo: { src: 'fotos/foto1.jpg', caption: 'Estande Macias' }
+// Adicione as fotos na pasta / e liste os arquivos abaixo.
+// Exemplo: { src: 'foto1.jpg', caption: 'Estande Macias' }
 const galleryPhotos = [
-  // { src: 'fotos/foto1.jpg', caption: '' },
+  // ── Stand ──────────────────────────────────────────────────
+  { src: 'febratextil-stand-00.jpg', caption: 'FebraTêxtil 2026 — Estande Macias' },
+  { src: 'febratextil-stand-01.jpg', caption: 'FebraTêxtil 2026 — Estande Macias' },
+  { src: 'febratextil-stand-02.jpg', caption: 'FebraTêxtil 2026 — Estande Macias' },
+  { src: 'febratextil-stand-03.jpg', caption: 'FebraTêxtil 2026 — Estande Macias' },
+  { src: 'febratextil-stand-04.jpg', caption: 'FebraTêxtil 2026 — Estande Macias' },
+  { src: 'febratextil-stand-05.jpg', caption: 'FebraTêxtil 2026 — Estande Macias' },
+  { src: 'febratextil-stand-06.jpg', caption: 'FebraTêxtil 2026 — Estande Macias' },
+  // ── Desfile ────────────────────────────────────────────────
+  { src: 'febratextil-desfile-00.jpg', caption: 'FebraTêxtil 2026 — Desfile' },
+  { src: 'febratextil-desfile-01.jpg', caption: 'FebraTêxtil 2026 — Desfile' },
+  { src: 'febratextil-desfile-02.jpg', caption: 'FebraTêxtil 2026 — Desfile' },
+  { src: 'febratextil-desfile-03.jpg', caption: 'FebraTêxtil 2026 — Desfile' },
+  { src: 'febratextil-desfile-04.jpg', caption: 'FebraTêxtil 2026 — Desfile' },
+  { src: 'febratextil-desfile-05.jpg', caption: 'FebraTêxtil 2026 — Desfile' },
+  { src: 'febratextil-desfile-06.jpg', caption: 'FebraTêxtil 2026 — Desfile' },
+  { src: 'febratextil-desfile-07.jpg', caption: 'FebraTêxtil 2026 — Desfile' },
+  { src: 'febratextil-desfile-08.jpg', caption: 'FebraTêxtil 2026 — Desfile' },
 ];
 
 // Instruções de lavagem padrão — extraídas das fichas técnicas
