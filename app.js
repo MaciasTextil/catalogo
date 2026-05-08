@@ -13,7 +13,9 @@
     colorSearch: '',
     selectionMode: false,
     selectedCodes: new Set(),
-    quickMaterials: new Set()
+    quickMaterials: new Set(),
+    compareMode: false,
+    compareCodes: new Set()   // max 4
   };
 
   // ─── Helpers ─────────────────────────────────────────────────
@@ -109,12 +111,17 @@
     const label = parts.length > 1 ? parts.slice(1).join(' - ') : data.name;
     const src = colorImgSrc(data);
     const bg = src === 'NA.png' ? '#C8C8C8' : (data.hex || '#ccc');
+    const imgSrcFull = src && src !== 'NA.png' ? src : null;
     const img = src ? `<img src="${src}" alt="${data.name}" loading="lazy" onerror="this.remove()">` : '';
     return `
-      <div class="color-item">
-        <div class="color-swatch${highlight ? ' highlight' : ''}" style="background:${bg}">${img}</div>
-        <div class="color-name">${label}</div>
-        <div class="color-pantone">${data.pantone}</div>
+      <div class="color-item${highlight ? ' highlight' : ''}"${imgSrcFull ? ` data-color-img="${imgSrcFull}" title="Clique para ver a imagem completa"` : ''}>
+        <div class="color-swatch" style="background:${bg}">${img}</div>
+        <div class="color-item-info">
+          <span class="color-item-code">${code}</span>
+          <span class="color-item-name">${label}</span>
+          ${data.pantone && data.pantone !== 'Não encontrado' && data.pantone !== 'Xadrez'
+            ? `<span class="color-item-pantone">${data.pantone}</span>` : ''}
+        </div>
       </div>`;
   }
 
@@ -531,6 +538,7 @@
   function toggleSelectionMode() {
     state.selectionMode = !state.selectionMode;
     if (!state.selectionMode) state.selectedCodes.clear();
+    if (state.selectionMode && state.compareMode) cancelCompare();
     document.getElementById('select-toggle-btn').classList.toggle('active', state.selectionMode);
     renderGrid();
     updateSelectionBar();
@@ -692,6 +700,203 @@
     if (win) { win.document.write(html); win.document.close(); }
   }
 
+  // ─── Compare ─────────────────────────────────────────────────
+  const MAX_COMPARE = 4;
+
+  function toggleCompareMode() {
+    state.compareMode = !state.compareMode;
+    if (!state.compareMode) state.compareCodes.clear();
+    if (state.compareMode && state.selectionMode) cancelSelection();
+    document.getElementById('compare-toggle-btn').classList.toggle('active', state.compareMode);
+    renderGrid();
+    updateCompareBar();
+  }
+
+  function cancelCompare() {
+    state.compareMode = false;
+    state.compareCodes.clear();
+    document.getElementById('compare-toggle-btn').classList.remove('active');
+    document.getElementById('compare-bar').classList.add('hidden');
+    renderGrid();
+  }
+
+  function toggleCompareCard(code) {
+    if (state.compareCodes.has(code)) {
+      state.compareCodes.delete(code);
+    } else {
+      if (state.compareCodes.size >= MAX_COMPARE) return;
+      state.compareCodes.add(code);
+    }
+    updateCompareBadges();
+    updateCompareBar();
+  }
+
+  function updateCompareBadges() {
+    const arr = [...state.compareCodes];
+    document.querySelectorAll('#fabric-grid .fabric-card').forEach(card => {
+      const code = card.dataset.code;
+      const idx  = arr.indexOf(code);
+      card.classList.toggle('compare-selected', idx >= 0);
+      const badge = card.querySelector('.card-compare-badge');
+      if (badge) {
+        badge.textContent = idx >= 0 ? idx + 1 : '';
+        badge.classList.toggle('visible', idx >= 0);
+      }
+    });
+  }
+
+  function updateCompareBar() {
+    const bar   = document.getElementById('compare-bar');
+    const slots = document.getElementById('compare-slots');
+    const btn   = document.getElementById('btn-compare-now');
+    bar.classList.toggle('hidden', !state.compareMode);
+    if (!state.compareMode) return;
+
+    const arr = [...state.compareCodes];
+    const slotsHtml = Array.from({ length: MAX_COMPARE }, (_, i) => {
+      if (arr[i]) {
+        const f = fabrics.find(fab => fab.code === arr[i]);
+        if (!f) return '';
+        const thumb = fabricThumbPath(f.code);
+        const full  = fabricImagePath(f.code);
+        return `
+          <div class="compare-slot filled" data-code="${f.code}">
+            <img src="${thumb}" alt="${f.name}" onerror="this.src='${full}'">
+            <div class="compare-slot-info">
+              <span class="compare-slot-name">${f.name}</span>
+              <span class="compare-slot-code">${f.code}</span>
+            </div>
+            <button class="compare-slot-remove" data-code="${f.code}" aria-label="Remover">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+          </div>`;
+      }
+      return `<div class="compare-slot empty">+ Adicionar</div>`;
+    }).join('');
+
+    slots.innerHTML = slotsHtml;
+
+    const n = arr.length;
+    btn.disabled    = n < 2;
+    btn.textContent = n < 2 ? `Selecione ${2 - n} mais` : `Comparar (${n})`;
+
+    slots.querySelectorAll('.compare-slot-remove').forEach(removeBtn => {
+      removeBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        state.compareCodes.delete(removeBtn.dataset.code);
+        updateCompareBadges();
+        updateCompareBar();
+      });
+    });
+  }
+
+  function openCompareView() {
+    const arr = [...state.compareCodes];
+    if (arr.length < 2) return;
+    const fabs = arr.map(c => fabrics.find(f => f.code === c)).filter(Boolean);
+    document.getElementById('compare-view-body').innerHTML = renderCompareTable(fabs);
+    document.getElementById('compare-overlay').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCompareView() {
+    document.getElementById('compare-overlay').classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  function renderCompareTable(fabs) {
+    const n = fabs.length;
+    const cols = `repeat(${n}, 1fr)`;
+    const minW = Math.max(n * 220, 500) + 'px';
+
+    function allSame(vals) { return vals.every(v => v === vals[0]); }
+
+    // Header
+    const header = fabs.map(f => {
+      const thumb = fabricThumbPath(f.code);
+      const full  = fabricImagePath(f.code);
+      return `
+        <div class="cmp-col-header">
+          <div class="cmp-fabric-img">
+            <img src="${thumb}" alt="${f.name}" onerror="this.src='${full}'">
+          </div>
+          <div class="cmp-fabric-name">${f.name}</div>
+          <div class="cmp-fabric-code">Cód. ${f.code}</div>
+          <div class="cmp-fabric-lines">
+            ${f.line.map(l => `<span class="line-tag">${l}</span>`).join('')}
+          </div>
+        </div>`;
+    }).join('');
+
+    // Row builder
+    function row(label, cellsHtml) {
+      return `
+        <div class="cmp-row">
+          <div class="cmp-row-label">${label}</div>
+          <div class="cmp-row-cells" style="grid-template-columns:${cols}">${cellsHtml}</div>
+        </div>`;
+    }
+
+    // Composição
+    const compCells = fabs.map(f => `
+      <div class="cmp-cell">
+        ${f.composition.map(c => `
+          <div class="cmp-comp-item">
+            <div class="comp-bar-track"><div class="comp-bar-fill" style="width:${c.percentage}%"></div></div>
+            <span>${c.material} — ${c.percentage}%</span>
+          </div>`).join('')}
+      </div>`).join('');
+
+    // Gramatura
+    const gramVals = fabs.map(f => String(f.gramWeight));
+    const gramCells = fabs.map(f =>
+      `<div class="cmp-cell${allSame(gramVals) ? '' : ' cmp-diff'}">${f.gramWeight} g/m²</div>`
+    ).join('');
+
+    // Largura
+    const widthVals = fabs.map(f => f.width.toFixed(2));
+    const widthCells = fabs.map(f =>
+      `<div class="cmp-cell${allSame(widthVals) ? '' : ' cmp-diff'}">${f.width.toFixed(2)} m</div>`
+    ).join('');
+
+    // Ligamento
+    const ligVals = fabs.map(f => f.ligamento);
+    const ligCells = fabs.map(f =>
+      `<div class="cmp-cell${allSame(ligVals) ? '' : ' cmp-diff'}">${f.ligamento}</div>`
+    ).join('');
+
+    // Aplicações
+    const appCells = fabs.map(f => {
+      const apps = f.application.filter(a => a && a !== '#');
+      return `<div class="cmp-cell">${apps.length
+        ? apps.map(a => `<span class="tag">${a}</span>`).join('')
+        : '<span class="cmp-empty">—</span>'}</div>`;
+    }).join('');
+
+    // Cores
+    const cs = state.colorSearch;
+    const colorCells = fabs.map(f => {
+      if (f.colors[0] === 'N/A')
+        return `<div class="cmp-cell cmp-cell-colors"><span class="colors-na-badge">Sob consulta</span></div>`;
+      const swatches = f.colors.map(c => buildColorSwatch(c, colorMatchesSearch(c, cs))).join('');
+      return `<div class="cmp-cell cmp-cell-colors">
+        <div class="cmp-colors-grid">${swatches}</div>
+        <div class="cmp-colors-count">${f.colors.length} cor${f.colors.length !== 1 ? 'es' : ''}</div>
+      </div>`;
+    }).join('');
+
+    return `
+      <div class="cmp-table" style="min-width:${minW}">
+        <div class="cmp-header-row" style="grid-template-columns:${cols}">${header}</div>
+        ${row('Composição', compCells)}
+        ${row('Gramatura', gramCells)}
+        ${row('Largura', widthCells)}
+        ${row('Ligamento', ligCells)}
+        ${row('Aplicações', appCells)}
+        ${row('Cores disponíveis', colorCells)}
+      </div>`;
+  }
+
   // ─── Render: card ────────────────────────────────────────────
   function renderCard(f) {
     const isNA = f.colors[0] === 'N/A';
@@ -714,12 +919,17 @@
     const selectCheck = state.selectionMode
       ? `<div class="card-select-check${isSelected ? ' checked' : ''}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>`
       : '';
+    const compareArr = [...state.compareCodes];
+    const compareIdx = compareArr.indexOf(f.code);
+    const compareBadge = state.compareMode
+      ? `<div class="card-compare-badge${compareIdx >= 0 ? ' visible' : ''}">${compareIdx >= 0 ? compareIdx + 1 : ''}</div>`
+      : '';
     const { min: gMin, max: gMax } = gramRange();
     const gramPct = gMax > gMin ? Math.round(((f.gramWeight - gMin) / (gMax - gMin)) * 100) : 50;
 
     return `
-      <article class="fabric-card${state.selectionMode ? ' selectable' : ''}${isSelected ? ' selected' : ''}" data-code="${f.code}">
-        ${selectCheck}
+      <article class="fabric-card${state.selectionMode ? ' selectable' : ''}${isSelected ? ' selected' : ''}${state.compareMode && compareIdx >= 0 ? ' compare-selected' : ''}" data-code="${f.code}">
+        ${selectCheck}${compareBadge}
         <div class="card-image">${imageHtml}</div>
         <div class="card-body">
           <div class="card-header">
@@ -892,6 +1102,12 @@
     if (fabricImg) {
       fabricImg.addEventListener('click', () => openLightbox(fabricImg.dataset.orig));
     }
+
+    // Clique em cor → abre imagem em nova aba
+    document.getElementById('modal-content').addEventListener('click', e => {
+      const item = e.target.closest('.color-item[data-color-img]');
+      if (item) window.open(item.dataset.colorImg, '_blank', 'noopener');
+    });
   }
 
   // ─── Lightbox ────────────────────────────────────────────────
@@ -1472,16 +1688,27 @@
     // Clear filters
     document.getElementById('clear-filters').addEventListener('click', clearFilters);
 
-    // Card click → modal ou seleção
+    // Card click → modal, seleção ou comparação
     document.getElementById('fabric-grid').addEventListener('click', e => {
       const card = e.target.closest('.fabric-card');
       if (!card) return;
       if (state.selectionMode) {
         toggleCardSelection(card.dataset.code);
+      } else if (state.compareMode) {
+        toggleCompareCard(card.dataset.code);
       } else {
         const fabric = fabrics.find(f => f.code === card.dataset.code);
         if (fabric) openModal(fabric);
       }
+    });
+
+    // Comparar
+    document.getElementById('compare-toggle-btn').addEventListener('click', toggleCompareMode);
+    document.getElementById('btn-compare-now').addEventListener('click', openCompareView);
+    document.getElementById('btn-compare-cancel').addEventListener('click', cancelCompare);
+    document.getElementById('compare-overlay-close').addEventListener('click', closeCompareView);
+    document.getElementById('compare-overlay').addEventListener('click', e => {
+      if (e.target.id === 'compare-overlay') closeCompareView();
     });
 
     // Material quick dropdown
@@ -1582,11 +1809,14 @@
 
     // Teclado
     document.addEventListener('keydown', e => {
-      const lbOpen = !document.getElementById('lightbox').classList.contains('hidden');
+      const lbOpen  = !document.getElementById('lightbox').classList.contains('hidden');
+      const cmpOpen = !document.getElementById('compare-overlay').classList.contains('hidden');
       if (lbOpen) {
         if (e.key === 'ArrowLeft')  lbNavigate(-1);
         if (e.key === 'ArrowRight') lbNavigate(+1);
         if (e.key === 'Escape')     closeLightbox();
+      } else if (cmpOpen) {
+        if (e.key === 'Escape') closeCompareView();
       } else if (e.key === 'Escape') {
         closeModal();
       }
