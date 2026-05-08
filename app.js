@@ -10,7 +10,6 @@
     widths: new Set(),
     ligamentos: new Set(),
     applications: new Set(),
-    materials: new Set(),
     colorSearch: '',
     selectionMode: false,
     selectedCodes: new Set(),
@@ -155,7 +154,6 @@
     n += state.widths.size;
     n += state.ligamentos.size;
     n += state.applications.size;
-    n += state.materials.size;
     n += state.quickMaterials.size;
     if (state.colorSearch) n++;
     return n;
@@ -189,14 +187,12 @@
         if (!f.application.includes(app)) return false;
       }
 
-      // Composição — AND: o tecido deve conter todos os materiais selecionados
-      for (const mat of state.materials) {
-        if (!f.composition.some(c => c.material === mat)) return false;
-      }
-      // Quick chips (Poliamida / Poliéster) — AND com o restante da composição
-      for (const qm of state.quickMaterials) {
-        const qmNorm = normalizeText(qm);
-        if (!f.composition.some(c => normalizeText(c.material).startsWith(qmNorm))) return false;
+      // Composição — OR: o tecido deve conter ao menos uma das composições selecionadas
+      if (state.quickMaterials.size > 0) {
+        const hasAny = [...state.quickMaterials].some(qm =>
+          f.composition.some(c => normalizeText(c.material) === normalizeText(qm))
+        );
+        if (!hasAny) return false;
       }
 
       // Busca por cor
@@ -252,7 +248,7 @@
       state.line = opt.dataset.value;
       const btn = document.getElementById('segment-btn');
       document.getElementById('segment-label').textContent =
-        state.line === 'all' ? 'Todos' : state.line;
+        state.line === 'all' ? 'Segmento' : state.line;
       btn.classList.toggle('active', state.line !== 'all');
       closeDropdown('segment-dropdown');
       renderGrid();
@@ -262,6 +258,85 @@
       e.stopPropagation();
       toggleDropdown('segment-dropdown');
     });
+  }
+
+  // ─── Composição quick dropdown (multi-select) ────────────────
+  function renderMaterialQuickDropdown() {
+    const mats = allMaterials();
+    const list = document.getElementById('material-quick-list');
+
+    const optionsHtml = mats.map(m =>
+      `<div class="dropdown-option" data-value="${m}" role="option" aria-selected="false">
+        <span class="option-check">${checkSvg}</span>${m}
+      </div>`
+    ).join('');
+
+    list.innerHTML = `
+      <div class="dd-search-wrap">
+        <input type="search" class="dd-search-input" id="mat-quick-search"
+               placeholder="Buscar composição..." autocomplete="off">
+      </div>
+      <div class="dropdown-divider"></div>
+      <div id="mat-quick-options">${optionsHtml}</div>`;
+
+    const searchEl = list.querySelector('#mat-quick-search');
+    const optionsEl = list.querySelector('#mat-quick-options');
+
+    searchEl.addEventListener('input', () => {
+      const q = normalizeText(searchEl.value);
+      let anyVisible = false;
+      optionsEl.querySelectorAll('.dropdown-option').forEach(opt => {
+        const match = !q || normalizeText(opt.dataset.value).includes(q);
+        opt.style.display = match ? '' : 'none';
+        if (match) anyVisible = true;
+      });
+      let noMatch = optionsEl.querySelector('.dd-no-match');
+      if (!anyVisible) {
+        if (!noMatch) {
+          noMatch = document.createElement('div');
+          noMatch.className = 'dd-no-match';
+          noMatch.textContent = 'Nenhuma opção encontrada';
+          optionsEl.appendChild(noMatch);
+        }
+      } else if (noMatch) noMatch.remove();
+    });
+
+    searchEl.addEventListener('click', e => e.stopPropagation());
+
+    optionsEl.addEventListener('click', e => {
+      const opt = e.target.closest('.dropdown-option');
+      if (!opt) return;
+      const val = opt.dataset.value;
+      if (state.quickMaterials.has(val)) {
+        state.quickMaterials.delete(val);
+        opt.classList.remove('selected');
+        opt.setAttribute('aria-selected', 'false');
+      } else {
+        state.quickMaterials.add(val);
+        opt.classList.add('selected');
+        opt.setAttribute('aria-selected', 'true');
+      }
+      updateQuickMaterialLabel();
+      updateBadge();
+      renderGrid();
+    });
+
+    document.getElementById('material-quick-btn').addEventListener('click', e => {
+      e.stopPropagation();
+      toggleDropdown('material-quick-dropdown');
+      if (document.getElementById('material-quick-dropdown').classList.contains('open')) {
+        setTimeout(() => searchEl.focus(), 50);
+      }
+    });
+  }
+
+  function updateQuickMaterialLabel() {
+    const count = state.quickMaterials.size;
+    const label = count === 0 ? 'Composição'
+      : count === 1 ? [...state.quickMaterials][0]
+      : `${count} selecionadas`;
+    document.getElementById('material-quick-label').textContent = label;
+    document.getElementById('material-quick-btn').classList.toggle('active', count > 0);
   }
 
   // ─── Render: advanced filters ────────────────────────────────
@@ -285,7 +360,6 @@
     bindPillGroup(ligContainer, state.ligamentos, v => v);
 
     renderApplicationDropdown();
-    renderMaterialDropdown();
   }
 
   // ─── Application dropdown (multi-select) ──────────────────────
@@ -376,85 +450,6 @@
     document.getElementById('application-btn').classList.toggle('active', count > 0);
   }
 
-  // ─── Material dropdown (multi-select + search) ────────────────
-  function renderMaterialDropdown() {
-    const mats = allMaterials();
-    const list = document.getElementById('material-list');
-
-    const optionsHtml = mats.map(m =>
-      `<div class="dropdown-option" data-value="${m}" role="option" aria-selected="false">
-        <span class="option-check">${checkSvg}</span>${m}
-      </div>`
-    ).join('');
-
-    list.innerHTML = `
-      <div class="dd-search-wrap">
-        <input type="search" class="dd-search-input" id="material-search"
-               placeholder="Buscar composição..." autocomplete="off">
-      </div>
-      <div class="dropdown-divider"></div>
-      <div id="material-options">${optionsHtml}</div>`;
-
-    const searchEl = list.querySelector('#material-search');
-    const optionsEl = list.querySelector('#material-options');
-
-    searchEl.addEventListener('input', () => {
-      const q = normalizeText(searchEl.value);
-      let anyVisible = false;
-      optionsEl.querySelectorAll('.dropdown-option').forEach(opt => {
-        const match = !q || normalizeText(opt.dataset.value).includes(q);
-        opt.style.display = match ? '' : 'none';
-        if (match) anyVisible = true;
-      });
-      let noMatch = optionsEl.querySelector('.dd-no-match');
-      if (!anyVisible) {
-        if (!noMatch) {
-          noMatch = document.createElement('div');
-          noMatch.className = 'dd-no-match';
-          noMatch.textContent = 'Nenhuma opção encontrada';
-          optionsEl.appendChild(noMatch);
-        }
-      } else if (noMatch) noMatch.remove();
-    });
-
-    searchEl.addEventListener('click', e => e.stopPropagation());
-
-    optionsEl.addEventListener('click', e => {
-      const opt = e.target.closest('.dropdown-option');
-      if (!opt) return;
-      const val = opt.dataset.value;
-      if (state.materials.has(val)) {
-        state.materials.delete(val);
-        opt.classList.remove('selected');
-        opt.setAttribute('aria-selected', 'false');
-      } else {
-        state.materials.add(val);
-        opt.classList.add('selected');
-        opt.setAttribute('aria-selected', 'true');
-      }
-      updateMaterialLabel();
-      updateBadge();
-      renderGrid();
-    });
-
-    document.getElementById('material-btn').addEventListener('click', e => {
-      e.stopPropagation();
-      toggleDropdown('material-dropdown');
-      if (document.getElementById('material-dropdown').classList.contains('open')) {
-        setTimeout(() => searchEl.focus(), 50);
-      }
-    });
-  }
-
-  function updateMaterialLabel() {
-    const count = state.materials.size;
-    const label = count === 0 ? 'Todos'
-      : count === 1 ? [...state.materials][0]
-      : `${count} selecionados`;
-    document.getElementById('material-label').textContent = label;
-    document.getElementById('material-btn').classList.toggle('active', count > 0);
-  }
-
   function bindPillGroup(container, stateSet, parser) {
     container.addEventListener('click', e => {
       const pill = e.target.closest('.pill');
@@ -497,21 +492,19 @@
     if (appSearch) appSearch.value = '';
     const noMatch = document.querySelector('#application-options .dd-no-match');
     if (noMatch) noMatch.remove();
-    // Reset material dropdown + quick chips
-    state.materials.clear();
+    // Reset composição dropdown
     state.quickMaterials.clear();
-    document.querySelectorAll('.quick-material-chip').forEach(c => c.classList.remove('active'));
-    document.getElementById('material-label').textContent = 'Todos';
-    document.getElementById('material-btn').classList.remove('active');
-    document.querySelectorAll('#material-list .dropdown-option').forEach(o => {
+    document.getElementById('material-quick-label').textContent = 'Composição';
+    document.getElementById('material-quick-btn').classList.remove('active');
+    document.querySelectorAll('#material-quick-list .dropdown-option').forEach(o => {
       o.classList.remove('selected');
       o.setAttribute('aria-selected', 'false');
       o.style.display = '';
     });
-    const matSearch = document.getElementById('material-search');
-    if (matSearch) matSearch.value = '';
-    const matNoMatch = document.querySelector('#material-options .dd-no-match');
-    if (matNoMatch) matNoMatch.remove();
+    const matQuickSearch = document.getElementById('mat-quick-search');
+    if (matQuickSearch) matQuickSearch.value = '';
+    const matQuickNoMatch = document.querySelector('#mat-quick-options .dd-no-match');
+    if (matQuickNoMatch) matQuickNoMatch.remove();
     updateBadge();
     renderGrid();
   }
@@ -703,7 +696,7 @@
     const imgPath = fabricImagePath(f.code);
 
     const imageHtml = `
-      <img src="${imgPath}" alt="${f.name}"
+      <img src="${imgPath}" alt="${f.name}" loading="lazy" decoding="async"
            onerror="this.parentElement.innerHTML='<div class=\\'card-image-placeholder\\'><svg viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\'/><path d=\\'M3 9h18M9 21V9\\'/></svg><span>Foto em breve</span></div>'">`;
 
     const visible = f.colors.slice(0, MAX_CARD_COLORS);
@@ -922,7 +915,8 @@
     const month = calDate.getMonth();
     const today = new Date();
 
-    document.getElementById('cal-title').textContent = `${MONTH_NAMES[month]} de ${year}`;
+    const monthCap = MONTH_NAMES[month].charAt(0).toUpperCase() + MONTH_NAMES[month].slice(1);
+    document.getElementById('cal-title').textContent = `${monthCap} de ${year}`;
 
     const firstDay = new Date(year, month, 1);
     const startOffset = firstDay.getDay(); // 0 = Sunday
@@ -953,10 +947,10 @@
       if (isToday) cls.push('today');
       if (evts.length) cls.push('has-event');
 
-      const pills = evts.slice(0, 2).map(e =>
+      const pills = evts.slice(0, 3).map(e =>
         `<span class="cal-event-pill ${e.type}" title="${e.title}">${e.title}</span>`
       ).join('');
-      const more = evts.length > 2 ? `<span class="cal-event-more">+${evts.length - 2}</span>` : '';
+      const more = evts.length > 3 ? `<span class="cal-event-more">+${evts.length - 3}</span>` : '';
 
       const iso = `${c.date.getFullYear()}-${String(c.date.getMonth()+1).padStart(2,'0')}-${String(c.date.getDate()).padStart(2,'0')}`;
       return `<div class="${cls.join(' ')}" data-date="${iso}">
@@ -1033,6 +1027,7 @@
     document.getElementById('events-view').classList.toggle('hidden', view !== 'events');
     document.getElementById('videos-view').classList.toggle('hidden', view !== 'videos');
     document.getElementById('colors-view').classList.toggle('hidden', view !== 'colors');
+    document.getElementById('gallery-view').classList.toggle('hidden', view !== 'gallery');
     // document.getElementById('reps-view').classList.toggle('hidden', view !== 'reps');
     document.getElementById('filter-bar').classList.toggle('hidden', view !== 'fabrics');
 
@@ -1047,6 +1042,45 @@
 
     if (view === 'events') { renderCalendar(); renderEventsList(); }
     if (view === 'colors') renderColorsPage();
+    if (view === 'gallery') renderGallery();
+  }
+
+  // ─── Gallery page ─────────────────────────────────────────────
+  function renderGallery() {
+    const grid = document.getElementById('gallery-grid');
+    const empty = document.getElementById('gallery-empty');
+    if (!grid || grid.dataset.rendered) return;
+
+    if (!galleryPhotos || galleryPhotos.length === 0) {
+      empty.classList.remove('hidden');
+      grid.dataset.rendered = '1';
+      return;
+    }
+
+    grid.innerHTML = galleryPhotos.map((p, i) => `
+      <div class="gallery-item" data-index="${i}">
+        <img src="${p.src}" alt="${p.caption || ''}" loading="lazy" decoding="async"
+             onerror="this.closest('.gallery-item').style.display='none'">
+        ${p.caption ? `<div class="gallery-caption">${p.caption}</div>` : ''}
+      </div>`).join('');
+
+    grid.dataset.rendered = '1';
+
+    // Click to open in modal
+    grid.addEventListener('click', e => {
+      const item = e.target.closest('.gallery-item');
+      if (!item) return;
+      const photo = galleryPhotos[Number(item.dataset.index)];
+      if (!photo) return;
+      document.getElementById('modal-content').innerHTML = `
+        <div style="text-align:center;padding:0.5rem 0 1rem">
+          <img src="${photo.src}" alt="${photo.caption || ''}"
+               style="max-width:100%;max-height:75vh;border-radius:8px;display:block;margin:0 auto">
+          ${photo.caption ? `<p style="margin-top:0.85rem;font-size:0.88rem;color:var(--text-muted)">${photo.caption}</p>` : ''}
+        </div>`;
+      document.getElementById('modal-overlay').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
   }
 
   // ─── Colors page ─────────────────────────────────────────────
@@ -1256,22 +1290,67 @@
     // Advanced panel toggle (smooth open/close)
     const toggle = document.getElementById('advanced-toggle');
     const panel = document.getElementById('advanced-panel');
+
+    function closePanel() {
+      panel.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', false);
+      panel.style.transform = '';
+      panel.style.transition = '';
+      document.body.style.overflow = '';
+    }
+
     toggle.addEventListener('click', () => {
       const isOpen = panel.classList.toggle('open');
       toggle.classList.toggle('open', isOpen);
       toggle.setAttribute('aria-expanded', isOpen);
+      // Lock background scroll on mobile when panel is open
+      if (window.innerWidth <= 768) {
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      }
     });
-    // Close panel on outside tap (mobile)
+
+    // Close panel on outside tap
     document.addEventListener('click', e => {
       if (!panel.contains(e.target) && !toggle.contains(e.target) && panel.classList.contains('open')) {
-        panel.classList.remove('open');
-        toggle.classList.remove('open');
-        toggle.setAttribute('aria-expanded', false);
+        closePanel();
       }
       // Close any open dropdown when clicking outside it
       document.querySelectorAll('.dropdown.open').forEach(dd => {
         if (!dd.contains(e.target)) closeDropdown(dd.id);
       });
+    });
+
+    // Drag handle to close (swipe down on the handle area)
+    let dragStartY = 0;
+    let dragDelta = 0;
+    let dragging = false;
+
+    panel.addEventListener('touchstart', e => {
+      const panelRect = panel.getBoundingClientRect();
+      if (e.touches[0].clientY - panelRect.top > 52) return;
+      dragStartY = e.touches[0].clientY;
+      dragDelta = 0;
+      dragging = true;
+      panel.style.transition = 'none';
+    }, { passive: true });
+
+    panel.addEventListener('touchmove', e => {
+      if (!dragging) return;
+      dragDelta = Math.max(0, e.touches[0].clientY - dragStartY);
+      panel.style.transform = `translateY(${dragDelta}px)`;
+    }, { passive: true });
+
+    panel.addEventListener('touchend', () => {
+      if (!dragging) return;
+      dragging = false;
+      if (dragDelta > 80) {
+        closePanel();
+      } else {
+        panel.style.transition = '';
+        panel.style.transform = '';
+      }
+      dragDelta = 0;
     });
 
     // Gramatura inputs
@@ -1307,21 +1386,8 @@
       }
     });
 
-    // Quick-chips de material (Poliamida / Poliéster)
-    document.querySelectorAll('.quick-material-chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        const mat = chip.dataset.material;
-        if (state.quickMaterials.has(mat)) {
-          state.quickMaterials.delete(mat);
-          chip.classList.remove('active');
-        } else {
-          state.quickMaterials.add(mat);
-          chip.classList.add('active');
-        }
-        updateBadge();
-        renderGrid();
-      });
-    });
+    // Material quick dropdown
+    renderMaterialQuickDropdown();
 
     // Seleção
     document.getElementById('select-toggle-btn').addEventListener('click', toggleSelectionMode);

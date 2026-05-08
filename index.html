@@ -38,6 +38,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 9 9"/><circle cx="12" cy="8" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="8" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="16" r="1.5" fill="currentColor" stroke="none"/></svg>
         Cores
       </button>
+      <button class="view-tab" data-view="gallery">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Fotos
+      </button>
       <!-- REPRESENTANTES (desativado temporariamente)
       <button class="view-tab" data-view="reps">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -47,20 +51,21 @@
     </div>
 
     <div class="filter-bar" id="filter-bar">
-      <span class="filter-bar-label">Segmento</span>
       <div class="dropdown" id="segment-dropdown">
         <button class="dropdown-btn" id="segment-btn" aria-haspopup="listbox" aria-expanded="false">
-          <span id="segment-label">Todos</span>
+          <span id="segment-label">Segmento</span>
           <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="dropdown-list" id="segment-list" role="listbox" aria-label="Segmentos"></div>
       </div>
 
-      <div class="filter-chips-scroll">
-        <span class="filter-bar-sep"></span>
-        <span class="filter-bar-label">Material</span>
-        <button class="chip quick-material-chip" data-material="Poliamida">Poliamida</button>
-        <button class="chip quick-material-chip" data-material="Poliéster">Poliéster</button>
+      <span class="filter-bar-sep"></span>
+      <div class="dropdown" id="material-quick-dropdown">
+        <button class="dropdown-btn" id="material-quick-btn" aria-haspopup="listbox" aria-expanded="false">
+          <span id="material-quick-label">Composição</span>
+          <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="dropdown-list" id="material-quick-list" role="listbox" aria-label="Composição"></div>
       </div>
 
       <button class="advanced-toggle" id="advanced-toggle" aria-expanded="false">
@@ -102,17 +107,6 @@
               <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="dropdown-list dropdown-list-dark" id="application-list" role="listbox" aria-multiselectable="true" aria-label="Aplicações"></div>
-          </div>
-        </div>
-
-        <div class="filter-group">
-          <label class="filter-label">Composição</label>
-          <div class="dropdown dropdown-dark" id="material-dropdown">
-            <button class="dropdown-btn dropdown-btn-dark" id="material-btn" aria-haspopup="listbox" aria-expanded="false">
-              <span id="material-label">Todos</span>
-              <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="dropdown-list dropdown-list-dark" id="material-list" role="listbox" aria-multiselectable="true" aria-label="Composição"></div>
           </div>
         </div>
 
@@ -215,7 +209,7 @@
             <button class="cal-today" id="cal-today">Hoje</button>
           </div>
           <div class="cal-weekdays">
-            <span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+            <span data-short="D">Dom</span><span data-short="S">Seg</span><span data-short="T">Ter</span><span data-short="Q">Qua</span><span data-short="Q">Qui</span><span data-short="S">Sex</span><span data-short="S">Sáb</span>
           </div>
           <div class="cal-grid" id="cal-grid"></div>
         </div>
@@ -257,6 +251,25 @@
         <p class="colors-page-count" id="colors-page-count"></p>
         <div class="colors-page-grid" id="colors-page-grid"></div>
         <p class="colors-no-results hidden" id="colors-no-results">Nenhuma cor encontrada.</p>
+      </div>
+    </section>
+
+    <section id="gallery-view" class="hidden">
+      <div class="gallery-wrap">
+        <div class="gallery-header">
+          <div>
+            <h2 class="gallery-title">FebraTêxtil 2026</h2>
+            <p class="gallery-sub">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Expo Center Norte, São Paulo - SP · 5 a 7 de maio de 2026
+            </p>
+          </div>
+        </div>
+        <div class="gallery-grid" id="gallery-grid"></div>
+        <div class="gallery-empty hidden" id="gallery-empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <p>Fotos em breve.</p>
+        </div>
       </div>
     </section>
   </main>

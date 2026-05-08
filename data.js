@@ -75,12 +75,19 @@ const events = [
   { date: "2026-12-25", type: "feriado", title: "Natal",                      location: "-", description: "Feriado nacional. Fábrica e escritório fechados." },
 
   // ── Feiras ─────────────────────────────────────────────────
-  { date: "2026-05-05", type: "feira", title: "FebraTêxtil 2026",  location: "A confirmar", description: "Feira Brasileira do Varejo Têxtil. De 5 a 7 de maio de 2026." },
-  { date: "2026-05-06", type: "feira", title: "FebraTêxtil 2026",  location: "A confirmar", description: "Feira Brasileira do Varejo Têxtil — 2º dia." },
-  { date: "2026-05-07", type: "feira", title: "FebraTêxtil 2026",  location: "A confirmar", description: "Feira Brasileira do Varejo Têxtil — último dia." },
-  { date: "2026-10-20", type: "feira", title: "ONDM Brasil 2026",  location: "A confirmar", description: "Organização Nacional dos Distribuidores de Malhas. De 20 a 22 de outubro de 2026." },
-  { date: "2026-10-21", type: "feira", title: "ONDM Brasil 2026",  location: "A confirmar", description: "ONDM Brasil — 2º dia." },
-  { date: "2026-10-22", type: "feira", title: "ONDM Brasil 2026",  location: "A confirmar", description: "ONDM Brasil — último dia." }
+  { date: "2026-05-05", type: "feira", title: "FebraTêxtil 2026",  location: "Expo Center Norte, São Paulo - SP", description: "Feira Brasileira do Varejo Têxtil. De 5 a 7 de maio de 2026." },
+  { date: "2026-05-06", type: "feira", title: "FebraTêxtil 2026",  location: "Expo Center Norte, São Paulo - SP", description: "Feira Brasileira do Varejo Têxtil — 2º dia." },
+  { date: "2026-05-07", type: "feira", title: "FebraTêxtil 2026",  location: "Expo Center Norte, São Paulo - SP", description: "Feira Brasileira do Varejo Têxtil — último dia." },
+  { date: "2026-10-20", type: "feira", title: "ONDM Brasil 2026",  location: "Av. Marginal Oeste - Centro, Balneário Camboriú - SC", description: "Organização Nacional dos Distribuidores de Malhas. De 20 a 22 de outubro de 2026." },
+  { date: "2026-10-21", type: "feira", title: "ONDM Brasil 2026",  location: "Av. Marginal Oeste - Centro, Balneário Camboriú - SC", description: "ONDM Brasil — 2º dia." },
+  { date: "2026-10-22", type: "feira", title: "ONDM Brasil 2026",  location: "Av. Marginal Oeste - Centro, Balneário Camboriú - SC", description: "ONDM Brasil — último dia." }
+];
+
+// Galeria de fotos das feiras
+// Adicione as fotos na pasta /fotos/ e liste os arquivos abaixo.
+// Exemplo: { src: 'fotos/foto1.jpg', caption: 'Estande Macias' }
+const galleryPhotos = [
+  // { src: 'fotos/foto1.jpg', caption: '' },
 ];
 
 // Instruções de lavagem padrão — extraídas das fichas técnicas
@@ -360,7 +367,7 @@ const fabrics = [
   {
     name: "Carmel",
     code: "22037",
-    composition: [{ material: "Poliéster", percentage: 100 }],
+    composition: [{ material: "Poliéster PET", percentage: 100 }],
     gramWeight: 101,
     width: 1.50,
     line: ["Esportivos"],
