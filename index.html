@@ -110,11 +110,6 @@
           </div>
         </div>
 
-        <div class="filter-group">
-          <label class="filter-label">Cor (nome ou código)</label>
-          <input type="search" class="text-input" id="color-search" placeholder="Ex: 0001, branco, verde militar...">
-        </div>
-
         <div class="advanced-actions">
           <button class="btn-clear" id="clear-filters">Limpar filtros</button>
         </div>
@@ -133,6 +128,12 @@
           <button class="search-clear" id="search-clear" aria-label="Limpar busca">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
           </button>
+        </div>
+        <div class="fabric-search-wrap fabric-color-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 9 9"/>
+          </svg>
+          <input type="search" id="color-search" placeholder="Buscar por cor (nome ou código)...">
         </div>
       </div>
       <div class="results-bar">
