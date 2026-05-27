@@ -57,16 +57,22 @@ body {
 /* Search (in fabrics body) */
 .fabrics-search-bar {
   margin-bottom: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
 }
 .fabric-search-wrap {
   position: relative;
+  flex: 1 1 260px;
   max-width: 380px;
 }
 .fabric-search-wrap .search-icon {
   position: absolute; left: 0.7rem; top: 50%; transform: translateY(-50%);
   width: 14px; height: 14px; color: var(--text-muted); pointer-events: none;
 }
-#search-input {
+#search-input,
+#color-search {
   width: 100%;
   padding: 0.52rem 2rem 0.52rem 2.1rem;
   border: 1px solid var(--border);
@@ -78,8 +84,10 @@ body {
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-#search-input::placeholder { color: var(--text-muted); }
-#search-input:focus {
+#search-input::placeholder,
+#color-search::placeholder { color: var(--text-muted); }
+#search-input:focus,
+#color-search:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(0,174,239,0.15);
 }
