@@ -91,17 +91,6 @@
     return data.img && data.img !== 'NA.png' ? data.img : null;
   }
 
-  function buildColorDot(colorStr, highlight) {
-    if (colorStr === 'N/A') return '';
-    const code = colorCodeFrom(colorStr);
-    const data = colorData[code];
-    if (!data) return '';
-    const src = colorImgSrc(data);
-    const bg = src === 'NA.png' ? '#C8C8C8' : (data.hex || '#ccc');
-    const img = src ? `<img src="${src}" alt="${data.name}" loading="lazy" onerror="this.remove()">` : '';
-    return `<div class="color-dot${highlight ? ' highlight' : ''}" style="background:${bg}" title="${data.name}">${img}</div>`;
-  }
-
   function buildColorSwatch(colorStr, highlight) {
     if (colorStr === 'N/A') return '';
     const code = colorCodeFrom(colorStr);
@@ -123,6 +112,23 @@
             ? `<span class="color-item-pantone">${data.pantone}</span>` : ''}
         </div>
       </div>`;
+  }
+
+  // Chip compacto para o card: bolinha + código + nome da cor
+  function buildColorChip(colorStr, highlight) {
+    if (colorStr === 'N/A') return '';
+    const code = colorCodeFrom(colorStr);
+    const data = colorData[code];
+    if (!data) return '';
+    const parts = data.name.split(' - ');
+    const label = parts.length > 1 ? parts.slice(1).join(' - ') : data.name;
+    const src = colorImgSrc(data);
+    const bg = src === 'NA.png' ? '#C8C8C8' : (data.hex || '#ccc');
+    const img = src ? `<img src="${src}" alt="${data.name}" loading="lazy" onerror="this.remove()">` : '';
+    return `<span class="color-chip${highlight ? ' highlight' : ''}" title="${data.name}">
+        <span class="color-chip-dot" style="background:${bg}">${img}</span>
+        <span class="color-chip-label"><strong>${code}</strong> ${label}</span>
+      </span>`;
   }
 
   // ─── Filter options ──────────────────────────────────────────
@@ -912,8 +918,19 @@
     const cs = state.colorSearch;
     const colorsHtml = isNA
       ? '<span class="colors-na-badge">Sob consulta</span>'
-      : visible.map(c => buildColorDot(c, colorMatchesSearch(c, cs))).join('') +
-        (more > 0 ? `<span class="colors-more">+${more}</span>` : '');
+      : visible.map(c => buildColorChip(c, colorMatchesSearch(c, cs))).join('') +
+        (more > 0 ? `<span class="colors-more">+${more} cor${more !== 1 ? 'es' : ''}</span>` : '');
+
+    const apps = f.application.filter(a => a && a !== '#');
+    const appsHtml = apps.length ? `
+          <div class="card-applications">
+            <span class="card-section-label">Aplicações</span>
+            <div class="app-tags">${apps.map(a => `<span class="app-tag">${a}</span>`).join('')}</div>
+          </div>` : '';
+
+    const suspendedHtml = f.salesSuspended
+      ? `<div class="sales-suspended"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Venda suspensa</div>`
+      : '';
 
     const isSelected = state.selectedCodes.has(f.code);
     const selectCheck = state.selectionMode
@@ -932,6 +949,7 @@
         ${selectCheck}${compareBadge}
         <div class="card-image">${imageHtml}</div>
         <div class="card-body">
+          ${suspendedHtml}
           <div class="card-header">
             <h2 class="card-name">${f.name}</h2>
             <span class="card-code">${f.code}</span>
@@ -958,7 +976,11 @@
           <div class="card-lines">
             ${f.line.map(l => `<span class="line-tag">${l}</span>`).join('')}
           </div>
-          <div class="card-colors">${colorsHtml}</div>
+          ${appsHtml}
+          <div class="card-colors-section">
+            <span class="card-section-label">Cores${isNA ? '' : ` · ${f.colors.length}`}</span>
+            <div class="card-colors">${colorsHtml}</div>
+          </div>
         </div>
       </article>`;
   }
@@ -986,7 +1008,7 @@
     const cards = [...document.querySelectorAll('#fabric-grid .fabric-card')];
     // Reset
     cards.forEach(card => {
-      ['.comp-value', '.card-lines'].forEach(sel => {
+      ['.comp-value', '.card-lines', '.card-applications'].forEach(sel => {
         const el = card.querySelector(sel);
         if (el) el.style.minHeight = '';
       });
@@ -1003,7 +1025,7 @@
 
     byRow.forEach(rowCards => {
       if (rowCards.length < 2) return;
-      ['.comp-value', '.card-lines'].forEach(sel => {
+      ['.comp-value', '.card-lines', '.card-applications'].forEach(sel => {
         const els = rowCards.map(c => c.querySelector(sel)).filter(Boolean);
         if (!els.length) return;
         const maxH = Math.max(...els.map(el => el.getBoundingClientRect().height));
@@ -1030,6 +1052,8 @@
         </div>
         <span class="modal-code">Cód. ${f.code}</span>
       </div>
+
+      ${f.salesSuspended ? `<div class="modal-suspended"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Venda suspensa</div>` : ''}
 
       <div class="modal-image">
         <img src="${imgPath}" alt="${f.name}" id="modal-fabric-img"

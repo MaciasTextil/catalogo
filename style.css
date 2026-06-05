@@ -778,18 +778,61 @@ main { max-width: 1400px; margin: 0 auto; padding: 1.25rem 1.25rem 3rem; }
   background: var(--tag-bg); color: var(--tag-text); font-weight: 500;
 }
 
+/* Rótulo de seção no card (Aplicações, Cores) */
+.card-section-label {
+  display: block;
+  font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--text-muted); font-weight: 600; margin-bottom: 0.3rem;
+}
+
+/* Aplicações no card */
+.card-applications { display: flex; flex-direction: column; }
+.app-tags { display: flex; flex-wrap: wrap; gap: 0.25rem; align-content: flex-start; }
+.app-tag {
+  font-size: 0.65rem; padding: 0.15rem 0.45rem; border-radius: 3px;
+  background: var(--bg); color: var(--text-muted); font-weight: 500;
+  border: 1px solid var(--border);
+}
+
+/* Cores no card — chips com código e nome */
+.card-colors-section { margin-top: auto; padding-top: 0.45rem; }
 .card-colors {
-  display: flex; align-items: center; gap: 0.28rem; flex-wrap: wrap; margin-top: auto; padding-top: 0.3rem;
+  display: flex; align-items: center; gap: 0.3rem 0.4rem; flex-wrap: wrap;
 }
-.color-dot {
-  width: 19px; height: 19px; border-radius: 50%;
+.color-chip {
+  display: inline-flex; align-items: center; gap: 0.3rem; max-width: 100%;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 999px; padding: 0.12rem 0.55rem 0.12rem 0.2rem;
+}
+.color-chip.highlight { border-color: var(--accent); box-shadow: 0 0 0 1.5px var(--accent); }
+.color-chip-dot {
+  width: 16px; height: 16px; border-radius: 50%;
   border: 1.5px solid rgba(0,0,0,0.1); overflow: hidden; flex-shrink: 0;
-  transition: transform 0.12s;
 }
-.color-dot.highlight { box-shadow: 0 0 0 2px var(--accent); }
-.color-dot img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.colors-more { font-size: 0.67rem; color: var(--text-muted); font-weight: 600; }
+.color-chip-dot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.color-chip-label {
+  font-size: 0.68rem; color: var(--text); font-weight: 500; line-height: 1.2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.color-chip-label strong { font-weight: 700; font-family: 'Courier New', monospace; }
+.colors-more { font-size: 0.67rem; color: var(--text-muted); font-weight: 600; align-self: center; }
 .colors-na-badge { font-size: 0.7rem; color: var(--text-muted); font-style: italic; }
+
+/* Aviso de venda suspensa */
+.sales-suspended {
+  display: flex; align-items: center; gap: 0.4rem;
+  background: #fdecec; color: #c0182b; border: 1px solid #f3c0c5;
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;
+  padding: 0.32rem 0.55rem; border-radius: 6px;
+}
+.sales-suspended svg { width: 14px; height: 14px; flex-shrink: 0; }
+.modal-suspended {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: #fdecec; color: #c0182b; border: 1px solid #f3c0c5;
+  font-size: 0.92rem; font-weight: 700;
+  padding: 0.6rem 0.85rem; border-radius: 8px; margin: 0.3rem 0 0.2rem;
+}
+.modal-suspended svg { width: 18px; height: 18px; flex-shrink: 0; }
 
 /* Card — compare mode */
 .fabric-card.compare-selected {

@@ -242,6 +242,7 @@ const fabrics = [
   {
     name: "Mac Stretch",
     code: "10166",
+    salesSuspended: true,
     composition: [
       { material: "Poliamida 6.6", percentage: 90 },
       { material: "Elastano", percentage: 10 }
