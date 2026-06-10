@@ -11,6 +11,7 @@
     ligamentos: new Set(),
     applications: new Set(),
     colorSearch: '',
+    bestSellersOnly: false,
     selectionMode: false,
     selectedCodes: new Set(),
     quickMaterials: new Set(),
@@ -186,6 +187,9 @@
 
       // Segmento — seleção única
       if (state.line !== 'all' && !f.line.includes(state.line)) return false;
+
+      // Best Sellers — somente os artigos mais vendidos
+      if (state.bestSellersOnly && !f.bestSeller) return false;
 
       // Gramatura
       if (state.gramMin != null && f.gramWeight < state.gramMin) return false;
@@ -484,9 +488,17 @@
     badge.classList.toggle('hidden', n === 0);
   }
 
+  function toggleBestSellers() {
+    state.bestSellersOnly = !state.bestSellersOnly;
+    document.getElementById('bestseller-toggle-btn').classList.toggle('active', state.bestSellersOnly);
+    renderGrid();
+  }
+
   function clearFilters() {
     state.gramMin = null;
     state.gramMax = null;
+    state.bestSellersOnly = false;
+    document.getElementById('bestseller-toggle-btn').classList.remove('active');
     state.widths.clear();
     state.ligamentos.clear();
     state.applications.clear();
@@ -932,6 +944,10 @@
       ? `<div class="sales-suspended"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Venda suspensa</div>`
       : '';
 
+    const bestSellerBadge = f.bestSeller
+      ? `<div class="card-bestseller"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>Best Seller</div>`
+      : '';
+
     const isSelected = state.selectedCodes.has(f.code);
     const selectCheck = state.selectionMode
       ? `<div class="card-select-check${isSelected ? ' checked' : ''}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>`
@@ -946,7 +962,7 @@
 
     return `
       <article class="fabric-card${state.selectionMode ? ' selectable' : ''}${isSelected ? ' selected' : ''}${state.compareMode && compareIdx >= 0 ? ' compare-selected' : ''}" data-code="${f.code}">
-        ${selectCheck}${compareBadge}
+        ${selectCheck}${compareBadge}${bestSellerBadge}
         <div class="card-image">${imageHtml}</div>
         <div class="card-body">
           ${suspendedHtml}
@@ -1052,6 +1068,8 @@
         </div>
         <span class="modal-code">Cód. ${f.code}</span>
       </div>
+
+      ${f.bestSeller ? `<div class="modal-bestseller"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>Best Seller — um dos nossos mais vendidos</div>` : ''}
 
       ${f.salesSuspended ? `<div class="modal-suspended"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Venda suspensa</div>` : ''}
 
@@ -1368,6 +1386,7 @@
     document.getElementById('videos-view').classList.toggle('hidden', view !== 'videos');
     document.getElementById('colors-view').classList.toggle('hidden', view !== 'colors');
     document.getElementById('gallery-view').classList.toggle('hidden', view !== 'gallery');
+    document.getElementById('tech-view').classList.toggle('hidden', view !== 'tech');
     // document.getElementById('reps-view').classList.toggle('hidden', view !== 'reps');
     document.getElementById('filter-bar').classList.toggle('hidden', view !== 'fabrics');
 
@@ -1383,6 +1402,41 @@
     if (view === 'events') { renderCalendar(); renderEventsList(); }
     if (view === 'colors') renderColorsPage();
     if (view === 'gallery') renderGallery();
+    if (view === 'tech') renderTech();
+  }
+
+  // ─── Tecnologias page ─────────────────────────────────────────
+  function renderTech() {
+    const grid = document.getElementById('tech-grid');
+    if (!grid || grid.dataset.rendered) return;
+    if (typeof technologies === 'undefined' || !technologies.length) {
+      grid.dataset.rendered = '1';
+      return;
+    }
+
+    grid.innerHTML = technologies.map(t => {
+      const side = (t.blocks || []).map(b => {
+        const inner = b.type === 'pills'
+          ? `<div class="tech-pills">${b.items.map(i => `<span class="tech-pill-chip">${i}</span>`).join('')}</div>`
+          : `<ul class="tech-feat">${b.items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+        return `<div class="tech-block"><h4 class="tech-block__label">${b.label}</h4>${inner}</div>`;
+      }).join('');
+
+      return `
+        <article class="tech-card" id="tech-${t.id}" style="--tec-cor:${t.color}">
+          <div class="tech-card__head">
+            <span class="tech-eyebrow" style="color:${t.color}">${t.eyebrow}</span>
+            <h3 class="tech-card__name">${t.name}</h3>
+            <p class="tech-card__tagline">${t.tagline}</p>
+          </div>
+          <div class="tech-card__cols">
+            <div class="tech-card__desc">${t.desc.map(p => `<p>${p}</p>`).join('')}</div>
+            ${side ? `<div class="tech-card__side">${side}</div>` : ''}
+          </div>
+        </article>`;
+    }).join('');
+
+    grid.dataset.rendered = '1';
   }
 
   // ─── Gallery page ─────────────────────────────────────────────
@@ -1725,6 +1779,9 @@
         if (fabric) openModal(fabric);
       }
     });
+
+    // Best Sellers
+    document.getElementById('bestseller-toggle-btn').addEventListener('click', toggleBestSellers);
 
     // Comparar
     document.getElementById('compare-toggle-btn').addEventListener('click', toggleCompareMode);

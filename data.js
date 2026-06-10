@@ -150,6 +150,7 @@ const fabrics = [
   {
     name: "Tomahawk",
     code: "51133",
+    bestSeller: true,
     composition: [{ material: "Poliamida 6.6", percentage: 100 }],
     gramWeight: 143,
     width: 1.50,
@@ -161,6 +162,7 @@ const fabrics = [
   {
     name: "Destroyer",
     code: "51131",
+    bestSeller: true,
     composition: [{ material: "Poliamida 6.6", percentage: 100 }],
     gramWeight: 112,
     width: 1.50,
@@ -200,6 +202,7 @@ const fabrics = [
   {
     name: "Mac Elastic Power",
     code: "10173",
+    salesSuspended: true,
     composition: [
       { material: "Poliamida 6.6", percentage: 80 },
       { material: "Elastano", percentage: 20 }
@@ -228,6 +231,7 @@ const fabrics = [
   {
     name: "Mac Ergonomic Flex",
     code: "20111",
+    bestSeller: true,
     composition: [
       { material: "Poliéster", percentage: 92 },
       { material: "Elastano", percentage: 8 }
@@ -271,6 +275,7 @@ const fabrics = [
   {
     name: "Mac Puelon",
     code: "10163",
+    bestSeller: true,
     composition: [
       { material: "Poliamida 6.6", percentage: 94 },
       { material: "Elastano", percentage: 6 }
@@ -385,6 +390,7 @@ const fabrics = [
   {
     name: "Carmel",
     code: "22037",
+    bestSeller: true,
     composition: [{ material: "Poliéster PET", percentage: 100 }],
     gramWeight: 101,
     width: 1.50,
@@ -535,6 +541,7 @@ const fabrics = [
   {
     name: "Strike",
     code: "22420",
+    bestSeller: true,
     composition: [{ material: "Poliéster", percentage: 100 }],
     gramWeight: 112,
     width: 1.50,
@@ -579,6 +586,7 @@ const fabrics = [
   {
     name: "MacPower",
     code: "51188",
+    bestSeller: true,
     composition: [{ material: "Poliamida 6.6", percentage: 100 }],
     gramWeight: 136,
     width: 1.52,
@@ -590,6 +598,7 @@ const fabrics = [
   {
     name: "MacTel",
     code: "11150",
+    bestSeller: true,
     composition: [{ material: "Poliamida 6.6", percentage: 100 }],
     gramWeight: 108,
     width: 1.50,
@@ -648,6 +657,7 @@ const fabrics = [
   {
     name: "Aerofit",
     code: "11049",
+    bestSeller: true,
     composition: [{ material: "Poliamida 6.6", percentage: 100 }],
     gramWeight: 72,
     width: 1.50,
@@ -767,3 +777,111 @@ const colorData = {
   "9989": { name: "9989 - Preto Mescla", pantone: "Mescla", img: "NA.png", hex: "#2A2A2A" },
   "9999": { name: "9999 - Preto", pantone: "19-4007 TCX", img: "9999.png", hex: "#1A1A1A" }
 };
+
+// Tecnologias proprietárias Macias — exibidas na aba "Tecnologias"
+// blocks[].type: "list" (lista com marcadores) | "pills" (chips)
+const technologies = [
+  {
+    id: "macwear",
+    name: "MacWear™",
+    color: "#0a2540",
+    eyebrow: "Performance e durabilidade",
+    tagline: "Performance, conforto e durabilidade para uso contínuo.",
+    desc: [
+      "O MacWear™ é o novo padrão de desempenho dos tecidos Macias. Combinamos resistência superior ao desgaste, manutenção da estrutura após lavagens e gestão de umidade — entregando peças que mantêm aparência e conforto no uso intenso do dia a dia.",
+      "Mais do que um acabamento, é uma evolução técnica: melhor caimento, secagem mais rápida e menos amarrotamento. O artigo sai de fábrica com essa tecnologia integrada."
+    ],
+    blocks: [
+      { label: "Diferenciais", type: "list", items: [
+        "Resistência superior ao desgaste e uso intenso",
+        "Manutenção da estrutura e aparência após lavagens",
+        "Gestão de umidade com alta respirabilidade",
+        "Menor amarrotamento e secagem rápida"
+      ] }
+    ]
+  },
+  {
+    id: "macsun",
+    name: "MacSun™",
+    color: "#ef4444",
+    eyebrow: "Proteção UV",
+    tagline: "Proteção UV integrada ao tecido.",
+    desc: [
+      "O MacSun™ não é um pós-tratamento — é proteção solar incorporada desde a construção do tecido. Funciona como tecnologia funcional para segmentos que exigem desempenho real sob exposição prolongada ao sol.",
+      "Posicionado como solução técnica (não apenas moda casual), o MacSun™ atende marcas que comunicam proteção funcional ao consumidor final."
+    ],
+    blocks: [
+      { label: "Aplicações ideais", type: "pills", items: [
+        "Workwear exposto ao sol",
+        "Uniformes escolares",
+        "Agricultura e construção",
+        "Outdoor técnico",
+        "Marcas com proposta funcional"
+      ] }
+    ]
+  },
+  {
+    id: "macflex",
+    name: "MacFlex™",
+    color: "#6453ff",
+    eyebrow: "Elasticidade técnica",
+    tagline: "Elasticidade e liberdade de movimento.",
+    desc: [
+      "Tecidos planos com elasticidade superior, estabilidade dimensional e conforto prolongado, mantendo resistência e durabilidade industrial. Combinação proprietária Poliamida 6.6 + Lycra® + MacWear.",
+      "Elasticidade controlada que não deforma. Recuperação superior após uso. Conforto térmico equilibrado e resistência mecânica compatível com uso intenso."
+    ],
+    blocks: [
+      { label: "Aplicações prioritárias", type: "list", items: [
+        "Uniformes corporativos premium",
+        "Uniformes operacionais com mobilidade",
+        "Workwear moderno",
+        "Linha casual estruturada",
+        "Segmento escolar premium"
+      ] }
+    ]
+  },
+  {
+    id: "macshield",
+    name: "MacShield™",
+    color: "#0f766e",
+    eyebrow: "Acabamento opcional",
+    tagline: "Repelência a líquidos e proteção da aparência.",
+    desc: [
+      "O MacShield™ é uma tecnologia de acabamento opcional que adiciona repelência a líquidos aos tecidos, protegendo a aparência da peça no uso diário.",
+      "Posicionamento técnico: proteção discreta, não impermeabilização total. Pensado para reduzir manchas leves e prolongar a apresentação da peça durante a jornada."
+    ],
+    blocks: [
+      { label: "Aplicações prioritárias", type: "list", items: [
+        "Uniformes corporativos — apresentação durante jornada inteira",
+        "Workwear leve — peças expostas a respingos e uso intenso",
+        "Alfaiataria funcional — proteção discreta sem comprometer elegância",
+        "Escolar premium — redução de manchas leves no uso diário"
+      ] }
+    ]
+  },
+  {
+    id: "macfresh",
+    name: "MacFresh™",
+    color: "#10b981",
+    eyebrow: "Anti-odor",
+    tagline: "Conforto térmico e sensação de frescor.",
+    desc: [
+      "O MacFresh™ é um acabamento que inibe bactérias causadoras de odor, mantendo o tecido fresco por mais tempo e reduzindo a necessidade de lavagens frequentes.",
+      "Posicionamento técnico: redução de odor em uso prolongado, mantendo aparência profissional por mais tempo. Atua sem alterar toque, caimento ou respirabilidade do tecido."
+    ],
+    blocks: [
+      { label: "Diferenciais", type: "list", items: [
+        "Inibe a proliferação de bactérias causadoras de odor",
+        "Reduz o acúmulo de mau cheiro no uso prolongado",
+        "Mantém sensação de frescor por mais tempo",
+        "Melhora o desempenho higiênico da peça",
+        "Atua sem alterar toque, caimento ou respirabilidade"
+      ] },
+      { label: "Aplicações ideais", type: "pills", items: [
+        "Workwear / Uniformes operacionais",
+        "Uniformes corporativos premium",
+        "Moda funcional / Travel wear"
+      ] }
+    ]
+  }
+];
