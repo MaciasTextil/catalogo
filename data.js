@@ -811,13 +811,7 @@ const technologies = [
       "Posicionado como solução técnica (não apenas moda casual), o MacSun™ atende marcas que comunicam proteção funcional ao consumidor final."
     ],
     blocks: [
-      { label: "Aplicações ideais", type: "pills", items: [
-        "Workwear exposto ao sol",
-        "Uniformes escolares",
-        "Agricultura e construção",
-        "Outdoor técnico",
-        "Marcas com proposta funcional"
-      ] }
+    
     ]
   },
   {
