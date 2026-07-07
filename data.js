@@ -391,7 +391,7 @@ const fabrics = [
     name: "Carmel",
     code: "22037",
     bestSeller: true,
-    composition: [{ material: "Poliéster PET", percentage: 100 }],
+    composition: [{ material: "Poliéster", percentage: 100 }],
     gramWeight: 101,
     width: 1.50,
     line: ["Esportivos"],
@@ -573,7 +573,7 @@ const fabrics = [
     colors: ["0001 - Branco","2694 - Azul Marinho","5527 - Vermelho Danger","9999 - Preto"]
   },
   {
-    name: "MacPol",
+    name: "Macipol",
     code: "22139",
     composition: [{ material: "Poliéster", percentage: 100 }],
     gramWeight: 100,
@@ -690,6 +690,39 @@ const fabrics = [
     ligamento: "Tela",
     application: ["Shorts", "Bermudas", "Calças esportivas", "Jaquetas", "Coletes", "Bonés"],
     colors: ["0372 - Off White", "1204 - Verde Militar", "2261 - Azul Marinho", "4244 - Caqui Escuro", "9999 - Preto"]
+  },
+  {
+    name: "Veneza Mescla Escuro",
+    code: "51148",
+    composition: [{ material: "Poliamida 6.6", percentage: 100 }],
+    gramWeight: 105,
+    width: 1.50,
+    line: ["Esportivos"],
+    ligamento: "Tela",
+    application: [],
+    colors: ["N/A"]
+  },
+  {
+    name: "Dubai Mescla Escuro",
+    code: "51150",
+    composition: [{ material: "Poliamida 6.6", percentage: 100 }],
+    gramWeight: 72,
+    width: 1.50,
+    line: ["Esportivos"],
+    ligamento: "Tela",
+    application: [],
+    colors: ["N/A"]
+  },
+  {
+    name: "Dubai Mescla Claro",
+    code: "51151",
+    composition: [{ material: "Poliamida 6.6", percentage: 100 }],
+    gramWeight: 79,
+    width: 1.50,
+    line: ["Esportivos"],
+    ligamento: "Tela",
+    application: [],
+    colors: ["N/A"]
   }
 ];
 

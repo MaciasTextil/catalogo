@@ -297,7 +297,7 @@ const fabrics = [
   name: "Carmel",
   code: "22037",
   composition: [
-    { material: "Poliéster", percentage: 100 }
+    { material: "Poliéster PET", percentage: 100 }
   ],
   gramWeight: 101,
   width: 1.50,
@@ -486,7 +486,7 @@ const fabrics = [
   composition: [
     { material: "Poliéster", percentage: 100 }
   ],
-  gramWeight: 107,
+  gramWeight: 112,
   width: 1.50,
   line: ["Esportivos"],
   ligamento: "Sarja",
