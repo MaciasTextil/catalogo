@@ -632,7 +632,7 @@ const fabrics = [
   line: ["Esportivos"],
   ligamento: "Rip Stop",
   application: ["Jaquetas corta vento", "Bolsas", "Entre outros"],
-  colors: ["0001 - Branco","0011 - Amarelo Limão Fluor","1204 - Verde Militar","1764 - Verde Limão","2073 - Azul Royal Escuro","2261 - Azul Marinho","2715 - Azul Estratosfera","2910 - Azul Royal Claro","4676 - Caqui Médio","5025 - Rosa Fluor","5384 - Vermelho Batom","6419 - Roxo Maravilha","7007 - Laranja Fluor","7131 - Laranja","9999 - Preto"],
+  colors: ["0001 - Branco","0011 - Amarelo Limão Fluor","0372 - Off White","1204 - Verde Militar","1764 - Verde Limão","2073 - Azul Royal Escuro","2261 - Azul Marinho","2715 - Azul Estratosfera","2910 - Azul Royal Claro","4676 - Caqui Médio","5025 - Rosa Fluor","5384 - Vermelho Batom","6419 - Roxo Maravilha","7007 - Laranja Fluor","7131 - Laranja","9999 - Preto"],
   image: "#"
 },
 {
