@@ -664,7 +664,7 @@ const fabrics = [
     line: ["Esportivos"],
     ligamento: "Tela Rip Stop",
     application: ["Jaquetas corta vento", "Bolsas"],
-    colors: ["0001 - Branco","0011 - Amarelo Limão Fluor","1204 - Verde Militar","1764 - Verde Limão","2073 - Azul Royal Escuro","2261 - Azul Marinho","2715 - Azul Estratosfera","2910 - Azul Royal Claro","4676 - Caqui Médio","5025 - Rosa Fluor","5384 - Vermelho Batom","6419 - Roxo Maravilha","7007 - Laranja Fluor","7131 - Laranja","9999 - Preto"]
+    colors: ["0001 - Branco","0011 - Amarelo Limão Fluor","0372 - Off White","1204 - Verde Militar","1764 - Verde Limão","2073 - Azul Royal Escuro","2261 - Azul Marinho","2715 - Azul Estratosfera","2910 - Azul Royal Claro","4676 - Caqui Médio","5025 - Rosa Fluor","5384 - Vermelho Batom","5397 - Coral","6419 - Roxo Maravilha","7007 - Laranja Fluor","7131 - Laranja","9999 - Preto"]
   },
   {
     name: "Nylpar Rip Stop",
@@ -792,6 +792,7 @@ const colorData = {
   "5025": { name: "5025 - Rosa Fluor", pantone: "Não encontrado", img: "NA.png", hex: "#FF80A0" },
   "5286": { name: "5286 - Rosa Velho", pantone: "15-1317 TCX", img: "5286.png", hex: "#D4A898" },
   "5384": { name: "5384 - Vermelho Batom", pantone: "19-1764 TCX", img: "5384.png", hex: "#C01840" },
+  "5397": { name: "5397 - Coral", pantone: "18-1762 TCX", img: "5397.png", hex: "#DE3848" },
   "5527": { name: "5527 - Vermelho Danger", pantone: "18-1763 TCX", img: "5527.png", hex: "#D02020" },
   "5581": { name: "5581 - Vinho", pantone: "19-1725 TCX", img: "5581.png", hex: "#6A1020" },
   "5665": { name: "5665 - Vermelho Queimado", pantone: "19-1656 TCX", img: "5665.png", hex: "#A83020" },
