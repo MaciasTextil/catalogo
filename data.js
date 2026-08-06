@@ -188,6 +188,7 @@ const fabrics = [
   {
     name: "Mactel Elastic 4Way",
     code: "10178",
+    salesSuspended: true,
     composition: [
       { material: "Poliamida 6.6", percentage: 91 },
       { material: "Elastano", percentage: 9 }
@@ -605,7 +606,7 @@ const fabrics = [
     line: ["Esportivos"],
     ligamento: "Tela",
     application: ["Shorts", "Bermudas", "Jaquetas"],
-    colors: ["0001 - Branco","0372 - Off White","0199 - Areia Escuro","1204 - Verde Militar","1913 - Evergreen","2011 - Azul Petróleo","2014 - Azul Royal","2065 - Azul Nautico","2073 - Azul Royal Escuro","2261 - Azul Marinho","2500 - Azul Marinho Escuro","2847 - Azul Acinzentado","3345 - Cinza Rato","3351 - Cinza Médio Esverdeado","3375 - Chumbo Pirata","3624 - Cinza Claro","4004 - Ocre Biscut","4007 - Caramelo","4174 - Marrom","4244 - Caqui Escuro","4676 - Caqui Médio","5384 - Vermelho Batom","5581 - Vinho","5810 - Rosa Chiclete","5978 - Vermelho","6267 - Roxo","7007 - Laranja Fluor","7131 - Laranja","9999 - Preto"]
+    colors: ["0001 - Branco","0372 - Off White","0130 - Amarelo Ouro","0199 - Areia Escuro","1204 - Verde Militar","1913 - Evergreen","2011 - Azul Petróleo","2014 - Azul Royal","2065 - Azul Nautico","2073 - Azul Royal Escuro","2261 - Azul Marinho","2500 - Azul Marinho Escuro","2847 - Azul Acinzentado","3345 - Cinza Rato","3351 - Cinza Médio Esverdeado","3375 - Chumbo Pirata","3624 - Cinza Claro","4004 - Ocre Biscut","4007 - Caramelo","4174 - Marrom","4244 - Caqui Escuro","4676 - Caqui Médio","5384 - Vermelho Batom","5581 - Vinho","5810 - Rosa Chiclete","5978 - Vermelho","6267 - Roxo","7007 - Laranja Fluor","7131 - Laranja","9999 - Preto"]
   },
   {
     name: "Texas",
